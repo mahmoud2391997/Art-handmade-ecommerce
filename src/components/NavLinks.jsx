@@ -9,7 +9,7 @@ export default function NavLinks() {
         <a key={index} href="#" className="relative group font">
           <Typography
             as="li"
-            class="flex items-center"
+            className="flex items-center"
             style={{
               color: "var(--nav-links-color)",
               fontFamily: "var(--nav-links-font)",

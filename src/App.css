@@ -2,10 +2,9 @@
   --white: #ffff;
   --main-color: #c9ab81;
   --stroke: #c9ab81;
+  --button-text-color: #525252;
+  --button-text-font: "Open Sans";
   --nav-links-font: "EB Garamond";
   --nav-links-color: #383838;
   --logo: url("src/assets/images/logo-dark.png");
-  /* --transition: 0.3s ease;
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */
 }
