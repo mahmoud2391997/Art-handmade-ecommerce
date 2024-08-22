@@ -1,8 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --white: #ffff;
+  --main-color: #c9ab81;
+  --stroke: #c9ab81;
+  --button-text-color: #525252;
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
+  --nav-links-color: #383838;
+  --logo: url("src/assets/images/logo-dark.png");
 }
 
 .logo {
@@ -39,4 +43,18 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.eb-garamond-font {
+  font-family: "EB Garamond";
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+.stroke-button rect {
+  transition: stroke-dashoffset 2s ease-in-out;
+}
+
+.stroke-button:hover rect {
+  stroke-dashoffset: -125; /* Moves the dash to the starting position, creating the rotation effect */
 }
