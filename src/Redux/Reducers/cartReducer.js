@@ -1,4 +1,4 @@
-import { ADD_TO_CART, UPDATE_PRODUCT_QUANITITY, REMOVE_PRODUCT_FROM_CART } from "../actionTypes";
+import { ADD_TO_CART, UPDATE_PRODUCT_QUANTITY, REMOVE_PRODUCT_FROM_CART } from "../actionTypes";
 
 const initialState = {
     cartItems: [],
@@ -25,7 +25,7 @@ export const cartReducer = ( state = initialState, action) => {
             }
         }
 
-        case UPDATE_PRODUCT_QUANITITY:{
+        case UPDATE_PRODUCT_QUANTITY:{
             return {
                 ...state,
                 cartItems: state.cartItems.map((item) => item.id === action.payload.id ? {...item, quantity: action.payload.quantity} : item

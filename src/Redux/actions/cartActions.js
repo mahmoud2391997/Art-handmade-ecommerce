@@ -1,13 +1,13 @@
-import { ADD_TO_CART, UPDATE_PRODUCT_QUANITITY, REMOVE_PRODUCT_FROM_CART } from "../actionTypes";
-import { addToCart, updateProductQuantity, removeProductFromCart} from '../api/productsAPI';
+import { ADD_TO_CART, UPDATE_PRODUCT_QUANTITY, REMOVE_PRODUCT_FROM_CART } from "../actionTypes";
+import { addToCart, updateProductQuantity, removeProductFromCart} from '../api/productsAPI'
 
 
 export const addToCartAction = (product) => async (dispatch) => {
     try {
-        const res = await addToCart(product);
+        const response = await addToCart(product);
         dispatch({
             type: ADD_TO_CART,
-            payload: res.data
+            payload: response.data
         })
     } catch (error) {
         console.error('Error adding to cart:', error);
@@ -16,10 +16,10 @@ export const addToCartAction = (product) => async (dispatch) => {
 
 export const updateProductQuantityAction = (id, quantity) => async ( dispatch) => {
     try {
-        const res = await updateProductQuantity(id, quantity)
+        const response = await updateProductQuantity(id, quantity)
         dispatch({
-            type: UPDATE_PRODUCT_QUANITITY,
-            payload: {id, quantity: res.data.quantity}
+            type: UPDATE_PRODUCT_QUANTITY,
+            payload: {id, quantity: response.data.quantity}
         })
     } catch (error) {
         console.error('Error updating cart quantity:', error);
