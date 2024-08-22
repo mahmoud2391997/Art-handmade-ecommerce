@@ -6,30 +6,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Card, Typography, Button } from '@material-tailwind/react';  
 
 export default function ProductDetails() {  
-  const { id } = useParams(); // Get the product ID from the URL  
+  const { productId } = useParams(); // Get the product ID from the URL  
   const dispatch = useDispatch();  
   const [product, setProduct] = useState(null);  
-  const { products } = useSelector((state) => state.products); // Assuming this stores all products  
+  const products = useSelector((state) => state.products.products); // Access products from the state
+  const currentProduct = useSelector((state) => state.products.currentProduct); // Access currentProduct from the state
 
   useEffect(() => {  
     // Check if product exists in state and fetch if not  
-    const existingProduct = products.find(product => product.id === parseInt(id));  
+    const existingProduct = products.find(product => product._id === productId);  
     
     if (existingProduct) {  
       setProduct(existingProduct); // If it exists, set it to state  
     } else {  
       // If not found in Redux state, dispatch the action to fetch it  
-      dispatch(fetchProductByIDAction(id));  
+      dispatch(fetchProductByIDAction(productId));  
     }  
-  }, [id, products, dispatch]);  
+  }, [productId, products, dispatch]);  
 
-  // The product state will likely need to be updated once the product is fetched  
-  const fetchedProduct = useSelector((state) => state.product); // Assuming the reducer updates state with the fetched product  
+  // Update the product state once the product is fetched
   useEffect(() => {  
-    if (fetchedProduct) {  
-      setProduct(fetchedProduct);  
+    if (currentProduct && currentProduct._id === productId) {  
+      setProduct(currentProduct);  
     }  
-  }, [fetchedProduct]);  
+  }, [currentProduct, productId]);  
 
   if (!product) return <p>Loading...</p>;  
 

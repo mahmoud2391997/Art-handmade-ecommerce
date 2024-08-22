@@ -3,7 +3,8 @@ import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID } from "../actionTypes";
 const initialState = {
     products: [],
     status: 'idle',
-    error: null
+    error: null,
+    currentProduct: null
 }
 
 
@@ -19,7 +20,7 @@ export const productReducer = ( state = initialState, action) => {
         case FETCH_PRODUCT_BY_ID:{
             return {
                 ...state,
-                product: action.payload,
+                currentProduct: action.payload,
                 status: 'succeeded'
             }
         }
