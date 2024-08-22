@@ -31,7 +31,7 @@ export default function MainButton({ title }) {
         fontFamily="var(--button-text-font)"
         fontWeight="600"
         letterSpacing="0.07em"
-        fontSize="16"
+        fontSize="13"
       >
         {title}
       </text>

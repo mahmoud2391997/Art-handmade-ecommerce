@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Navbar, Collapse, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import NavLinks from "./NavLinks";
-import ShoppingBag from "./icons/ShoppingBag";
-import SearchIcon from "./icons/SearchIcon";
-import MainButton from "./MainButton";
+import MainButton from "../MainButton";
+import ShoppingBag from "../../icons/ShoppingBag";
+import SearchIcon from "../../icons/SearchIcon";
 
 export default function NavBar() {
   const [open, setOpen] = React.useState(false);

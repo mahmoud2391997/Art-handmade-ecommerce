@@ -3,8 +3,8 @@
   --main-color: #c9ab81;
   --stroke: #c9ab81;
   --button-text-color: #525252;
-  --button-text-font: "Open Sans";
-  --nav-links-font: "EB Garamond";
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
   --nav-links-color: #383838;
   --logo: url("src/assets/images/logo-dark.png");
 }
