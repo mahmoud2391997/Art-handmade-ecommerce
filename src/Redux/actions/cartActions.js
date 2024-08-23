@@ -1,39 +1,100 @@
-import { ADD_TO_CART, UPDATE_PRODUCT_QUANTITY, REMOVE_PRODUCT_FROM_CART } from "../actionTypes";
-import { addToCart, updateProductQuantity, removeProductFromCart} from '../api/productsAPI'
-
-
-export const addToCartAction = (product) => async (dispatch) => {
-    try {
-        const response = await addToCart(product);
-        dispatch({
-            type: ADD_TO_CART,
-            payload: response.data
-        })
-    } catch (error) {
-        console.error('Error adding to cart:', error);
+// actions/cartActions.js
+import { 
+    ADD_TO_CART, 
+    REMOVE_FROM_CART, 
+    INCREASE_QUANTITY, 
+    DECREASE_QUANTITY, 
+    CLEAR_CART, 
+    UPDATE_TOTAL, 
+    UPDATE_AMOUNT 
+  } from '../actionTypes';
+  
+  export const addToCart = (product) => (dispatch, getState) => {
+    const { cartItems } = getState().cart;
+    const existingProduct = cartItems.find(item => item._id === product._id);
+    
+    let updatedCart;
+    if (existingProduct) {
+      updatedCart = cartItems.map(item => 
+        item._id === product._id 
+          ? { ...item, quantity: item.quantity + 1 } 
+          : item
+      );
+    } else {
+      updatedCart = [...cartItems, { ...product, quantity: 1 }];
     }
-}
-
-export const updateProductQuantityAction = (id, quantity) => async ( dispatch) => {
-    try {
-        const response = await updateProductQuantity(id, quantity)
-        dispatch({
-            type: UPDATE_PRODUCT_QUANTITY,
-            payload: {id, quantity: response.data.quantity}
-        })
-    } catch (error) {
-        console.error('Error updating cart quantity:', error);
-    }
-}
-
-export const removeProductFromCartAction = (id) => async (dispatch) => {
-    try {
-        await removeProductFromCart(id)
-        dispatch({
-            type: REMOVE_PRODUCT_FROM_CART,
-            payload: id
-        })
-    } catch (error) {
-        console.error('Error removing from cart:', error);
-    }
-}
+    
+    dispatch({
+      type: ADD_TO_CART,
+      payload: updatedCart
+    });
+    dispatch(updateTotal(updatedCart));
+  };
+  
+  export const removeFromCart = (productId) => (dispatch, getState) => {
+    const { cartItems } = getState().cart;
+    const updatedCart = cartItems.filter(item => item._id !== productId);
+    
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: updatedCart
+    });
+    dispatch(updateTotal(updatedCart));
+  };
+  
+  export const increaseQuantity = (productId) => (dispatch, getState) => {
+    const { cartItems } = getState().cart;
+    const updatedCart = cartItems.map(item => 
+      item._id === productId 
+        ? { ...item, quantity: item.quantity + 1 } 
+        : item
+    );
+    
+    dispatch({
+      type: INCREASE_QUANTITY,
+      payload: updatedCart
+    });
+    dispatch(updateTotal(updatedCart));
+  };
+  
+  export const decreaseQuantity = (productId) => (dispatch, getState) => {
+    const { cartItems } = getState().cart;
+    const updatedCart = cartItems.map(item => 
+      item._id === productId 
+        ? { ...item, quantity: item.quantity - 1 } 
+        : item
+    ).filter(item => item.quantity > 0);
+    
+    dispatch({
+      type: DECREASE_QUANTITY,
+      payload: updatedCart
+    });
+    dispatch(updateTotal(updatedCart));
+  };
+  
+  export const clearCart = () => (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
+      payload: []
+    });
+    dispatch(updateTotal([]));
+  };
+  
+  const updateTotal = (cartItems) => {
+    const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const amount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    
+    return dispatch => {
+      dispatch({
+        type: UPDATE_TOTAL,
+        payload: total
+      });
+      dispatch({
+        type: UPDATE_AMOUNT,
+        payload: amount
+      });
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      localStorage.setItem('total', total.toString());
+    };
+  };
+  

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';  
 import { useParams } from 'react-router-dom';  
-import { addToCartAction } from '../Redux/actions/cartActions';
-import { fetchProductByIDAction } from '../redux/actions/productActions';
+import { addToCart } from '../Redux/actions/cartActions';
+import { fetchProductByIDAction } from '../Redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';  
 import { Card, Typography, Button } from '@material-tailwind/react';  
 
@@ -47,7 +47,7 @@ export default function ProductDetails() {
         <div className="mt-4">  
           <Button   
             color="blue"   
-            onClick={() => dispatch(addToCartAction(product))}  
+            onClick={() => dispatch(addToCart(product))}  
           >  
             Add to Cart  
           </Button>  

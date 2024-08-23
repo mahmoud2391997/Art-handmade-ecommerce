@@ -17,6 +17,7 @@ export const productReducer = ( state = initialState, action) => {
                 status: 'succeeded'
             }
         }
+
         case FETCH_PRODUCT_BY_ID:{
             return {
                 ...state,
@@ -24,6 +25,7 @@ export const productReducer = ( state = initialState, action) => {
                 status: 'succeeded'
             }
         }
+        
         default:
             return state;
     }

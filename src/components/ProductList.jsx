@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';  
 import { useDispatch, useSelector } from 'react-redux';  
 import { fetchProductsAction } from '../Redux/actions/productActions';  
-import { addToCartAction } from '../redux/actions/cartActions';   
+import { addToCart } from '../Redux/actions/cartActions';   
 import { Link } from 'react-router-dom';  
 import {  
   Card,  
@@ -19,10 +19,11 @@ const ProductList = () => {
 
   useEffect(() => {  
     dispatch(fetchProductsAction());  
-  }, [dispatch]);  
+  }, []);  
 
-  const handleAddToCart = (product) => {  
-    dispatch(addToCartAction(product));  
+  const handleAddToCart = (product) => {
+    console.log('Adding to cart', product)  
+    dispatch(addToCart(product));  
   };  
 
   if (status === 'loading') return <p>Loading...</p>;  

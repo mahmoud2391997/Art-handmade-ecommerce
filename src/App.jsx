@@ -14,6 +14,7 @@ import ProductDetails from "./pages/ProductDetails"
 //components
 import Layout from "./components/Layout/Layout"
 import EventDetails from "./pages/EventDetails"
+import Cart from "./pages/Cart"
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'products/:productId', element: <ProductDetails /> },
       { path: 'events', element: <Events /> },
       { path: 'events/:eventId', element: <EventDetails /> },
+      { path: 'cart', element: <Cart />},
       { path: 'contact', element: <Contact /> },
       { path: 'checkout', element: <Checkout /> },
     ]
