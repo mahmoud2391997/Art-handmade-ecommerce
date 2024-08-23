@@ -1,0 +1,20 @@
+.landing {
+  animation: landing 12s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes landing {
+  0% {
+    background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg");
+  }
+  33% {
+    background-image: url("https://files.ocula.com/anzax/10/10d60b81-dde0-44ea-8888-e003eb664425_2000_1333.jpg");
+  }
+  66% {
+    background-image: url("https://images.squarespace-cdn.com/content/v1/6568f6c2f926614e3d0da73a/ddf76aa6-d43f-4cc4-8672-19954acb4a10/230613-Mars-Landing-web-ready-9.jpg?format=2500w");
+  }
+
+  100% {
+    background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg");
+  }
+}

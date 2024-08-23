@@ -3,17 +3,16 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
+import HomePage from "./pages/HomePage/HomePage";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="eb-garamond-font">
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+    <div className="eb-garamond-font max-w-screen relative text-[#4e4e4e]">
+      <div className="w-full absolute top-0">
+        <NavBar />
+      </div>
+      <HomePage />
     </div>
   );
 }

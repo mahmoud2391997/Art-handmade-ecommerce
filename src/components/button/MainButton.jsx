@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainButton.css";
 
-export default function MainButton({ title }) {
+export default function MainButton({ title, color }) {
   return (
     <svg
       width="150"
@@ -25,7 +25,7 @@ export default function MainButton({ title }) {
       <text
         x="75"
         y="26"
-        fill="var(--button-text-color)"
+        fill={color}
         textAnchor="middle"
         alignmentBaseline="middle"
         fontFamily="var(--button-text-font)"

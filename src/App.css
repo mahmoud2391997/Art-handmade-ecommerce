@@ -4,9 +4,9 @@
   --stroke: #c9ab81;
   --button-text-color: #525252;
   --button-text-font: "Open Sans", sans-serif;
-  --nav-links-font: "EB Garamond", serif;
+  --nav-links-font: "EB Garamond";
   --nav-links-color: #383838;
-  --logo: url("src/assets/images/logo-dark.png");
+  --logo: url("src/assets/logo-light.png");
 }
 
 .logo {
