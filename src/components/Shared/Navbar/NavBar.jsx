@@ -55,7 +55,7 @@ export default function NavBar() {
       </div>
       <Collapse open={open}>
         <div className="mt-2 rounded-xl bg-white py-2">
-          //*| Nav Links component in mobile and tablet |
+          {/* | Nav Links component in mobile and tablet | */}
           <NavLinks />
           <div className="flex justify-center">
             <MainButton title={"Sign In"} />
