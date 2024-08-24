@@ -28,7 +28,7 @@ export default function HomePage() {
     }, 4000);
   }
   return (
-    <div className="w-full z-0 bg-white">
+    <div className="w-full z-40 pb-[200px] relative bg-white">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">
         <div className=" w-full">
           <Title
@@ -40,45 +40,45 @@ export default function HomePage() {
       </section>
       <div className="my-20">
         <Title title={"MAIN CATEGORIES"} subTitle={"CHECK CATEGORIES"} />
-        <section className="w-4/6 m-auto justify-between flex mt-20">
+        <section className="w-5/6 gap-10 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  grid mt-20">
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
         </section>
       </div>
       <div className="my-20">
-        <Title title={"UPCOMING EVENT"} subTitle={"CHECK TEICKETS"} />
+        <Title title={"UPCOMING EVENT"} subTitle={"CHECK TICKETS"} />
         <section className="w-4/6 h-[675px] m-auto justify-center items-end flex mt-20 bg-cover bg-no-repeat  landing">
           <div
-            className="w-[90%] z-10 flex lg:flex-row flex-col justify-between items-start lg:items-end mb-8 h-[80%]
+            className="w-[90%] h-[90%] z-10 flex lg:flex-row flex-col justify-between items-start lg:items-end mb-8 sm:h-[80%]
           "
           >
             <div className="h-40 flex flex-col justify-between lg:w-2/5 w-full ">
               <span className="text-base font-thin text-white">
                 Upcoming Event
               </span>
-              <div className="text-5xl text-white leading-8 tracking-[0.16em]  ">
+              <div className="sm:text-5xl text-2xl text-white leading-8 tracking-[0.16em]  ">
                 Discover Art
               </div>
               <MainButton title={"View More"} color={"white"} />
             </div>
-            <div className="bg-white sm:h-80 h-96 w-92 p-5 flex flex-col justify-between">
+            <div className="bg-white h-[400px] sm:h-80 w-full sm:w-96 p-5 flex flex-col justify-between">
               <div className="flex flex-col justify-between">
-                <h3 className="text-2xl leading-5 tracking-[0.16em] mb-3">
+                <h3 className="sm:text-2xl text-base leading-5 tracking-[0.16em] mb-3">
                   <FontAwesomeIcon className="mr-4" icon={faClock} />
                   OPENING HOURS
                 </h3>
-                <div className="flex flex-col justify-between ml-10">
+                <div className="flex flex-col justify-between sm:ml-10">
                   <p>Tue ‒ Thu: 09am ‒ 07pm</p>
                   <p>Fri ‒ Mon: 09am ‒ 05pm</p>
                 </div>
               </div>
               <div className="h-20 flex flex-col justify-between">
-                <h3 className="text-2xl leading-5 tracking-[0.16em] mb-3">
+                <h3 className="sm:text-2xl text-base leading-5 tracking-[0.16em] mb-3">
                   <FontAwesomeIcon className="mr-4" icon={faLocationDot} />
                   FIND US
                 </h3>
-                <div className="flex flex-col justify-between ml-10">
+                <div className="flex flex-col justify-between sm:ml-10">
                   <p>673 12 Constitution Lane Massillon</p>
                   <p>781-562-9355, 781-727-6090</p>
                 </div>
@@ -92,7 +92,7 @@ export default function HomePage() {
         <div className="w-full">
           <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
         </div>
-        <section className="w-5/6 lg:min-w-[976px] xl:min-w-[1012px] justify-between flex mt-20">
+        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
           <ProductCard></ProductCard>
           <ProductCard></ProductCard>
           <ProductCard></ProductCard>

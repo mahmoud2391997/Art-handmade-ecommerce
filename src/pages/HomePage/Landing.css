@@ -1,20 +1,20 @@
 .landing {
-  animation: landing 12s;
+  animation: landing 16s;
   animation-iteration-count: infinite;
 }
 
 @keyframes landing {
   0% {
-    background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg");
+    background-image: url("https://i1.adis.ws/i/canon/pro-printing-fine-art-paper-1_f67a0b6adcaf44a8b056dfae19b75dcf?$media-collection-full-dt$");
   }
   33% {
-    background-image: url("https://files.ocula.com/anzax/10/10d60b81-dde0-44ea-8888-e003eb664425_2000_1333.jpg");
+    background-image: url("https://i1.adis.ws/i/canon/pro-printing-fine-art-paper-2_1eab090c539d4cdcb83d989ed3e8f01a?$media-collection-full-dt$");
   }
   66% {
-    background-image: url("https://images.squarespace-cdn.com/content/v1/6568f6c2f926614e3d0da73a/ddf76aa6-d43f-4cc4-8672-19954acb4a10/230613-Mars-Landing-web-ready-9.jpg?format=2500w");
+    background-image: url("https://cms.nationalmuseumsni.org/sites/default/files/styles/responsive/public/1095/616/0/2022-12/Renaissance%201095x616.jpg");
   }
 
   100% {
-    background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg");
+    background-image: url("https://i1.adis.ws/i/canon/pro-printing-fine-art-paper-1_f67a0b6adcaf44a8b056dfae19b75dcf?$media-collection-full-dt$");
   }
 }

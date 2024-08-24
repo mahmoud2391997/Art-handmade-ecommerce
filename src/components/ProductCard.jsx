@@ -3,12 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainButton from "./button/MainButton";
 export default function ProductCard() {
   return (
-    <div className="xl:w-[253px] w-56 h-[350px] xl:h-[400px] p-4 mb-7">
-      <div className="xl:w-[236px] w-48 h-48 xl:h-[236px]">
-        <img src="https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-5-600x600.jpg" />
+    <div className="xl:w-[253px] w-full sm:w-52 h-[350px] xl:h-[400px] p-4 mb-7">
+      <div className="xl:w-[236px] w-full h-[236px] sm:w-48 sm:h-48 xl:h-[236px]">
+        <img
+          src="https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-5-600x600.jpg"
+          className=" h-full m-auto"
+        />
       </div>
-      <div className="xl:w-[236px] w-48 h-24 xl:h-[124px] flex flex-col items-center justify-around">
-        <h5 className="text-2xl leading-5 tracking-[0.16em]">Lorem, ipsum.</h5>
+      <div className="xl:w-[236px] w-full sm:w-48 h-24 xl:h-[124px] flex flex-col items-center justify-around">
+        <h5 className="sm:text-2xl text-base leading-5 tracking-[0.16em]">
+          Lorem, ipsum.
+        </h5>
         <div className="w-2/3 flex justify-center">
           <FontAwesomeIcon icon={faStar} />
           <FontAwesomeIcon icon={faStar} />
@@ -16,7 +21,7 @@ export default function ProductCard() {
           <FontAwesomeIcon icon={faStar} />
           <FontAwesomeIcon icon={faStar} />
         </div>
-        <div className="w-full tracking-[0.16em] leading-5 text-2xl text-center">
+        <div className="w-full tracking-[0.16em] leading-5 sm:text-2xl text-base text-center">
           <span className="">57 $</span>
         </div>
       </div>

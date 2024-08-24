@@ -1,6 +1,6 @@
 export default function CategoryItem() {
   return (
-    <div className="h-[700px] w-[413px] flex flex-col items-center mx-5">
+    <div className="lg:h-[700px] w-full flex flex-col items-center ">
       <img
         src="https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-14.jpg"
         className="w-full h-[610px]"
