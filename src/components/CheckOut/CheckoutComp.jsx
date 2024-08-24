@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Textarea, Button } from '@material-tailwind/react';
-import { countries, cities } from './countriesAndCitiesData'; // Ensure correct export
+import { Input, Textarea } from '@material-tailwind/react';
+import { countries, cities } from './countriesAndCitiesData';
 import DropDown from './Icons/DropDown';
-import CheckOutCart from './CheckOutCart'; // Import CheckOutCart component
+import CheckOutCart from './CheckOutCart'; 
+import MainButton from '../MainButton/MainButton';
+import ChekoutTitle from '../CheckOut/CheckoutTitle'
 
 export default function CheckoutComp() {
     const [country, setCountry] = useState('');
@@ -29,8 +31,10 @@ export default function CheckoutComp() {
     };
 
     return (
-        <div className="p-8 max-w-7xl mx-auto">
-            <h2 className="text-2xl font-semibold mb-4 uppercase">Billing Details</h2>
+        <div className='relative z-40 bg-white '>
+            <ChekoutTitle />
+        <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700 ">
+            <h2 className="text-2xl font-semibold mb-10 uppercase">Billing Details</h2>
             <form>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     {/* Form Fields Column */}
@@ -79,7 +83,7 @@ export default function CheckoutComp() {
                                     onChange={(e) => setCity(e.target.value)}
                                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
                                     disabled={!country}
-                                >
+                                    >
                                     <option value="" disabled>Select Town / City</option>
                                     {cityOptions.map((city) => (
                                         <option key={city} value={city}>
@@ -98,24 +102,24 @@ export default function CheckoutComp() {
                                 placeholder="Postcode/ZIP"
                                 className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                                 variant="standard"
-                            />
+                                />
                             <Input
                                 type="text"
                                 placeholder="Phone"
                                 className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                                 variant="standard"
-                            />
+                                />
                             <Input
                                 type="email"
                                 placeholder="Email Address"
                                 className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                                 variant="standard"
-                            />
+                                />
                             <Textarea
                                 placeholder="Order Notes (Optional)"
                                 className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                                 variant="standard"
-                            />
+                                />
                             <div className="mb-8">
                                 <ul className="list-none p-0">
                                     <li className="mb-2">
@@ -145,7 +149,7 @@ export default function CheckoutComp() {
                                                 checked={paymentMethod === 'cash-on-delivery'}
                                                 onChange={handlePaymentChange}
                                                 className="mr-2"
-                                            />
+                                                />
                                             Cash on Delivery
                                         </label>
                                         {paymentMethod === 'cash-on-delivery' && (
@@ -163,15 +167,9 @@ export default function CheckoutComp() {
                         <CheckOutCart />
                     </div>
                 </div>
-                <Button
-                    type="submit"
-                    color="light-blue"
-                    fullWidth={true}
-                    className="w-full p-3 rounded-md"
-                >
-                    Place Order
-                </Button>
+                <MainButton title="Place Order" />
             </form>
         </div>
+                                                </div>
     );
 }
