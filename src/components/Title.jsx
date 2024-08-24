@@ -7,14 +7,14 @@ export default function Title({ subTitle, title, color }) {
         {subTitle}
       </h2>
 
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full ">
         <div
           className={`border-t-[1px] lg:px-2 px-[10px]  ${
             color ? "border-[" + color + "]" : "border-gray-500"
-          }   flex-grow mx-2 sm:mx-4 md:mx-10 lg:mx-20 xl:mx-40 `}
+          }   flex-grow mx-2 sm:mx-4 md:mx-10 lg:mx-10 xl:mx-40 `}
         ></div>
         <h1
-          className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl max-w-[70%] ${
+          className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl  ${
             color ? "text-" + color : "text-[#525252]"
           } whitespace-nowrap font-eb-garamond text-center mx-4 tracking-[0.16em] leading-5`}
         >
@@ -23,7 +23,7 @@ export default function Title({ subTitle, title, color }) {
         <div
           className={`border-t-[1px] lg:px-2 px-[10px]  ${
             color ? "border-[" + color + "]" : "border-gray-500"
-          }   flex-grow mx-2 sm:mx-4 md:mx-10 lg:mx-20 xl:mx-40`}
+          }   flex-grow mx-2 sm:mx-4 md:mx-10 lg:mx-10 xl:mx-40`}
         ></div>
       </div>
     </div>

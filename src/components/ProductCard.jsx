@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainButton from "./button/MainButton";
 export default function ProductCard() {
   return (
-    <div className="xl:w-[266px] w-56 h-[350px] xl:h-[400px] p-4 mb-7">
+    <div className="xl:w-[253px] w-56 h-[350px] xl:h-[400px] p-4 mb-7">
       <div className="xl:w-[236px] w-48 h-48 xl:h-[236px]">
         <img src="https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-5-600x600.jpg" />
       </div>

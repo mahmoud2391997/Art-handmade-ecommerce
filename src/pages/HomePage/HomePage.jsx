@@ -29,10 +29,10 @@ export default function HomePage() {
   }
   return (
     <div className="w-full z-0 bg-white">
-      <section className="w-full h-screen bg-cover bg-no-repeat landing flex items-center">
-        <div className="m-auto w-full ">
+      <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">
+        <div className=" w-full">
           <Title
-            title={"ART AND HANDMADE"}
+            title={"ART & HANDMADE"}
             subTitle={"HELLO AND WELCOME"}
             color={"white"}
           />
@@ -48,21 +48,21 @@ export default function HomePage() {
       </div>
       <div className="my-20">
         <Title title={"UPCOMING EVENT"} subTitle={"CHECK TEICKETS"} />
-        <section className="w-4/6 h-[675px] m-auto justify-between flex mt-20 bg-cover bg-no-repeat relative landing">
+        <section className="w-4/6 h-[675px] m-auto justify-center items-end flex mt-20 bg-cover bg-no-repeat  landing">
           <div
-            className="w-5/6 z-10 flex flex-row justify-between m-auto absolute bottom-8 left-24 items-end
+            className="w-[90%] z-10 flex lg:flex-row flex-col justify-between items-start lg:items-end mb-8 h-[80%]
           "
           >
-            <div className="h-40 flex flex-col justify-between w-2/5 ">
+            <div className="h-40 flex flex-col justify-between lg:w-2/5 w-full ">
               <span className="text-base font-thin text-white">
                 Upcoming Event
               </span>
-              <h2 className="text-5xl text-white leading-5 tracking-[0.16em]">
+              <div className="text-5xl text-white leading-8 tracking-[0.16em]  ">
                 Discover Art
-              </h2>
+              </div>
               <MainButton title={"View More"} color={"white"} />
             </div>
-            <div className="bg-white h-80 w-92 p-5 flex flex-col justify-between">
+            <div className="bg-white sm:h-80 h-96 w-92 p-5 flex flex-col justify-between">
               <div className="flex flex-col justify-between">
                 <h3 className="text-2xl leading-5 tracking-[0.16em] mb-3">
                   <FontAwesomeIcon className="mr-4" icon={faClock} />
@@ -88,9 +88,11 @@ export default function HomePage() {
           </div>
         </section>
       </div>
-      <div className="my-20">
-        <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
-        <section className="w-5/6 m-auto justify-between flex mt-20">
+      <div className="my-20 w-full flex flex-col items-center">
+        <div className="w-full">
+          <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
+        </div>
+        <section className="w-5/6 lg:min-w-[976px] xl:min-w-[1012px] justify-between flex mt-20">
           <ProductCard></ProductCard>
           <ProductCard></ProductCard>
           <ProductCard></ProductCard>
