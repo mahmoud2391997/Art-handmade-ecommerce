@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import NavBar from "./Navbar/NavBar"
+import Footer from "./Footer/Footer";
+import '../../App.css'
 
 export default function Layout() {
 
@@ -9,10 +10,13 @@ export default function Layout() {
     const showLayout = !noLayout.includes(location.pathname)
 
   return (
-    <div>
-        {showLayout && <Header />}
+    <div className="relative  flex-col min-h-screen">
+        {showLayout && <NavBar />}
+        
             <Outlet />
+           
         {showLayout && <Footer />}
+        
     </div>
   )
 }

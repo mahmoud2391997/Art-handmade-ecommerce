@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { Input, Textarea, Button } from '@material-tailwind/react';
 import { countries, cities } from './countriesAndCitiesData'; // Ensure correct export
@@ -29,7 +30,9 @@ export default function CheckoutComp() {
     };
 
     return (
-        <div className="p-8 max-w-7xl mx-auto">
+      
+
+        <div className="p-8 max-w-7xl mx-auto ">
             <h2 className="text-2xl font-semibold mb-4 uppercase">Billing Details</h2>
             <form>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -173,5 +176,6 @@ export default function CheckoutComp() {
                 </Button>
             </form>
         </div>
+    
     );
 }

@@ -1,76 +1,132 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
-  clearCart
-} from '../Redux/actions/cartActions';
-import { Button } from '@material-tailwind/react';
+} from "../Redux/actions/cartActions";
+import cart from "../assets/images/cart.jpg";
+import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+import ButtonCart from "../components/ButtonCart"
+import { Link } from "react-router-dom"; 
 
 export default function Cart() {
   const dispatch = useDispatch();
 
-  // Ensure the state structure matches the selector
   const cartItems = useSelector((state) => state.cart.cartItems || []);
   const total = useSelector((state) => state.cart.total || 0);
 
   return (
-    <div className="p-8 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
-      <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p className="text-center text-gray-500">Your cart is empty</p>
-      ) : (
-        <div>
-          {cartItems.map((item) => (
-            <div key={item._id} className="flex items-center justify-between border-b border-gray-200 py-4">
-              <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
-              <div className="flex-1 ml-4">
-                <h4 className="text-xl font-semibold">{item.name}</h4>
-                <p className="text-gray-600">Price: ${item.price}</p>
-                <div className="flex items-center mt-2">
-                  <Button 
-                    size="sm" 
-                    color="blue" 
-                    onClick={() => dispatch(increaseQuantity(item._id))} 
-                    className="mr-2"
-                  >
-                    +
-                  </Button>
-                  <p className="text-gray-600">{item.quantity}</p>
-                  <Button 
-                    size="sm" 
-                    color="red" 
-                    onClick={() => dispatch(decreaseQuantity(item._id))} 
-                    className="ml-2"
-                  >
-                    -
-                  </Button>
-                </div>
-              </div>
-              <Button 
-                size="sm" 
-                color="red" 
-                onClick={() => dispatch(removeFromCart(item._id))}
-              >
-                Remove
-              </Button>
-            </div>
-          ))}
-          <div className="mt-6 flex justify-between items-center font-bold">
-            <span>Total:</span>
-            <span>${total}</span>
+    <div className="relative pb-[500px] z-40">
+      <div className="bg-white pb-[50px]">
+        <div className="relative overflow-hidden w-full h-[150px] bg-white">
+          <img
+            className="absolute w-full h-full object-cover animate-moveVertical"
+            src={cart}
+            alt="Cart"
+          />
+          <div className="absolute top-1/2 left-0 z-10 p-4 transform -translate-y-1/2">
+            <h3 className="text-3xl p-20 font-eb-garamond text-white uppercase tracking-wider leading-[5.1em]">
+              Cart
+            </h3>
           </div>
-          <Button 
-            size="lg" 
-            color="red" 
-            onClick={() => dispatch(clearCart())} 
-            className="mt-6 w-full"
-          >
-            Clear Cart
-          </Button>
         </div>
-      )}
+        <div className="p-10 max-w-4xl mx-auto bg-white rounded-lg">
+          {cartItems.length === 0 ? (
+            <div className="border-b h-20">
+              <p className="text-center text-gray-500">Your cart is empty</p>
+            </div>
+          ) : (
+            <div>
+              {/* Headers */}
+              <div className="grid grid-cols-6 border-b text-[#525252] py-5 text-center ">
+                <div className="font-eb-garamond"></div>
+                <div className="font-eb-garamond">Product</div>
+                <div className="font-eb-garamond">Price</div>
+                <div className="font-eb-garamond">Quantity</div>
+                <div className="font-eb-garamond">Subtotal</div>
+              </div>
+
+              {cartItems.map((item) => (
+                <div
+                  key={item._id}
+                  className="grid grid-cols-5 border-b border-gray-200 py-4 items-center gap-4"
+                >
+                  {/* "x" button and image */}
+                  <div className="flex items-center space-x-4">
+                    <p
+                      onClick={() => dispatch(removeFromCart(item._id))}
+                      className="text-gray-500 cursor-pointer"
+                    >
+                      x
+                    </p>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-32 h-32 object-cover rounded"
+                    />
+                  </div>
+
+                  {/* Product Name */}
+                  <div>
+                    <h4 className="text-gray-600 font-eb-garamond">{item.name}</h4>
+                  </div>
+
+                  {/* Price */}
+                  <div>
+                    <p className="text-gray-600 font-eb-garamond">{item.price}$</p>
+                  </div>
+
+                  {/* Quantity Column */}
+                  <div className="flex items-center">
+                    <div className="flex items-center border border-gray-300 px-2 py-1 rounded">
+                      <p className="text-gray-600 mx-2">{item.quantity}</p>
+                      <div className="flex flex-col ml-2">
+                        <p
+                          onClick={() => dispatch(increaseQuantity(item._id))}
+                          className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
+                        >
+                          <SlArrowUp className="w-3" />
+                        </p>
+                        <p
+                          onClick={() => dispatch(decreaseQuantity(item._id))}
+                          className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
+                        >
+                          <SlArrowDown className="w-3" />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Subtotal */}
+                  <div>
+                    <p className="text-gray-600">
+                      {item.price * item.quantity}$
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+             {/* TABLE CART */}
+              <div className="mb-10 p-6"></div>
+
+              {/* Cart Totals */}
+              <div className="border-b text-[#525252] py-2 mb-6">
+                <h4 className="font-eb-garamond uppercase font-bold text-xl tracking-widest text-left">Cart Totals</h4>
+              </div>
+              <div className="flex border-b text-[#525252] py-2 mb-4">
+                <div className="w-1/2 font-eb-garamond text-left">Total</div>
+                <div className="w-1/2 font-eb-garamond text-right">{total}$</div>
+              </div>
+              
+              <Link to="/checkout">
+                <ButtonCart title2={"Proceed to Checkout"} />
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
