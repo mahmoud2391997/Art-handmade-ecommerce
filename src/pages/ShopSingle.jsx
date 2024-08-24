@@ -11,6 +11,7 @@ import test from "../assets/images/test.jpg";
 import MainButton from "../components/Shared/MainButton";
 import UpIcon from "../components/icons/UpIcon";
 import DownIcon from "../components/icons/DownIcon";
+import Quantity from "../components/Shared/Quantity";
 
 export default function ShopSingle() {
   let [quantity, setQuantity] = useState(0);
@@ -89,33 +90,13 @@ export default function ShopSingle() {
           </Typography>
 
           <div className="flex gap-8 items-center">
-            <div className="w-28 max-w-sm relative rounded-none">
-              <div className="relative rounded-none ">
-                <input
-                  type="number"
-                  className="w-full pl-4 h-10 pr-3 py-2  placeholder:text-black text-slate-700 text-sm border rounded-none transition duration-300 ease-in-out focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-                  style={{ borderColor: "var(--button-text-color)" }}
-                  placeholder="quantity"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                />
-                <button
-                  className="absolute  right-1 top-1 my-auto px-2 flex items-center bg-white rounded"
-                  type="button"
-                  onClick={handleUp}
-                >
-                  <UpIcon />
-                </button>
-
-                <button
-                  className="absolute  right-1 top-5 my-auto px-2 flex items-center bg-white rounded"
-                  type="button"
-                  onClick={handleDown}
-                >
-                  <DownIcon />
-                </button>
-              </div>
-            </div>
+            <Quantity
+              quantity={quantity}
+              setQuantity={setQuantity}
+              handleUp={handleUp}
+              handleDown={handleDown}
+              handleQuantityChange={handleQuantityChange}
+            />
             <MainButton title={"add to cart"} />
           </div>
 
