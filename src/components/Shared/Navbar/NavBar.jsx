@@ -34,8 +34,8 @@ export default function NavBar() {
             <ShoppingBag />
             <SearchIcon />
             <div className="hidden lg:flex ">
-              <MainButton title={"Sign In"} />
-              <MainButton title={"Log In"} />
+              <MainButton title={"sign in"} />
+              <MainButton title={"log in"} />
             </div>
           </div>
         </div>

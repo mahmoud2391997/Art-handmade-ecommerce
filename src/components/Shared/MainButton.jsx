@@ -32,6 +32,8 @@ export default function MainButton({ title }) {
         fontWeight="600"
         letterSpacing="0.07em"
         fontSize="13"
+        // text="uppercase"
+        style={{ textTransform: "capitalize" }}
       >
         {title}
       </text>

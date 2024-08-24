@@ -1,12 +1,18 @@
 :root {
+  --main-font: "EB Garamond", serif;
+  --second-font: "Open Sans", sans-serif;
+  --third-font: "Alegreya Sans", sans-serif;
   --white: #ffff;
   --main-color: #c9ab81;
   --stroke: #c9ab81;
   --button-text-color: #525252;
+  --heading-text-color: #525252;
+  --main-text-color: #5f5f5f;
   --button-text-font: "Open Sans", sans-serif;
   --nav-links-font: "EB Garamond", serif;
   --nav-links-color: #383838;
   --logo: url("src/assets/images/logo-dark.png");
   --title-bg: url("src/assets/images/title-img-2.jpg");
+  --product-img: url("src/assets/images/test.jpg");
   --page-title-font: "EB Garamond", serif;
 }
