@@ -40,7 +40,7 @@ export default function HomePage() {
       </section>
       <div className="my-20">
         <Title title={"MAIN CATEGORIES"} subTitle={"CHECK CATEGORIES"} />
-        <section className="w-5/6 gap-10 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  grid mt-20">
+        <section className="w-4/6 gap-6 m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3  grid mt-20">
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
@@ -62,7 +62,7 @@ export default function HomePage() {
               </div>
               <MainButton title={"View More"} color={"white"} />
             </div>
-            <div className="bg-white h-[400px] sm:h-80 w-full sm:w-96 p-5 flex flex-col justify-between">
+            <div className="bg-white h-[400px] sm:h-80 w-full sm:w-[330px] p-5 flex flex-col justify-between">
               <div className="flex flex-col justify-between">
                 <h3 className="sm:text-2xl text-base leading-5 tracking-[0.16em] mb-3">
                   <FontAwesomeIcon className="mr-4" icon={faClock} />
