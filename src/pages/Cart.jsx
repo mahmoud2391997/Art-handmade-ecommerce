@@ -9,7 +9,8 @@ import {
 import cart from "../assets/images/cart.jpg";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import ButtonCart from "../components/ButtonCart"
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+// import MainButton from "../components/MainButton";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -70,12 +71,16 @@ export default function Cart() {
 
                   {/* Product Name */}
                   <div>
-                    <h4 className="text-gray-600 font-eb-garamond">{item.name}</h4>
+                    <h4 className="text-gray-600 font-eb-garamond">
+                      {item.name}
+                    </h4>
                   </div>
 
                   {/* Price */}
                   <div>
-                    <p className="text-gray-600 font-eb-garamond">{item.price}$</p>
+                    <p className="text-gray-600 font-eb-garamond">
+                      {item.price}$
+                    </p>
                   </div>
 
                   {/* Quantity Column */}
@@ -108,18 +113,22 @@ export default function Cart() {
                 </div>
               ))}
 
-             {/* TABLE CART */}
+              {/* TABLE CART */}
               <div className="mb-10 p-6"></div>
 
               {/* Cart Totals */}
               <div className="border-b text-[#525252] py-2 mb-6">
-                <h4 className="font-eb-garamond uppercase font-bold text-xl tracking-widest text-left">Cart Totals</h4>
+                <h4 className="font-eb-garamond uppercase font-bold text-xl tracking-widest text-left">
+                  Cart Totals
+                </h4>
               </div>
               <div className="flex border-b text-[#525252] py-2 mb-4">
                 <div className="w-1/2 font-eb-garamond text-left">Total</div>
-                <div className="w-1/2 font-eb-garamond text-right">{total}$</div>
+                <div className="w-1/2 font-eb-garamond text-right">
+                  {total}$
+                </div>
               </div>
-              
+
               <Link to="/checkout">
                 <ButtonCart title2={"Proceed to Checkout"} />
               </Link>
