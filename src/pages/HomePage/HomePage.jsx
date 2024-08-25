@@ -1,32 +1,13 @@
 import { useEffect, useState } from "react";
 import "../HomePage/Landing.css";
-import CategoryItem from "../../components/categoryItem";
+import CategoryItem from "../../components/CategoryItem";
 import ProductCard from "../../components/ProductCard";
 import MainButton from "../../components/button/MainButton";
 import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
 export default function HomePage() {
-  const bgImages = [
-    "https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg",
-    "https://files.ocula.com/anzax/10/10d60b81-dde0-44ea-8888-e003eb664425_2000_1333.jpg",
-    "https://images.squarespace-cdn.com/content/v1/6568f6c2f926614e3d0da73a/ddf76aa6-d43f-4cc4-8672-19954acb4a10/230613-Mars-Landing-web-ready-9.jpg?format=2500w",
-  ];
-  const [bg, setBg] = useState(
-    "https://musea.qodeinteractive.com/wp-content/uploads/2019/10/02-min.jpg"
-  );
-  useEffect(() => {
-    changeBGImage();
-  }, [bg]);
-  function changeBGImage() {
-    setTimeout(() => {
-      setBg((prev) =>
-        bgImages.indexOf(prev) + 1 == bgImages.length
-          ? bgImages[0]
-          : bgImages[bgImages.indexOf(prev) + 1]
-      );
-    }, 4000);
-  }
+ 
   return (
     <div className="w-full z-40 pb-[200px] relative bg-white">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">

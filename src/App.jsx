@@ -1,24 +1,46 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
+//pages 
+import Register from "./pages/Register"
+import NotFound from "./pages/NotFound"
+import Home from "./pages/Home"
+import Products from "./pages/Products"
+import Login from "./pages/Login"
+import Events from "./pages/Events"
+import Contact from "./pages/Contact"
+import Checkout from "./pages/Checkout"
+import ProductDetails from "./pages/ProductDetails"
+
+//components
+import Layout from "./components/Layout/Layout"
+import EventDetails from "./pages/EventDetails"
+import Cart from "./pages/Cart"
 import "./App.css";
-import ProductCard from "./components/ProductCard";
-import HomePage from "./pages/HomePage/HomePage";
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 
-function App() {
+
+const router = createBrowserRouter([
+  { path: 'register', element: <Register /> },
+  { path: 'login', element: <Login /> },
+  { path: 'notfound', element: <NotFound /> },
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: 'products', element: <Products /> },
+      { path: 'products/:productId', element: <ProductDetails /> },
+      { path: 'events', element: <Events /> },
+      { path: 'events/:eventId', element: <EventDetails /> },
+      { path: 'cart', element: <Cart />},
+      { path: 'contact', element: <Contact /> },
+      { path: 'checkout', element: <Checkout /> },
+    ]
+  }
+]);
+
+export default function App() {
   return (
-    <div className="relative z-40 pb-[500px] bg-white">
-      <div className="eb-garamond-font max-w-screen relative text-[#4e4e4e]">
-        <div className="w-full absolute top-0 z-50">
-          <NavBar />
-        </div>
-        <HomePage />
-      </div>
-      <Footer />
-    </div>
-  );
+    <>
+      <RouterProvider router={router} />
+    </>
+  )
 }
-
-export default App;

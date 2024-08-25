@@ -15,11 +15,12 @@ export default function ProductCard() {
           Lorem, ipsum.
         </h5>
         <div className="w-2/3 flex justify-center">
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
+          
         </div>
         <div className="w-full tracking-[0.16em] leading-5 sm:text-2xl text-base text-center">
           <span className="">57 $</span>
