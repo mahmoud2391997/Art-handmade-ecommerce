@@ -32,7 +32,7 @@ export default function ShopSingle() {
 
   return (
     // Shop single container
-    <div className="flex items-center flex-col mb-10">
+    <div className=" z-40 pb-[200px] relative bg-white items-center flex flex-col mb-10">
       <PageTitle title={"product"} />
       <Card className="w-full max-w-[60rem] h-full flex-row m-40 rounded-none shadow-none">
         <CardHeader

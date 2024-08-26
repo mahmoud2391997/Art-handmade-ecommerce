@@ -5,11 +5,11 @@ import SearchInput from "../components/SearchInput";
 import RangeSlider from "../components/RangeSlider";
 import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
-import ProductCard from "../components/Shared/ProductCard";
+import ProductCard from "../components/CustomerProductCard";
 
 export default function ShopList() {
   return (
-    <div>
+    <div className="z-40 pb-[200px] relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start  gap-10 mx-28 my-32">
         <div className="w-2/3  flex flex-col ">
