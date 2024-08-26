@@ -3,7 +3,7 @@ import React from "react";
 import "./MainButton.css";
 
 // eslint-disable-next-line react/prop-types
-export default function MainButton({ title2 }) {
+export default function MainButton({ title }) {
   return (
     <svg
       width="350"
@@ -22,6 +22,7 @@ export default function MainButton({ title2 }) {
         strokeWidth="1"
         strokeDasharray="330% 25"
         strokeDashoffset="240%"
+        // style={{ transition: "stroke-dashoffset 2s ease-in-out" }}
       />
       <text
         x="85"
@@ -34,7 +35,7 @@ export default function MainButton({ title2 }) {
         letterSpacing="0.07em"
         fontSize="13"
       >
-        {title2}
+        {title}
       </text>
     </svg>
   );

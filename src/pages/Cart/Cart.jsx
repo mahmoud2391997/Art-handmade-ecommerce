@@ -38,10 +38,15 @@ export default function Cart() {
 
         <div className="p-1 sm:p-6 md:p-10 max-w-4xl mx-auto bg-white rounded-lg">
           {cartItems.length === 0 ? (
-            <div className="border-b h-20">
-              <p className="text-center text-sm md:text-base text-gray-500">
-                Your cart is empty
-              </p>
+            <div className="w-full h-[19.8vh] flex flex-col items-center">
+              <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-gray-500">
+                <h1 className="md:text-xl text-lg text-center">
+                  Your Cart Is Empty
+                </h1>
+              </div>
+              <Link to="/products">
+                <ButtonCart title2={"Return To Product List"} />
+              </Link>
             </div>
           ) : (
             <div>

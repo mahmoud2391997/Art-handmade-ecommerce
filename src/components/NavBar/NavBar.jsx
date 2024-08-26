@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Navbar, Collapse, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../../Logo";
+import Logo from "../Logo";
 import NavLinks from "./NavLinks";
-import MainButton from "../../button/MainButton";
-import ShoppingBag from "../../icons/ShoppingBag";
-import SearchIcon from "../../icons/SearchIcon";
+import MainButton from "../button/MainButton";
+import ShoppingBag from "../icons/ShoppingBag";
+import SearchIcon from "../icons/SearchIcon";
 
 export default function NavBar() {
   const [open, setOpen] = React.useState(false);
@@ -19,7 +19,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Navbar color="transparent" fullWidth className=" absolute top-0 z-50">
+    <Navbar color="transparent" fullWidth>
       <div className="container mx-auto my-6 flex items-center justify-between text-white">
         <div className="flex justify-between w-full mr-4 lg:mr-0">
           <div className="flex justify-center items-center gap-8">
