@@ -7,7 +7,8 @@ function App() {
   return (
     <>
       <NavBar />
-      <ShopSingle />
+      <ShopList />
+      {/* <ShopSingle /> */}
     </>
   );
 }
