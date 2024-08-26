@@ -24,6 +24,8 @@ export default function ShopList() {
               </Select>
             </div>
           </div>
+          {/* Nedaa section */}
+          <div>card</div>
         </div>
         <div className="w-1/3 bg-gray-400">right</div>
       </div>
