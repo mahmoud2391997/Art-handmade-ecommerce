@@ -9,7 +9,7 @@ import ProductCard from "../components/CustomerProductCard";
 
 export default function ShopList() {
   return (
-    <div className="z-40 pb-[200px] relative bg-white">
+    <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start gap-10 mx-28 my-32">
         <div className="w-2/3 flex flex-col">
@@ -29,9 +29,9 @@ export default function ShopList() {
               </Select>
             </div>
           </div>
-            <div className="p-10 max-h-screen">
-              <ProductCard isRandom={false} /> {/* Pass isRandom as needed */}
-            </div>
+          <div className="p-10 min-h-screen">
+            <ProductCard isRandom={false} /> {/* Pass isRandom as needed */}
+          </div>
         </div>
         <div className="w-1/3 flex flex-col">
           <Typography
