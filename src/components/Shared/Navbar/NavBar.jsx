@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Navbar, Collapse, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../../Logo";
+import Logo from "../Logo";
 import NavLinks from "./NavLinks";
-import MainButton from "../../button/MainButton";
+import MainButton from "../MainButton";
 import ShoppingBag from "../../icons/ShoppingBag";
 import SearchIcon from "../../icons/SearchIcon";
 
@@ -19,8 +19,8 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Navbar color="transparent" fullWidth className=" absolute top-0 z-50">
-      <div className="container mx-auto my-6 flex items-center justify-between text-white">
+    <Navbar color="transparent" fullWidth>
+      <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900">
         <div className="flex justify-between w-full mr-4 lg:mr-0">
           <div className="flex justify-center items-center gap-8">
             {/* | Logo component | */}
@@ -34,8 +34,8 @@ export default function NavBar() {
             <ShoppingBag />
             <SearchIcon />
             <div className="hidden lg:flex ">
-              <MainButton title={"Sign In"} color={"white"} />
-              <MainButton title={"Log In"} color={"white"} />
+              <MainButton title={"sign in"} />
+              <MainButton title={"log in"} />
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function NavBar() {
       </div>
       <Collapse open={open}>
         <div className="mt-2 rounded-xl bg-white py-2">
-          //*| Nav Links component in mobile and tablet |
+          {/* | Nav Links component in mobile and tablet | */}
           <NavLinks />
           <div className="flex justify-center">
             <MainButton title={"Sign In"} />

@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import NavBar from "./Navbar/NavBar";
+import NavBar from "../Shared/Navbar/NavBar";
 import Footer from "./Footer/Footer";
 import "../../App.css";
 

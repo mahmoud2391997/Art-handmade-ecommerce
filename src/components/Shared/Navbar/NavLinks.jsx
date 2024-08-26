@@ -11,7 +11,7 @@ export default function NavLinks() {
             as="li"
             className="flex items-center"
             style={{
-              color: "white",
+              color: "var(--nav-links-color)",
               fontFamily: "var(--nav-links-font)",
               fontSize: "14px",
               fontWeight: "500",

@@ -3,11 +3,6 @@
 @import "tailwindcss/utilities";
 
 ::selection {
-    background-color: #c9ab81; 
-    color: #ffffff;            
+  background-color: var(--main-color);
+  color: var(--white);
 }
-
-/* .animate-strokeMove {
-    animation: strokeMove 2s infinite;
-  } */
-  

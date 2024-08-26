@@ -16,6 +16,8 @@ import Layout from "./components/Layout/Layout";
 import EventDetails from "./pages/EventDetails";
 import Cart from "./pages/Cart/Cart";
 import "./App.css";
+import ShopList from "./pages/ShopList";
+import ShopSingle from "./pages/ShopSingle";
 
 const router = createBrowserRouter([
   { path: "register", element: <Register /> },
@@ -25,8 +27,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "products", element: <Products /> },
-      { path: "products/:productId", element: <ProductDetails /> },
+      { path: "products", element: <ShopList /> },
+      { path: "products/:productId", element: <ShopSingle /> },
       { path: "events", element: <Events /> },
       { path: "events/:eventId", element: <EventDetails /> },
       { path: "cart", element: <Cart /> },
