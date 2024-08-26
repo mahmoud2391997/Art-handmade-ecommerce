@@ -14,7 +14,7 @@ import ProductDetails from "./pages/ProductDetails";
 //components
 import Layout from "./components/Layout/Layout";
 import EventDetails from "./pages/EventDetails";
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart/Cart";
 import "./App.css";
 
 const router = createBrowserRouter([

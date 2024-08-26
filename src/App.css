@@ -1,4 +1,15 @@
 :root {
+  --white: #ffff;
+  --main-color: #c9ab81;
+  --stroke: #c9ab81;
+  --button-text-color: #525252;
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
+  --nav-links-color: #383838;
+  --logo: url("src/assets/images/logo-light.png");
+}
+.card {
+  padding: 2em;
   --main-font: "EB Garamond", serif;
   --second-font: "Open Sans", sans-serif;
   --third-font: "Alegreya Sans", sans-serif;

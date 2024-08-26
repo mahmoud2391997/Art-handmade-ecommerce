@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
 import AdminProductCard from "../../components/AdminProductCard";
 import CustomerProductCard from "../../components/CustomerProductCard";
+
 export default function HomePage() {
   return (
-    <div className="w-full z-40 pb-[200px] relative bg-white">
+    <div className="w-full z-40 pb-[200px] relative bg-white font-eb-garamond">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">
         <div className=" w-full">
           <Title
