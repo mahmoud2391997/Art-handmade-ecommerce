@@ -1,23 +1,27 @@
+import { useState } from "react";
 import StaticStarRating from "../components/staticStarRating";
 import MainButton from "./MainButton";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsAction } from "../Redux/actions/productActions";
+import { fetchProductsAction, fetchRandomProductsAction } from "../Redux/actions/productActions";
 import { addToCart } from "../Redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody, Button } from "@material-tailwind/react";
 
 
-export default function ProductCard() {
+export default function ProductCard({isRandom}) {
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();  
   const { products, status, error } = useSelector(state => state.products);
 
-  useEffect(() => {  
-    dispatch(fetchProductsAction());  
-  }, []);  
+  useEffect(() => {
+    if (isRandom) {
+      dispatch(fetchRandomProductsAction());
+    }else {
+      dispatch(fetchProductsAction())
+    }
+  }, [dispatch, isRandom])  
 
   const handleAddToCart = (product) => {
     console.log('Adding to cart', product)  

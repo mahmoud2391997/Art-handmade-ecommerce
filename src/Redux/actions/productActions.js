@@ -1,5 +1,5 @@
-import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID } from "../actionTypes";
-import { fetchProducts, fetchProductByID } from "../api/productsAPI";
+import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID, FETCH_RANDOM_PRODUCTS } from "../actionTypes";
+import { fetchProducts, fetchProductByID, fetchRandomProducts } from "../api/productsAPI";
 
 export const fetchProductsAction = () => async (dispatch, getState) => {
     const { loaded } = getState().products;
@@ -20,7 +20,6 @@ export const fetchProductsAction = () => async (dispatch, getState) => {
 
 export const fetchProductByIDAction = (productId) => async (dispatch) => {
     try {
-        console.log("Fetching product with ID:", productId);
         const product = await fetchProductByID(productId);
         dispatch({
             type: FETCH_PRODUCT_BY_ID,
@@ -30,3 +29,16 @@ export const fetchProductByIDAction = (productId) => async (dispatch) => {
         console.log('Error Fetching Product', error);
     }
 };
+
+export const fetchRandomProductsAction = () => async (dispatch) => {
+    try {
+        const randomProducts = await fetchRandomProducts();
+        dispatch({
+            type: FETCH_RANDOM_PRODUCTS,
+            payload: randomProducts,
+        });
+    } catch (error) {
+        console.log('Error Fetching Random Products', error);
+    }
+}
+

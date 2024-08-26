@@ -31,7 +31,7 @@ export default function ShopList() {
           </div>
           {/* Nedaa section */}
           <div className="grid grid-cols-1 md: grid-cols-3 gap-12">
-            <ProductCard />
+            <ProductCard isRandom={false} />
           </div>
         </div>
         <div className="w-1/3 flex flex-col">

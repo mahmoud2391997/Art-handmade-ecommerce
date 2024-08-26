@@ -6,7 +6,7 @@ import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
 import AdminProductCard from "../../components/AdminProductCard";
-import CustomerProductCard from "../../components/CustomerProductCard";
+import ProductCard from "../../components/CustomerProductCard";
 
 export default function HomePage() {
   return (
@@ -76,7 +76,7 @@ export default function HomePage() {
           <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
         </div>
         <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
-          <CustomerProductCard />
+          <ProductCard isRandom />
         </section>
       </div>
     </div>

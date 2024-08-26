@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID } from "../actionTypes";
+import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID, FETCH_RANDOM_PRODUCTS } from "../actionTypes";
 
 const initialState = {
     products: [],
@@ -24,6 +24,15 @@ export const productReducer = (state = initialState, action) => {
                 ...state,
                 currentProduct: action.payload,
                 status: 'succeeded',
+            };
+        }
+
+        case FETCH_RANDOM_PRODUCTS: {
+            return {
+                ...state,
+                products: action.payload,
+                status: 'succeeded',
+                loaded: true,
             };
         }
 
