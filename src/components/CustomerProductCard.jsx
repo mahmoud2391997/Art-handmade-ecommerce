@@ -1,7 +1,7 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainButton from "./button/MainButton";
-export default function ProductCard() {
+export default function CustomerProductCard() {
   return (
     <div className="xl:w-[253px] w-full sm:w-56 h-[350px] xl:h-[400px] p-4 mb-7 flex flex-col items-center">
       <div className="xl:w-[236px] w-[236px] h-[236px] sm:w-48 sm:h-48 xl:h-[236px]">
@@ -15,12 +15,11 @@ export default function ProductCard() {
           Lorem, ipsum.
         </h5>
         <div className="w-2/3 flex justify-center">
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]"/>
-          
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
+          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
         </div>
         <div className="w-full tracking-[0.16em] leading-5 sm:text-2xl text-base text-center">
           <span className="">57 $</span>

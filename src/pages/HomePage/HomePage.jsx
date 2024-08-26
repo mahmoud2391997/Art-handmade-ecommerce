@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "../HomePage/Landing.css";
 import CategoryItem from "../../components/CategoryItem";
-import ProductCard from "../../components/ProductCard";
 import MainButton from "../../components/button/MainButton";
 import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
+import AdminProductCard from "../../components/AdminProductCard";
+import CustomerProductCard from "../../components/CustomerProductCard";
 export default function HomePage() {
- 
   return (
     <div className="w-full z-40 pb-[200px] relative bg-white">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">
@@ -21,7 +21,8 @@ export default function HomePage() {
       </section>
       <div className="my-20">
         <Title title={"MAIN CATEGORIES"} subTitle={"CHECK CATEGORIES"} />
-        <section className="w-4/6 gap-6 m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3  grid mt-20">
+        <section className="w-5/6 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid mt-20">
+          <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
           <CategoryItem></CategoryItem>
@@ -73,11 +74,12 @@ export default function HomePage() {
         <div className="w-full">
           <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
         </div>
-        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
+        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
+          <CustomerProductCard />
+          <CustomerProductCard />
+          <CustomerProductCard />
+          <CustomerProductCard />
+          <CustomerProductCard />
         </section>
       </div>
     </div>
