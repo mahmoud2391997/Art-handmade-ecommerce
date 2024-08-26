@@ -3,16 +3,15 @@ import Header from "./Header";
 import Footer from "./Footer/Footer";
 
 export default function Layout() {
-
-    const location = useLocation();
-    const noLayout = ['./register', '/login', '/notfound']
-    const showLayout = !noLayout.includes(location.pathname)
+  const location = useLocation();
+  const noLayout = ["./register", "/login", "/notfound"];
+  const showLayout = !noLayout.includes(location.pathname);
 
   return (
     <div>
-        {showLayout && <Header />}
-            <Outlet />
-        {showLayout && <Footer />}
+      {showLayout && <Header />}
+      <Outlet />
+      {showLayout && <Footer />}
     </div>
-  )
+  );
 }

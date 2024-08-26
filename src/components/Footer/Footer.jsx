@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { LOGO, ART, Icons } from "./footerData";
-import logo from "../../../assets/images/logo (1).png";
+import { LOGO, ART, Icons } from "./Footerdata";
+import logo from "../../assets/logo-light.png";
 import SocialIcons from "./SocialIcons";
+import "../../index.css";
+import Title from "../Title";
 
 export default function Footer() {
   return (

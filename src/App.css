@@ -12,8 +12,14 @@
   --button-text-font: "Open Sans", sans-serif;
   --nav-links-font: "EB Garamond", serif;
   --nav-links-color: #383838;
-  --logo: url("src/assets/images/logo-dark.png");
+  --logo: url("src/assets/images/logo.png");
   --title-bg: url("src/assets/images/title-img-2.jpg");
   --product-img: url("src/assets/images/test.jpg");
   --page-title-font: "EB Garamond", serif;
+}
+.eb-garamond-font {
+  font-family: "EB Garamond";
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }

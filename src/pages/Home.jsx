@@ -1,9 +1,6 @@
-import React from 'react'
+import React from "react";
+import HomePage from "./HomePage/HomePage";
 
 export default function Home() {
-  return (
-    <div>
-      Home
-    </div>
-  )
+  return <HomePage />;
 }
