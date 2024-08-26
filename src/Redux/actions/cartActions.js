@@ -76,7 +76,7 @@ export const clearCart = () => (dispatch) => {
   dispatch(updateTotal([]));
 };
 
-const updateTotal = (cartItems) => {
+export const updateTotal = (cartItems) => {
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0

@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
+import { 
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
+  updateTotal
 } from "../../Redux/actions/cartActions";
 import cart from "../../assets/images/cart.jpg";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
@@ -19,6 +19,10 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems || []);
+
+  const calculateItemSubtotal = ( price, quantity) => {
+    return price * quantity;
+  }
 
   return (
     <div className="relative pb-[500px] z-40 sm:w-full">
@@ -76,7 +80,7 @@ export default function Cart() {
                   </div>
 
                   <div className="  sm:ml-10 md:ml-12 text-gray-600 text-sm md:text-base font-eb-garamond  ">
-                    {item.price}$
+                  ${item.price}
                   </div>
 
                   <div className="flex items-center p-2 sm:p-4 md:p-6 lg:p-8">
@@ -87,7 +91,7 @@ export default function Cart() {
                       <div className="flex flex-col ml-1 sm:ml-2">
                         <p
                           onClick={() => dispatch(increaseQuantity(item._id))}
-                          className="text-gray-500 فث hover:text-[#c9ab81] cursor-pointer"
+                          className="text-gray-500  hover:text-[#c9ab81] cursor-pointer"
                         >
                           <SlArrowUp className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
                         </p>
@@ -100,9 +104,8 @@ export default function Cart() {
                       </div>
                     </div>
                   </div>
-
                   <div className="text-gray-600 text-sm md:text-base font-eb-garamond p-4 md:p-16 hidden md:block">
-                    {item.price * item.quantity}$
+                  ${calculateItemSubtotal(item.price, item.quantity)}
                   </div>
                   <div className="flex items-center justify-between">
                     <MdDeleteOutline

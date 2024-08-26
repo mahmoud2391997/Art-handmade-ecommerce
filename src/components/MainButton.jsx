@@ -3,14 +3,16 @@ import React from "react";
 import "./MainButton.css";
 
 // eslint-disable-next-line react/prop-types
-export default function MainButton({ title }) {
+export default function MainButton({ title, className, onClick }) {
   return (
     <svg
       width="150"
       height="50"
       viewBox="0 0 150 50"
       xmlns="http://www.w3.org/2000/svg"
-      className="stroke-button hover: cursor-pointer"
+      className={`stroke-button ${className}`}  
+      onClick={onClick}  
+      style={{ cursor: "pointer" }}  
     >
       <rect
         x="5"
@@ -22,7 +24,6 @@ export default function MainButton({ title }) {
         strokeWidth="1"
         strokeDasharray="330% 25"
         strokeDashoffset="240%"
-        // style={{ transition: "stroke-dashoffset 2s ease-in-out" }}
       />
       <text
         x="75"

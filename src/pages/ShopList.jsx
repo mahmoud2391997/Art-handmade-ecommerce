@@ -30,9 +30,7 @@ export default function ShopList() {
             </div>
           </div>
           {/* Nedaa section */}
-          <div className="grid grid-cols-3 gap-12">
-            <ProductCard />
-            <ProductCard />
+          <div className="grid grid-cols-1 md: grid-cols-3 gap-12">
             <ProductCard />
           </div>
         </div>

@@ -4,29 +4,30 @@ const initialState = {
     products: [],
     status: 'idle',
     error: null,
-    currentProduct: null
-}
+    currentProduct: null,
+    loaded: false,
+};
 
-
-export const productReducer = ( state = initialState, action) => {
-    switch (action.type){
-        case FETCH_PRODUCTS:{
+export const productReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case FETCH_PRODUCTS: {
             return {
                 ...state,
                 products: action.payload,
-                status: 'succeeded'
-            }
+                status: 'succeeded',
+                loaded: true, 
+            };
         }
 
-        case FETCH_PRODUCT_BY_ID:{
+        case FETCH_PRODUCT_BY_ID: {
             return {
                 ...state,
                 currentProduct: action.payload,
-                status: 'succeeded'
-            }
+                status: 'succeeded',
+            };
         }
-        
+
         default:
             return state;
     }
-}
+};
