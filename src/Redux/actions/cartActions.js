@@ -61,9 +61,9 @@ import {
     const { cartItems } = getState().cart;
     const updatedCart = cartItems.map(item => 
       item._id === productId 
-        ? { ...item, quantity: item.quantity - 1 } 
+        ? { ...item, quantity: Math.max(item.quantity - 1, 0) } 
         : item
-    ).filter(item => item.quantity > 0);
+    );
     
     dispatch({
       type: DECREASE_QUANTITY,

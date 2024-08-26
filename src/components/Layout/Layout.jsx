@@ -10,7 +10,7 @@ export default function Layout() {
     const showLayout = !noLayout.includes(location.pathname)
 
   return (
-    <div className="relative  flex-col min-h-screen">
+    <div className="relative  flex-col min-h-screen lg:w-full sm:w-full md:w-full">
         {showLayout && <NavBar />}
         
             <Outlet />

@@ -21,8 +21,8 @@ export default function NavBar() {
 
   return (
     <>
-      <Navbar color="transparent" fullWidth className="bg-white z-40 relative">
-        <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900">
+      <Navbar color="transparent" fullWidth className="bg-white z-40 relative lg:w-full sm:w-full md:w-full">
+        <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900 lg:w-full sm:w-full md:w-full">
           <div className="flex justify-between w-full mr-4 lg:mr-0">
             <div className="flex justify-center items-center gap-8">
               {/* | Logo component | */}
