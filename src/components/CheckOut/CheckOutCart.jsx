@@ -25,7 +25,7 @@ export default function CheckOutCart() {
                     </thead>
                     <tbody>
                         {cartItems.map((item) => (
-                            <tr key={item._id}>
+                            <tr key={item._id} className="max-h-screen overflow-y-scroll">
                                 <td className="py-6 border-b border-gray-300">{item.name} × {item.quantity}</td>
                                 <td className="py-6 text-right border-b border-gray-300">${(item.price * item.quantity)}</td>
                             </tr>

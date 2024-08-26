@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Input, Textarea } from "@material-tailwind/react";
 import { countries, cities } from "./countriesAndCitiesData";
@@ -32,12 +31,10 @@ export default function CheckoutComp() {
   };
 
   return (
-    <div className="relative z-40 bg-white ">
+    <div className="relative z-40 bg-white">
       <ChekoutTitle />
-      <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700 ">
-        <h2 className="text-2xl font-semibold mb-10 uppercase">
-          Billing Details
-        </h2>
+      <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700">
+        <h2 className="text-2xl font-semibold mb-10 uppercase">Billing Details</h2>
         <form>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Form Fields Column */}
@@ -47,31 +44,29 @@ export default function CheckoutComp() {
                   <Input
                     type="text"
                     placeholder="First Name"
-                    className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                    className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                     variant="standard"
                   />
                   <Input
                     type="text"
                     placeholder="Last Name"
-                    className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                    className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                     variant="standard"
                   />
                 </div>
                 <Input
                   type="text"
                   placeholder="Company Name (Optional)"
-                  className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                   variant="standard"
                 />
                 <div className="relative mb-8">
                   <select
                     value={country}
                     onChange={handleCountryChange}
-                    className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
+                    className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500 placeholder-opacity-100"
                   >
-                    <option value="" disabled>
-                      Select Country / Region
-                    </option>
+                    <option value="" disabled>Select Country / Region</option>
                     {countries.map((country) => (
                       <option key={country} value={country}>
                         {country}
@@ -86,12 +81,10 @@ export default function CheckoutComp() {
                   <select
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
+                    className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500 placeholder-opacity-100"
                     disabled={!country}
                   >
-                    <option value="" disabled>
-                      Select Town / City
-                    </option>
+                    <option value="" disabled>Select Town / City</option>
                     {cityOptions.map((city) => (
                       <option key={city} value={city}>
                         {city}
@@ -107,24 +100,24 @@ export default function CheckoutComp() {
                 <Input
                   type="text"
                   placeholder="Postcode/ZIP"
-                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                   variant="standard"
                 />
                 <Input
                   type="text"
                   placeholder="Phone"
-                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                   variant="standard"
                 />
                 <Input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                   variant="standard"
                 />
                 <Textarea
                   placeholder="Order Notes (Optional)"
-                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
+                  className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500 placeholder-opacity-100"
                   variant="standard"
                 />
                 <div className="mb-8">
@@ -137,7 +130,7 @@ export default function CheckoutComp() {
                           value="direct-bank-transfer"
                           checked={paymentMethod === "direct-bank-transfer"}
                           onChange={handlePaymentChange}
-                          className="mr-2"
+                          className="mr-2 accent-blue-500"
                         />
                         Direct Bank Transfer
                       </label>
@@ -158,7 +151,7 @@ export default function CheckoutComp() {
                           value="cash-on-delivery"
                           checked={paymentMethod === "cash-on-delivery"}
                           onChange={handlePaymentChange}
-                          className="mr-2"
+                          className="mr-2 accent-blue-500"
                         />
                         Cash on Delivery
                       </label>

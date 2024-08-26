@@ -11,9 +11,9 @@ export default function ShopList() {
   return (
     <div className="z-40 pb-[200px] relative bg-white">
       <PageTitle title={"shop"} />
-      <div className="flex justify-center items-start  gap-10 mx-28 my-32">
-        <div className="w-2/3  flex flex-col ">
-          <div className="flex justify-between items-center ">
+      <div className="flex justify-center items-start gap-10 mx-28 my-32">
+        <div className="w-2/3 flex flex-col">
+          <div className="flex justify-between items-center mb-4">
             <div
               className="capitalize text-[17px]"
               style={{ fontFamily: "var(--third-font)" }}
@@ -29,13 +29,11 @@ export default function ShopList() {
               </Select>
             </div>
           </div>
-          {/* Nedaa section */}
-          <div className="grid grid-cols-1 md: grid-cols-3 gap-12">
-            <ProductCard isRandom={false} />
-          </div>
+            <div className="p-10 max-h-screen">
+              <ProductCard isRandom={false} /> {/* Pass isRandom as needed */}
+            </div>
         </div>
         <div className="w-1/3 flex flex-col">
-          {/* filter */}
           <Typography
             className="uppercase text-[22px] text-[var(--main-gray)] mb-4"
             style={{
@@ -49,13 +47,9 @@ export default function ShopList() {
           <div className="w-full h-5 border-l-[1px] border-r-[1px] border-[var(--main-gray)] flex justify-center items-center mb-10">
             <div className="w-full h-[1px] bg-[var(--main-gray)]" />
           </div>
-          {/* price */}
           <RangeSlider />
-          {/* categories */}
           <CategoriesCheckbox />
-          {/* tags */}
           <TagsFilter />
-          {/* search */}
           <SearchInput />
         </div>
       </div>

@@ -75,7 +75,7 @@ export default function HomePage() {
         <div className="w-full">
           <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
         </div>
-        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
+        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]">
           <ProductCard isRandom />
         </section>
       </div>
