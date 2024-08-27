@@ -1,38 +1,28 @@
 import React from "react";
-import UpIcon from "../icons/UpIcon";
-import DownIcon from "../icons/DownIcon";
+import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
-export default function Quantity({
-  quantity,
-  onQuantityChange,
-}) {
+export const Quantity = ({ quantity, increaseQuantity, decreaseQuantity }) => {
   return (
-    <div className="w-24 max-w-sm relative rounded-none">
-      <div className="relative rounded-none ">
-        <input
-          type="number"
-          className="w-full pl-4 h-10 pr-3 py-2 placeholder:text-black text-slate-700 text-sm border rounded-none transition duration-300 ease-in-out focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-          style={{ borderColor: "var(--button-text-color)" }}
-          placeholder="quantity"
-          value={quantity}
-          onChange={(e) => onQuantityChange(Number(e.target.value))}
-        />
-        <button
-          className="absolute right-1 top-1 my-auto px-2 flex items-center bg-white rounded"
-          type="button"
-          onClick={() => onQuantityChange(quantity + 1)}
+    <div className="flex items-center border border-gray-300 px-2 py-1 rounded-none">
+      <p className="text-gray-600 text-xs sm:text-sm md:text-[12px] lg:text-[14px] mx-1 sm:mx-2 md:mx-4">
+        {quantity}
+      </p>
+      <div className="flex flex-col ml-1 sm:ml-2">
+        <p
+          onClick={increaseQuantity}
+          className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
         >
-          <UpIcon />
-        </button>
-
-        <button
-          className="absolute right-1 top-5 my-auto px-2 flex items-center bg-white rounded"
-          type="button"
-          onClick={() => onQuantityChange(Math.max(quantity - 1, 1))}
+          <SlArrowUp className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
+        </p>
+        <p
+          onClick={decreaseQuantity}
+          className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
         >
-          <DownIcon />
-        </button>
+          <SlArrowDown className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
+        </p>
       </div>
     </div>
   );
-}
+};
+
+export default Quantity;

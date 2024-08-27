@@ -117,10 +117,10 @@ export default function Cart() {
               ))}
               <CartTotals />
 
-              <div className="flex justify-center mt-6">
-                <Link to="/checkout" className="w-full max-w-xs">
+              <div className="flex justify-center text-center mt-6">
+                <Link to="/checkout" className="w-full max-w-xs text-center">
                   <ButtonCart
-                    className="w-full"
+                    className="w-full text-center py-4 "
                     title2={"Proceed to Checkout"}
                   />
                 </Link>
