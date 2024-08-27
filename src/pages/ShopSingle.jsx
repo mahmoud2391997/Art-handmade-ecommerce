@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PageTitle from "../components/Shared/PageTitle";
-import { Card, CardBody, CardHeader, Typography, Button } from "@material-tailwind/react";
+import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 import MainButton from "../components/Shared/MainButton";
 import StaticStarRating from "../components/Shared/StaticStarRating";
 import ShopSingleTabs from "../components/ShopSingleTabs";
 import { useParams } from "react-router-dom";
-import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { addToCart, increaseQuantity, decreaseQuantity } from "../Redux/actions/cartActions";
 import { fetchProductByIDAction } from '../Redux/actions/productActions';
 import { useSelector, useDispatch } from "react-redux";
+import Quantity from "../components/Shared/Quantity";
 
 export default function ShopSingle() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1); // Default quantity
   const products = useSelector((state) => state.products.products);
   const currentProduct = useSelector((state) => state.products.currentProduct);
 
@@ -35,9 +36,8 @@ export default function ShopSingle() {
 
   if (!product) return <p>Loading...</p>;
 
-  const handleAddToCart = (product) => {
-    console.log('Adding to cart', product)  
-    dispatch(addToCart(product));  
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...product, quantity }));
   };
 
   return (
@@ -96,29 +96,12 @@ export default function ShopSingle() {
           </Typography>
 
           <div className="flex gap-8 items-center">
-            <div className="flex items-center p-2 sm:p-4 md:p-6 lg:p-8">
-              <div className="flex items-center border border-gray-300 px-2 py-1 rounded-none">
-                <p className="text-gray-600 text-xs sm:text-sm md:text-[12px] lg:text-[14px] mx-1 sm:mx-2 md:mx-4">
-                  {product.quantity}
-                </p>
-                <div className="flex flex-col ml-1 sm:ml-2">
-                  <p
-                    onClick={() => dispatch(increaseQuantity(product._id))}
-                    className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
-                  >
-                    <SlArrowUp className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
-                  </p>
-                  <p
-                    onClick={() => dispatch(decreaseQuantity(product._id))}
-                    className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
-                  >
-                    <SlArrowDown className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Quantity
+              quantity={quantity}
+              onQuantityChange={setQuantity}
+            />
             <MainButton
-              onClick={() => handleAddToCart(product)}
+              onClick={handleAddToCart}
               title="Add To Cart"
             />
           </div>
