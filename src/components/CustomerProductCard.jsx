@@ -22,7 +22,7 @@ export default function ProductCard({ isRandom }) {
 
   const handleAddToCart = (product) => {
     console.log('Adding to cart', product);
-    dispatch(addToCart(product));
+    dispatch(addToCart(product)); // Ensure `addToCart` is configured to handle this
   };
 
   if (status === 'loading') return <p>Loading...</p>;
@@ -31,7 +31,7 @@ export default function ProductCard({ isRandom }) {
   return (
     <div className="relative p-4 mb-7 grid grid-cols-1 lg:grid-cols-3 gap-[10rem]">
       {products.map((product) => (
-        <Card key={product.id} className="relative flex flex-col items-center group rounded-none">
+        <Card key={product._id} className="relative flex flex-col items-center group rounded-none">
           <div className="relative xl:w-60 w-60 h-60 sm:w-48 sm:h-48 xl:h-60 mb-4 overflow-hidden">
             <img
               src={product.image}
@@ -53,7 +53,7 @@ export default function ProductCard({ isRandom }) {
               {product.name}
             </h5>
             <div className="w-2/3 flex justify-center">
-              <StaticStarRating rating={3} />
+              <StaticStarRating rating={product.rating || 3} />
             </div>
             <div className="w-full tracking-[0.16em] leading-5 sm:text-l text-base text-center">
               <span>{product.price}$</span>
@@ -64,5 +64,3 @@ export default function ProductCard({ isRandom }) {
     </div>
   );
 }
-
-

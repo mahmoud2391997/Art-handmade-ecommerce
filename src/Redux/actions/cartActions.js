@@ -9,17 +9,17 @@ import {
   UPDATE_AMOUNT,
 } from "../actionTypes";
 
-export const addToCart = (product, quantity) => (dispatch, getState) => {
+export const addToCart = (product) => (dispatch, getState) => {
   const { cartItems } = getState().cart;
   const existingProduct = cartItems.find((item) => item._id === product._id);
 
   let updatedCart;
   if (existingProduct) {
     updatedCart = cartItems.map((item) =>
-      item._id === product._id ? { ...item, quantity: item.quantity + quantity } : item
+      item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
     );
   } else {
-    updatedCart = [...cartItems, { ...product, quantity }];
+    updatedCart = [...cartItems, { ...product, quantity: 1 }];
   }
 
   dispatch({
