@@ -5,7 +5,6 @@ import "./RollUp.css";
 export default function RollUp() {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 200) {
@@ -36,7 +35,7 @@ export default function RollUp() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 cursor-pointer"
+            className="w-6 h-6 cursor-pointer svg"
           >
             <path
               strokeLinecap="round"

@@ -35,7 +35,7 @@ export default function NavBar() {
             <SearchIcon />
             <div className="hidden lg:flex ">
               <MainButton title={"sign in"} />
-              <MainButton title={"log in"} />
+              <MainButton title={"Register"} />
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function NavBar() {
           <NavLinks />
           <div className="flex justify-center">
             <MainButton title={"Sign In"} />
-            <MainButton title={"Log In"} />
+            <MainButton title={"Register"} />
           </div>
         </div>
       </Collapse>
