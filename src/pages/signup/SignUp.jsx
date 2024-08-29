@@ -42,7 +42,7 @@ export default function SignUp() {
     console.log(data);
   };
   return (
-    <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-0">
+    <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[5%]">
       <PageTitle title={"sign up"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
