@@ -1,9 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-// eslint-disable-next-line react/prop-types
 export default function StarIcon({ filled }) {
   return (
     <svg
@@ -12,7 +8,7 @@ export default function StarIcon({ filled }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="var(--main-color)"
-      className="size-4"
+      className="size-5"
     >
       <path
         strokeLinecap="round"
