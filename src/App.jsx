@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";

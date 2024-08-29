@@ -155,7 +155,6 @@ export default function SignUp() {
         >
           <MainButton title={"sign up"} />
         </Button>
-        {/* birth date */}
       </form>
     </div>
   );
