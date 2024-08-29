@@ -130,7 +130,7 @@ export default function CheckoutComp() {
                           value="direct-bank-transfer"
                           checked={paymentMethod === "direct-bank-transfer"}
                           onChange={handlePaymentChange}
-                          className="mr-2 accent-blue-500"
+                          className="mr-2 accent-blue-500 placeholder-gray-500"
                         />
                         Direct Bank Transfer
                       </label>
@@ -151,7 +151,7 @@ export default function CheckoutComp() {
                           value="cash-on-delivery"
                           checked={paymentMethod === "cash-on-delivery"}
                           onChange={handlePaymentChange}
-                          className="mr-2 accent-blue-500"
+                          className="mr-2 accent-blue-500 placeholder-gray-500"
                         />
                         Cash on Delivery
                       </label>
