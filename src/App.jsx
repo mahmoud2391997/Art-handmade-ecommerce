@@ -20,6 +20,7 @@ import ShopList from "./pages/ShopList";
 import ShopSingle from "./pages/ShopSingle";
 import InputCard from "./components/InputCard/InputCard";
 import Profile from "./pages/Profile/Profile";
+import OrderHistory from "./pages/OrderHistory/OrderHistory";
 
 const router = createBrowserRouter([
   { path: "register", element: <Register /> },
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "checkout", element: <Checkout /> },
       { path: "profile", element: <Profile /> },
+      { path: "orderhistory", element: <OrderHistory /> },
     ],
   },
 ]);
