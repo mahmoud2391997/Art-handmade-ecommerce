@@ -18,9 +18,11 @@ import Cart from "./pages/Cart/Cart";
 import "./App.css";
 import ShopList from "./pages/ShopList";
 import ShopSingle from "./pages/ShopSingle";
+import SignUp from "./pages/signup/SignUp";
 
 const router = createBrowserRouter([
-  { path: "register", element: <Register /> },
+  // { path: "register", element: <Register /> },
+  { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
   {
