@@ -26,20 +26,3 @@ function registerAuthentication(email, password) {
       console.error(error);
     });
 }
-// function checkAuthroize() {
-//   let token = sessionStorage.getItem("token");
-
-//   axios
-//     .get(`https://art-ecommerce-server.glitch.me/api/auth/authorize`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         "Content-Type": "application/json",
-//       },
-//     })
-//     .then((response) => {
-//       console.log(response.data);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
