@@ -3,14 +3,23 @@ import { Input, Textarea } from "@material-tailwind/react";
 import { countries, cities } from "./countriesAndCitiesData";
 import DropDown from "./Icons/DropDown";
 import CheckOutCart from "./CheckOutCart";
-import MainButton from "../MainButton/MainButton";
 import ChekoutTitle from "../CheckOut/CheckoutTitle";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function CheckoutComp() {
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
   const [cityOptions, setCityOptions] = useState([]);
-  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const { register, handleSubmit, setValue, watch } = useForm();
+
+  const country = watch("country", "");
+  const city = watch("city", "");
+  const paymentMethod = watch("paymentMethod", "");
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   useEffect(() => {
     if (country && cities[country]) {
@@ -22,8 +31,13 @@ export default function CheckoutComp() {
 
   const handleCountryChange = (e) => {
     const selectedCountry = e.target.value;
-    setCountry(selectedCountry);
-    setCity("");
+    setValue("country", selectedCountry);
+    setValue("city", "");
+  };
+
+  const handleCityChange = (e) => {
+    const selectedCity = e.target.value;
+    setValue("city", selectedCity);
   };
 
   const handlePaymentChange = (e) => {
@@ -31,13 +45,13 @@ export default function CheckoutComp() {
   };
 
   return (
-    <div className="relative z-40 bg-white ">
+    <div className="relative z-40 bg-white">
       <ChekoutTitle />
-      <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700 ">
+      <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700">
         <h2 className="text-2xl font-semibold mb-10 uppercase">
           Billing Details
         </h2>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Form Fields Column */}
             <div>
@@ -48,12 +62,14 @@ export default function CheckoutComp() {
                     placeholder="First Name"
                     className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                     variant="standard"
+                    {...register("firstName")}
                   />
                   <Input
                     type="text"
                     placeholder="Last Name"
                     className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                     variant="standard"
+                    {...register("lastName")}
                   />
                 </div>
                 <Input
@@ -61,24 +77,28 @@ export default function CheckoutComp() {
                   placeholder="Phone"
                   className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                   variant="standard"
+                  {...register("phone")}
                 />
                 <Input
                   type="email"
                   placeholder="Email Address"
                   className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                   variant="standard"
+                  {...register("email")}
                 />
                 <Input
                   type="text"
-                  placeholder="Address (Stree No./District)"
+                  placeholder="Address (Street No./District)"
                   className="w-30 border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                   variant="standard"
+                  {...register("address")}
                 />
                 <div className="relative mb-8">
                   <select
                     value={country}
                     onChange={handleCountryChange}
                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
+                    {...register("country")}
                   >
                     <option value="" disabled>
                       Select Country / Region
@@ -96,9 +116,10 @@ export default function CheckoutComp() {
                 <div className="relative mb-8">
                   <select
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={handleCityChange}
                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
                     disabled={!country}
+                    {...register("city")}
                   >
                     <option value="" disabled>
                       Select Town / City
@@ -120,11 +141,13 @@ export default function CheckoutComp() {
                   placeholder="Postcode/ZIP"
                   className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                   variant="standard"
+                  {...register("postcode")}
                 />
                 <Textarea
                   placeholder="Order Notes (Optional)"
                   className="w-full border-b border-gray-400 p-2 focus:outline-none placeholder-gray-500"
                   variant="standard"
+                  {...register("notes")}
                 />
                 <div className="mb-8">
                   <ul className="list-none p-0">
@@ -132,11 +155,11 @@ export default function CheckoutComp() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
-                          name="payment"
+                          name="paymentMethod"
                           value="direct-bank-transfer"
-                          checked={paymentMethod === "direct-bank-transfer"}
                           onChange={handlePaymentChange}
                           className="mr-2"
+                          {...register("paymentMethod")}
                         />
                         Direct Bank Transfer
                       </label>
@@ -153,11 +176,11 @@ export default function CheckoutComp() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
-                          name="payment"
+                          name="paymentMethod"
                           value="cash-on-delivery"
-                          checked={paymentMethod === "cash-on-delivery"}
                           onChange={handlePaymentChange}
                           className="mr-2"
+                          {...register("paymentMethod")}
                         />
                         Cash on Delivery
                       </label>
@@ -176,7 +199,7 @@ export default function CheckoutComp() {
               <CheckOutCart />
             </div>
           </div>
-          <MainButton />
+          <button type="submit" className="text-black">Submit</button>
         </form>
       </div>
     </div>
