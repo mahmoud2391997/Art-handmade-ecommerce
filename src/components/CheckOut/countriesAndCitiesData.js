@@ -39,3 +39,5 @@ export const cities = {
     Sudan: ["Khartoum", "Omdurman", "Port Sudan", "Nyala", "Kassala"],
     Palestine: ["Jerusalem", "Gaza City", "Ramallah", "Hebron", "Nablus"]
 };
+
+
