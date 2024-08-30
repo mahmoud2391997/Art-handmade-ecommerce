@@ -8,6 +8,8 @@ import PageTitle from "../../components/Shared/PageTitle";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
 
+import { loginAuthentication } from "../../api/auth";
+
 export default function Login() {
   const schema = yup.object().shape({
     email: yup
@@ -32,6 +34,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    loginAuthentication(data.email, data.password);
     console.log(data);
   };
   return (

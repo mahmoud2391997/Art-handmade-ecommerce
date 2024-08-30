@@ -8,10 +8,12 @@ import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
 import PageTitle from "../../components/Shared/PageTitle";
 
+import { registerAuthentication } from "../../api/auth";
+
 export default function SignUp() {
   const schema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
+    first_name: yup.string().required("First name is required"),
+    last_name: yup.string().required("Last name is required"),
     email: yup
       .string()
       .matches(
@@ -39,6 +41,7 @@ export default function SignUp() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    registerAuthentication(data);
     console.log(data);
   };
   return (
@@ -56,11 +59,11 @@ export default function SignUp() {
               type="text"
               placeholder="Please Enter Your First Name ..."
               className="w-[50%]"
-              {...register("firstName")}
+              {...register("first_name")}
             />
-            {errors.firstName && (
+            {errors.first_name && (
               <Typography className="pl-2 text-red-500 text-sm">
-                {errors.firstName.message}
+                {errors.first_name.message}
               </Typography>
             )}
           </div>
@@ -71,11 +74,11 @@ export default function SignUp() {
               type="text"
               placeholder="Please Enter Your Last Name ..."
               className="w-[50%]"
-              {...register("lastName")}
+              {...register("last_name")}
             />
-            {errors.lastName && (
+            {errors.last_name && (
               <Typography className="pl-2 text-red-500 text-sm">
-                {errors.lastName.message}
+                {errors.last_name.message}
               </Typography>
             )}
           </div>
