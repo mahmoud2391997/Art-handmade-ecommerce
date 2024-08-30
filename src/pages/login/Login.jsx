@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -11,6 +12,8 @@ import MainButton from "../../components/MainButton";
 import { loginAuthentication } from "../../api/auth";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -34,7 +37,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    loginAuthentication(data.email, data.password);
+    loginAuthentication(data.email, data.password, navigate);
     console.log(data);
   };
   return (

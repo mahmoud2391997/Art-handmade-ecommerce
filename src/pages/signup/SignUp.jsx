@@ -1,4 +1,5 @@
 import React from "react";
+import { replace, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -11,6 +12,8 @@ import PageTitle from "../../components/Shared/PageTitle";
 import { registerAuthentication } from "../../api/auth";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     first_name: yup.string().required("First name is required"),
     last_name: yup.string().required("Last name is required"),
@@ -41,8 +44,8 @@ export default function SignUp() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    registerAuthentication(data);
     console.log(data);
+    registerAuthentication(data, navigate);
   };
   return (
     <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[5%]">

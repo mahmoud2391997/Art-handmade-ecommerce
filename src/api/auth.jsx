@@ -1,5 +1,9 @@
+// import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
-export function loginAuthentication(email, password) {
+import { replace } from "react-router-dom";
+
+export function loginAuthentication(email, password, navigate) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/auth/login`, {
       email: email,
@@ -8,19 +12,24 @@ export function loginAuthentication(email, password) {
     .then((response) => {
       console.log(response.data);
       sessionStorage.setItem("token", response.data.token);
-      //navigate
+      if (response.data.success) {
+        sessionStorage.setItem("token", response.data.token);
+        navigate("/", { replace: true });
+      }
     })
     .catch((error) => {
       console.error(error);
     });
 }
-export function registerAuthentication(profile) {
+export function registerAuthentication(profile, navigate) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/auth/register`, profile)
     .then((response) => {
       console.log(response.data);
-      sessionStorage.setItem("token", response.data.token);
-      //navigate home
+      if (response.data.success) {
+        sessionStorage.setItem("token", response.data.token);
+        navigate("/", { replace: true });
+      }
     })
     .catch((error) => {
       console.error(error);
