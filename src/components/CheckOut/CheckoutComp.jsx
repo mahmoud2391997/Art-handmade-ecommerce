@@ -3,8 +3,8 @@ import { Input, Textarea } from "@material-tailwind/react";
 import { countries, cities } from "./countriesAndCitiesData";
 import DropDown from "./Icons/DropDown";
 import CheckOutCart from "./CheckOutCart";
-import MainButton from "../MainButton/MainButton";
 import ChekoutTitle from "../CheckOut/CheckoutTitle";
+import MainButton from "../Shared/MainButton";
 
 export default function CheckoutComp() {
   const [country, setCountry] = useState("");
@@ -34,7 +34,9 @@ export default function CheckoutComp() {
     <div className="relative z-40 bg-white">
       <ChekoutTitle />
       <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700">
-        <h2 className="text-2xl font-semibold mb-10 uppercase">Billing Details</h2>
+        <h2 className="text-2xl font-semibold mb-10 uppercase">
+          Billing Details
+        </h2>
         <form>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Form Fields Column */}
@@ -66,7 +68,9 @@ export default function CheckoutComp() {
                     onChange={handleCountryChange}
                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500 placeholder-opacity-100"
                   >
-                    <option value="" disabled>Select Country / Region</option>
+                    <option value="" disabled>
+                      Select Country / Region
+                    </option>
                     {countries.map((country) => (
                       <option key={country} value={country}>
                         {country}
@@ -84,7 +88,9 @@ export default function CheckoutComp() {
                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500 placeholder-opacity-100"
                     disabled={!country}
                   >
-                    <option value="" disabled>Select Town / City</option>
+                    <option value="" disabled>
+                      Select Town / City
+                    </option>
                     {cityOptions.map((city) => (
                       <option key={city} value={city}>
                         {city}

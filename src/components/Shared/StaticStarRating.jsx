@@ -1,5 +1,5 @@
 import React from "react";
-import StarIcon from "../icons/StarIcon";
+import StarIcon from "../icons/starIcon";
 
 export default function StaticStarRating({ rating }) {
   return (

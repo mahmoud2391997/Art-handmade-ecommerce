@@ -2,15 +2,18 @@ import StaticStarRating from "../components/staticStarRating";
 import MainButton from "./MainButton";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductsAction, fetchRandomProductsAction } from "../Redux/actions/productActions";
+import {
+  fetchProductsAction,
+  fetchRandomProductsAction,
+} from "../Redux/actions/productActions";
 import { addToCart } from "../Redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody } from "@material-tailwind/react";
 
 export default function ProductCard({ isRandom }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();  
-  const { products, status, error } = useSelector(state => state.products);
+  const dispatch = useDispatch();
+  const { products, status, error } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (isRandom) {
@@ -21,17 +24,22 @@ export default function ProductCard({ isRandom }) {
   }, [dispatch, isRandom]);
 
   const handleAddToCart = (product) => {
-    console.log('Adding to cart', product);
+    console.log("Adding to cart", product);
     dispatch(addToCart(product)); // Ensure `addToCart` is configured to handle this
   };
 
-  if (status === 'loading') return <p>Loading...</p>;
-  if (status === 'failed') return <p>{error}</p>;
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>{error}</p>;
 
+  console.log(products.length);
   return (
     <div className="relative p-4 mb-7 grid grid-cols-1 lg:grid-cols-3 gap-[10rem]">
       {products.map((product) => (
-        <Card key={product._id} className="relative flex flex-col items-center group rounded-none">
+        <Card
+          key={product._id}
+          className="relative flex flex-col items-center group rounded-none"
+        >
+          {console.log(product)}
           <div className="relative xl:w-60 w-60 h-60 sm:w-48 sm:h-48 xl:h-60 mb-4 overflow-hidden">
             <img
               src={product.image}
@@ -47,7 +55,8 @@ export default function ProductCard({ isRandom }) {
             </div>
           </div>
           <CardBody className="xl:w-60 w-full sm:w-56 h-24 xl:h-[124px] flex flex-col items-center justify-around ">
-            <h5 className="sm:text-xl font-eb-garamond text-base leading-5 tracking-[0.14em] cursor-pointer"
+            <h5
+              className="sm:text-xl font-eb-garamond text-base leading-5 tracking-[0.14em] cursor-pointer"
               onClick={() => navigate(`/products/${product._id}`)}
             >
               {product.name}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -13,6 +13,7 @@ import { loginAuthentication } from "../../api/auth";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const schema = yup.object().shape({
     email: yup
@@ -37,7 +38,13 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    loginAuthentication(data.email, data.password, data.rememberMe, navigate);
+    loginAuthentication(
+      data.email,
+      data.password,
+      data.rememberMe,
+      navigate,
+      location
+    );
     console.log(data);
   };
   return (

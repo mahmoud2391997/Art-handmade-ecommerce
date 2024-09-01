@@ -1,28 +1,42 @@
 // eslint-disable-next-line no-unused-vars
 import { useDispatch, useSelector } from "react-redux";
-import { 
+import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
-  updateTotal
+  updateTotal,
 } from "../../Redux/actions/cartActions";
 import cart from "../../assets/images/cart.jpg";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import ButtonCart from "../../components/ButtonCart";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import "../../index.css";
 import RollUp from "../../components/RollUpButton/RollUp";
 import CartTotals from "./CartTotals";
+import MainButton from "../../components/Shared/MainButton";
 
 export default function Cart() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems || []);
 
-  const calculateItemSubtotal = ( price, quantity) => {
+  const calculateItemSubtotal = (price, quantity) => {
     return price * quantity;
-  }
+  };
+
+  const handleCheckOut = () => {
+    const isloggedIn =
+      localStorage.getItem("token") || sessionStorage.getItem("token");
+
+    if (isloggedIn) {
+      navigate("/checkout");
+    } else {
+      navigate("/login", { state: { from: location } });
+    }
+  };
 
   return (
     <div className="relative pb-[500px] z-40 sm:w-full">
@@ -80,7 +94,7 @@ export default function Cart() {
                   </div>
 
                   <div className="  sm:ml-10 md:ml-12 text-gray-600 text-sm md:text-base font-eb-garamond  ">
-                  ${item.price}
+                    ${item.price}
                   </div>
 
                   <div className="flex items-center p-2 sm:p-4 md:p-6 lg:p-8">
@@ -105,7 +119,7 @@ export default function Cart() {
                     </div>
                   </div>
                   <div className="text-gray-600 text-sm md:text-base font-eb-garamond p-4 md:p-16 hidden md:block">
-                  ${calculateItemSubtotal(item.price, item.quantity)}
+                    ${calculateItemSubtotal(item.price, item.quantity)}
                   </div>
                   <div className="flex items-center justify-between">
                     <MdDeleteOutline
@@ -118,12 +132,13 @@ export default function Cart() {
               <CartTotals />
 
               <div className="flex justify-center text-center mt-6">
-                <Link to="/checkout" className="w-full max-w-xs text-center">
-                  <ButtonCart
-                    className="w-full text-center py-4 "
-                    title2={"Proceed to Checkout"}
-                  />
-                </Link>
+                {/* <Link to="/checkout" className="w-full max-w-xs text-center"> */}
+                <MainButton
+                  // className="w-full text-center py-4 "
+                  title={"Checkout"}
+                  onClick={handleCheckOut}
+                />
+                {/* </Link> */}
               </div>
             </div>
           )}

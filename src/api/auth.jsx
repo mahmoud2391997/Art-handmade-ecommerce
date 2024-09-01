@@ -3,7 +3,13 @@
 import axios from "axios";
 import { replace } from "react-router-dom";
 
-export function loginAuthentication(email, password, rememberMe, navigate) {
+export function loginAuthentication(
+  email,
+  password,
+  rememberMe,
+  navigate,
+  location
+) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/auth/login`, {
       email: email,
@@ -20,7 +26,10 @@ export function loginAuthentication(email, password, rememberMe, navigate) {
       }
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
-        navigate("/", { replace: true });
+        // navigate("/", { replace: true });
+        console.log(location.state);
+        const redirectTo = location.state?.from?.pathname || "/";
+        navigate(redirectTo, { replace: true });
       }
     })
     .catch((error) => {

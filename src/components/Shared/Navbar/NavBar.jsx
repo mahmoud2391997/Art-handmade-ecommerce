@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { Navbar, Collapse, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -17,6 +17,7 @@ export default function NavBar() {
     localStorage.getItem("token") || sessionStorage.getItem("token")
   );
   const navigate = useNavigate();
+  const location = useLocation();
   const handleOpen = () => setOpen((cur) => !cur);
 
   const goToSignUp = () => {
@@ -24,7 +25,7 @@ export default function NavBar() {
   };
 
   const goToLogIn = () => {
-    navigate("/login");
+    navigate("/login", { state: { from: location } });
   };
 
   const handleLogout = () => {
@@ -63,7 +64,7 @@ export default function NavBar() {
               <NavLinks />
             </div>
           </div>
-          <div className="flex justify-center items-center gap-4 ">
+          <div className="flex justify-center items-center gap-4 ms-2  ">
             <Link to="/cart">
               <ShoppingBag />
             </Link>

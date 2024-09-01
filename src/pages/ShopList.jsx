@@ -1,24 +1,50 @@
-import { Option, Select, Typography } from "@material-tailwind/react";
-import React from "react";
+import { Button, Option, Select, Typography } from "@material-tailwind/react";
+import React, { useState } from "react";
 import PageTitle from "../components/Shared/PageTitle";
 import SearchInput from "../components/SearchInput";
 import RangeSlider from "../components/RangeSlider";
 import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductCard from "../components/CustomerProductCard";
+import { useSelector } from "react-redux";
+import SingleProductCard from "../components/Shared/SingleProductCard";
+import LeftIcon from "../components/icons/LeftIcon";
+import RightIcon from "../components/icons/RightIcon";
 
 export default function ShopList() {
+  const { products } = useSelector((state) => state.products);
+  console.log(products);
+
+  const productsPerPage = 1; // Number of products per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
   return (
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start gap-10 mx-28 my-32">
-        <div className="w-2/3 flex flex-col">
-          <div className="flex justify-between items-center mb-4">
+        <div className="w-full flex flex-col">
+          <div className="flex justify-between items-center flex-wrap mb-4">
             <div
-              className="capitalize text-[17px]"
+              className="capitalize text-[17px] text-[var(--main-gray)]"
               style={{ fontFamily: "var(--third-font)" }}
             >
-              showing 1-12 of 15 result
+              showing {indexOfFirstProduct + 1} -
+              {Math.min(indexOfLastProduct, products.length)} of{" "}
+              {products.length} results
+              {/* showing 1-12 of {products.length} */}
             </div>
             <div>
               <Select variant="standard" label="Sort">
@@ -29,8 +55,46 @@ export default function ShopList() {
               </Select>
             </div>
           </div>
-          <div className="p-10 min-h-screen">
-            <ProductCard isRandom={false} /> {/* Pass isRandom as needed */}
+          <div className="p-10 min-h-fit">
+            {currentProducts.map((product, index) => (
+              <div key={index}>
+                {/* {console.log(product.name)}
+                <Typography>{product.name}</Typography> */}
+                <SingleProductCard prod={product} />
+              </div>
+            ))}
+            {/* Pass isRandom as needed */}
+            {/* <ProductCard /> */}
+          </div>
+          <div className="flex justify-center items-start mt-4">
+            {/* Pagination Controls */}
+            <Button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
+            >
+              <LeftIcon />
+            </Button>
+            {[...Array(totalPages)].map((_, index) => (
+              <Button
+                key={index}
+                onClick={() => handlePageChange(index + 1)}
+                className={
+                  currentPage === index + 1
+                    ? "underline text-sm px-3 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-color)]"
+                    : "text-xs px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
+                }
+              >
+                {index + 1}
+              </Button>
+            ))}
+            <Button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
+            >
+              <RightIcon />
+            </Button>
           </div>
         </div>
         <div className="w-1/3 flex flex-col">
