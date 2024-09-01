@@ -37,7 +37,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    loginAuthentication(data.email, data.password, navigate);
+    loginAuthentication(data.email, data.password, data.rememberMe, navigate);
     console.log(data);
   };
   return (
@@ -45,7 +45,7 @@ export default function Login() {
       <PageTitle title={"log in"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[50%] lg:h-[100%]"
+        className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[30%] lg:h-[100%]"
       >
         <div className="flex flex-col gap-2">
           <Input

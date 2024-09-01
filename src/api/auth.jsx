@@ -3,15 +3,21 @@
 import axios from "axios";
 import { replace } from "react-router-dom";
 
-export function loginAuthentication(email, password, navigate) {
+export function loginAuthentication(email, password, rememberMe, navigate) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/auth/login`, {
       email: email,
       password: password,
+      rememberMe: rememberMe,
     })
     .then((response) => {
       console.log(response.data);
-      sessionStorage.setItem("token", response.data.token);
+      if (rememberMe) {
+        localStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("token", response.data.token);
+      } else {
+        sessionStorage.setItem("token", response.data.token);
+      }
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
         navigate("/", { replace: true });

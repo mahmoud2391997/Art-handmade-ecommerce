@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Navbar, Collapse, IconButton } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -13,7 +13,9 @@ import { isAuth } from "../../../utils/isAuth";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(sessionStorage.length);
+  const [isLogged, setIsLogged] = useState(
+    localStorage.getItem("token") || sessionStorage.getItem("token")
+  );
   const navigate = useNavigate();
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -26,9 +28,10 @@ export default function NavBar() {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     sessionStorage.removeItem("token");
     console.log("logged out, token removed");
-    setIsLogged(sessionStorage.length);
+    setIsLogged(null);
   };
 
   useEffect(() => {
@@ -38,10 +41,18 @@ export default function NavBar() {
     );
   }, []);
 
-  useEffect(() => {}, [isLogged]);
+  useEffect(() => {
+    // const token =
+    //   localStorage.getItem("token") || sessionStorage.getItem("token");
+    // setIsLogged(token);
+  }, [isLogged]);
 
   return (
-    <Navbar color="transparent" fullWidth className="w-screen p-0 lg:p-4">
+    <Navbar
+      color="transparent"
+      fullWidth
+      className="sticky top-0 z-50 bg-white w-screen p-0 lg:p-4"
+    >
       <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900">
         <div className="flex justify-between w-full mr-4 lg:mr-0">
           <div className="flex justify-center items-center gap-8">
@@ -53,7 +64,9 @@ export default function NavBar() {
             </div>
           </div>
           <div className="flex justify-center items-center gap-4 ">
-            <ShoppingBag />
+            <Link to="/cart">
+              <ShoppingBag />
+            </Link>
             <SearchIcon />
             {!isAuth() ? (
               <div className="hidden lg:flex ">

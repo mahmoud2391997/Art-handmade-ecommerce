@@ -3,6 +3,14 @@ import React from "react";
 
 export default function NavLinks() {
   const links = ["home", "pages", "events", "shop", "blog"];
+
+  const link = [
+    { name: "home", path: "/" },
+    { name: "shop", path: "/" },
+    { name: "events", path: "/" },
+    { name: "about us", path: "/" },
+    { name: "contact", path: "/" },
+  ];
   return (
     <ul className="mb-4 mt-2 flex flex-col gap-3 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-8">
       {links.map((link, index) => (

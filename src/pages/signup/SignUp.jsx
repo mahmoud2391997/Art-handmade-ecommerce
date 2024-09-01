@@ -52,7 +52,7 @@ export default function SignUp() {
       <PageTitle title={"sign up"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[50%] lg:h-[100%]"
+        className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[40%] lg:h-[100%]"
       >
         <div className="flex flex-col lg:flex-row lg:gap-5">
           <div className="flex flex-col gap-2 lg:w-[50%]">
