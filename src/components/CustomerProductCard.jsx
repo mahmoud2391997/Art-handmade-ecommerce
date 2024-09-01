@@ -22,7 +22,8 @@ export default function ProductCard({ isRandom }) {
 
   const handleAddToCart = (product) => {
     console.log('Adding to cart', product);
-    dispatch(addToCart(product)); // Ensure `addToCart` is configured to handle this
+    const defaultQuantity = 1
+    dispatch(addToCart(product, defaultQuantity)); 
   };
 
   if (status === 'loading') return <p>Loading...</p>;

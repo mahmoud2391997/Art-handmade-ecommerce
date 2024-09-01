@@ -29,7 +29,7 @@ export default function ShopSingle() {
     }
   };
 
-  //should ensure they only affect the local quantity state variable and not the cart state because if I use dispatch it will update the quantity when I inc or dec without addToCart Function
+  //should ensure they only affect the local quantity state variable and not the cart state because if I use dispatch it will update the quantity when I incease or decrease without addToCart Function
 
   const handleIncreaseQuantity = () => {  
     setQuantity(prevQuantity => prevQuantity + 1);  
