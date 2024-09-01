@@ -7,6 +7,7 @@ import ShopSingleTabs from "../components/ShopSingleTabs";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../Redux/actions/cartActions";
 import { fetchProductByIDAction } from '../Redux/actions/productActions';
+import { increaseQuantity, decreaseQuantity } from '../Redux/actions/cartActions';
 import { useSelector, useDispatch } from "react-redux";
 import Quantity from "../components/Shared/Quantity";
 
@@ -16,6 +17,7 @@ export default function ShopSingle() {
   const [quantity, setQuantity] = useState(1); // Default quantity
   const products = useSelector((state) => state.products.products);
   const currentProduct = useSelector((state) => state.products.currentProduct);
+  const productFromCart = useSelector((state) => state.cart.cartItems.find(item => item.id === productId)); // i need to access the cart state not product because I'm using functions related to cart not product
 
   useEffect(() => {
     const existingProduct = products.find(product => product._id === productId);
@@ -32,12 +34,12 @@ export default function ShopSingle() {
   };
 
   const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
+    dispatch(increaseQuantity(productId))
   };
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      dispatch(decreaseQuantity(productId))
     }
   };
 
@@ -70,7 +72,7 @@ export default function ShopSingle() {
 
           <div className="flex gap-8 items-center">
           <Quantity
-              quantity={quantity}
+              quantity={productFromCart?.quantity}
               increaseQuantity={handleIncreaseQuantity}
               decreaseQuantity={handleDecreaseQuantity}
             />
