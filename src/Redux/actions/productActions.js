@@ -18,9 +18,41 @@ export const fetchProductsAction = () => async (dispatch, getState) => {
     }
 };
 
-export const fetchProductByIDAction = (productId) => async (dispatch) => {
+export const fetchProductByIDAction = (productId) => async (dispatch, getState) => {
+    // Check if the product is already in local storage
+    const storedProduct = localStorage.getItem(`product_${productId}`);
+    
+    if (storedProduct) {
+        // If found in local storage, parse it and dispatch it to Redux
+        const product = JSON.parse(storedProduct);
+        dispatch({
+            type: FETCH_PRODUCT_BY_ID,
+            payload: product,
+        });
+        return;
+    }
+
+    // If not found in local storage, check Redux state
+    const { products } = getState().products;
+    const existingProduct = products.find((product) => product._id === productId);
+
+    if (existingProduct) {
+        // If found in Redux state, dispatch it to Redux
+        dispatch({
+            type: FETCH_PRODUCT_BY_ID,
+            payload: existingProduct,
+        });
+        //  update local storage as well
+        localStorage.setItem(`product_${productId}`, JSON.stringify(existingProduct));
+        return; 
+    }
+
+    // If not found in either, fetch from the API
     try {
         const product = await fetchProductByID(productId);
+        // Store the fetched product in local storage
+        localStorage.setItem(`product_${productId}`, JSON.stringify(product));
+        // Dispatch the fetched product to Redux
         dispatch({
             type: FETCH_PRODUCT_BY_ID,
             payload: product,
@@ -29,6 +61,7 @@ export const fetchProductByIDAction = (productId) => async (dispatch) => {
         console.log('Error Fetching Product', error);
     }
 };
+
 
 export const fetchRandomProductsAction = () => async (dispatch) => {
     try {
