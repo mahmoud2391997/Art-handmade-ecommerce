@@ -4,6 +4,7 @@ import { countries, cities } from "./countriesAndCitiesData";
 import DropDown from "./Icons/DropDown";
 import CheckOutCart from "./CheckOutCart";
 import ChekoutTitle from "../CheckOut/CheckoutTitle";
+import MainButton from '../Shared/MainButton'
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -244,7 +245,9 @@ export default function CheckoutComp() {
               <CheckOutCart />
             </div>
           </div>
-          <button type="submit" className="text-black">Submit</button>
+          <div className="flex justify-center mt-2 ">  
+          <MainButton title='Place Order' onClick={handleSubmit(onSubmit)} type="submit" />
+          </div> 
         </form>
       </div>
     </div>
