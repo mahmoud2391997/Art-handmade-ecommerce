@@ -61,5 +61,9 @@ input::placeholder {
   background: #555; 
 }
 
+.Toastify__toast {  
+  border-radius: 0 !important;
+}
+
 
 

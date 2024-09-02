@@ -14,6 +14,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import "../../index.css";
 import RollUp from "../../components/RollUpButton/RollUp";
 import CartTotals from "./CartTotals";
+import { toast, Bounce } from "react-toastify";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -109,7 +110,20 @@ export default function Cart() {
                   </div>
                   <div className="flex items-center justify-between">
                     <MdDeleteOutline
-                      onClick={() => dispatch(removeFromCart(item._id))}
+                      onClick={() => {
+                        dispatch(removeFromCart(item._id))
+                        toast.info("Product deleted from cart", {
+                          position: "top-center",
+                          autoClose: 2000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                          transition: Bounce,
+                      });
+                      }}
                       className="text-[#c9ab81] hover:text-[#816640] cursor-pointer text-[18px] md:text-[24px]"
                     />
                   </div>
