@@ -10,12 +10,14 @@ import { useSelector } from "react-redux";
 import SingleProductCard from "../components/Shared/SingleProductCard";
 import LeftIcon from "../components/icons/LeftIcon";
 import RightIcon from "../components/icons/RightIcon";
+import ProductList from "../components/ProductListFinal";
+import Pagination from "../components/Shared/Pagination";
 
 export default function ShopList() {
   const { products } = useSelector((state) => state.products);
   console.log(products);
 
-  const productsPerPage = 1; // Number of products per page
+  const productsPerPage = 6; // Number of products per page
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -56,19 +58,23 @@ export default function ShopList() {
             </div>
           </div>
           <div className="p-10 min-h-fit">
-            {currentProducts.map((product, index) => (
+            {/* {currentProducts.map((product, index) => (
               <div key={index}>
-                {/* {console.log(product.name)}
-                <Typography>{product.name}</Typography> */}
-                <SingleProductCard prod={product} />
+                <SingleProductCard prod={product} isRandom={false} />
               </div>
-            ))}
+            ))} */}
             {/* Pass isRandom as needed */}
-            {/* <ProductCard /> */}
+            {/* <ProductCard isRandom={false} /> */}
+            <ProductList isRandom={false} currentProducts={currentProducts} />
           </div>
           <div className="flex justify-center items-start mt-4">
             {/* Pagination Controls */}
-            <Button
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+            {/* <Button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
@@ -94,7 +100,7 @@ export default function ShopList() {
               className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
             >
               <RightIcon />
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="w-1/3 flex flex-col">

@@ -6,22 +6,8 @@ import { Card, CardBody } from "@material-tailwind/react";
 import StaticStarRating from "./StaticStarRating";
 import { fetchProductsAction } from "../../Redux/actions/productActions";
 
-export default function SingleProductCard({ prod }) {
+export default function SingleProductCard({ prod, handleAddToCart }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.products);
-
-  useEffect(() => {
-    dispatch(fetchProductsAction());
-  }, [dispatch]);
-
-  const handleAddToCart = (product) => {
-    console.log("Adding to cart", product);
-    dispatch(addToCart(product)); // Ensure `addToCart` is configured to handle this
-  };
-
-  if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>{error}</p>;
   return (
     <Card
       key={prod._id}
