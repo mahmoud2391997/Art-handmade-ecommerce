@@ -1,4 +1,3 @@
-// reducers/cartReducer.js
 import { 
   ADD_TO_CART, 
   REMOVE_FROM_CART, 
@@ -13,46 +12,53 @@ import {
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem('cart')) || [],
   total: parseFloat(localStorage.getItem('total')) || 0,
-  amount: 0
+  amount: parseFloat(localStorage.getItem('amount')) || 0,
 };
 
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return {
-        ...state,
-        cartItems: action.payload
-      };
     case REMOVE_FROM_CART:
-      return {
-        ...state,
-        cartItems: action.payload
-      };
     case INCREASE_QUANTITY:
-      return {
-        ...state,
-        cartItems: action.payload
-      };
     case DECREASE_QUANTITY:
+      const updatedCartItems = action.payload;
+      // Update cart items in localStorage
+      localStorage.setItem('cart', JSON.stringify(updatedCartItems));
       return {
         ...state,
-        cartItems: action.payload
+        cartItems: updatedCartItems,
       };
+      
     case CLEAR_CART:
+      // Clear cart items from localStorage
+      localStorage.removeItem('cart');
+      localStorage.removeItem('total');
+      localStorage.removeItem('amount');
       return {
         ...state,
-        cartItems: action.payload
+        cartItems: [],
+        total: 0,
+        amount: 0,
       };
+
     case UPDATE_TOTAL:
+      const newTotal = action.payload;
+      // Update total in localStorage
+      localStorage.setItem('total', newTotal.toString());
       return {
         ...state,
-        total: action.payload
+        total: newTotal,
       };
+
     case UPDATE_AMOUNT:
+      const newAmount = action.payload;
+      // Update amount in localStorage
+      localStorage.setItem('amount', newAmount.toString());
       return {
         ...state,
-        amount: action.payload
+        amount: newAmount,
       };
+
     default:
       return state;
   }

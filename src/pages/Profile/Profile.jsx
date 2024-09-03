@@ -18,7 +18,9 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bdate, setBdate] = useState("");
-  function getProfile(token) {
+  function getProfile() {
+    let token =
+      sessionStorage.getItem("token") || localStorage.getItem("token");
     axios
       .get(`https://art-ecommerce-server.glitch.me/api/profile`, {
         headers: {
@@ -39,9 +41,10 @@ export default function Profile() {
         console.error(error);
       });
   }
-  function editProfile(profileId, editedProfile, token) {
+  function editProfile(profileId, editedProfile) {
     console.log(editedProfile);
-
+    let token =
+      sessionStorage.getItem("token") || localStorage.getItem("token");
     axios
       .put(
         `https://art-ecommerce-server.glitch.me/api/profile/${profileId}`,

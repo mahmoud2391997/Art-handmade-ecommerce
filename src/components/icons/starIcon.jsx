@@ -8,7 +8,7 @@ export default function StarIcon({ filled }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="var(--main-color)"
-      className="size-5"
+      className="size-4"
     >
       <path
         strokeLinecap="round"

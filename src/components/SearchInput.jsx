@@ -3,9 +3,9 @@ import React from "react";
 // import SearchIcon from "./icons/SearchIcon";
 import { FiSearch as SearchIcon } from "react-icons/fi";
 
-export default function SearchInput() {
+export default function SearchInput({ onChange }) {
   return (
-    <div>
+    <div className="mb-8">
       <Typography
         className="uppercase text-[22px] text-[var(--main-gray)]"
         style={{
@@ -28,9 +28,10 @@ export default function SearchInput() {
             fontSize: "16px",
             color: "var(--main-gray)",
           }}
+          onChange={onChange}
         />
         <SearchIcon
-          className="absolute cursor-pointer right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[var(--main-color)] transition-colors duration-700 ease-in-out"
+          className="absolute  right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[var(--main-color)] transition-colors duration-700 ease-in-out"
           size={20}
         />
       </div>

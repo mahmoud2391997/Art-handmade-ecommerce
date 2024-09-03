@@ -1,15 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 //pages
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
 
 //components
 import Layout from "./components/Layout/Layout";
@@ -21,9 +24,11 @@ import ShopSingle from "./pages/ShopSingle";
 import InputCard from "./components/InputCard/InputCard";
 import Profile from "./pages/Profile/Profile";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
+import SignUp from "./pages/signup/SignUp";
 
 const router = createBrowserRouter([
-  { path: "register", element: <Register /> },
+  // { path: "register", element: <Register /> },
+  { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
   {
@@ -39,6 +44,7 @@ const router = createBrowserRouter([
       { path: "checkout", element: <Checkout /> },
       { path: "profile", element: <Profile /> },
       { path: "orderhistory", element: <OrderHistory /> },
+      { path: "about", element: <About /> },
     ],
   },
 ]);
@@ -47,6 +53,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }

@@ -1,7 +1,8 @@
+//the right one of MainButton
 import React from "react";
 import "./MainButton.css";
 
-export default function MainButton({ title, className, onClick }) {
+export default function MainButton({ title, onClick }) {
   return (
     <svg
       width="150"
@@ -9,8 +10,8 @@ export default function MainButton({ title, className, onClick }) {
       viewBox="0 0 150 50"
       xmlns="http://www.w3.org/2000/svg"
       className="stroke-button hover: cursor-pointer"
-      onClick={onClick}  // Attach the onClick handler here
-      style={{ cursor: "pointer" }}  // Ensure the cursor style is applied
+      onClick={onClick} // Attach the onClick handler here
+      style={{ cursor: "pointer" }} // Ensure the cursor style is applied
     >
       <rect
         x="5"

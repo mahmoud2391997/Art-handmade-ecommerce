@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
-  function getOrders(token) {
+  function getOrders() {
+    let token =
+      sessionStorage.getItem("token") || localStorage.getItem("token");
     axios
       .get("https://art-ecommerce-server.glitch.me/api/orders", {
         headers: {
@@ -24,9 +26,7 @@ export default function OrderHistory() {
       });
   }
   useEffect(() => {
-    getOrders(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3MjUwNDI5NDYsImV4cCI6MTcyNTMwMjE0Nn0.4mm9rc_vw8x-gOqyjvkSbjjpjzaF-53bO360ViBISMU"
-    );
+    getOrders();
   }, []);
   return (
     <div className="w-full h-auto z-40 relative pb-[200px] bg-white">
