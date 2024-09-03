@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, Typography } from "@material-tailwind/react";
+import { getCategories } from "../api/categories";
+import { useSelector } from "react-redux";
 
-export default function CategoriesCheckbox() {
-  const [selectedCategories, setSelectedCategories] = useState([]);
+export default function CategoriesCheckbox({
+  selectedCategories,
+  setSelectedCategories,
+  categories,
+}) {
+  // const [categories, setCategories] = useState([]);
+  // const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const categories = ["Brochure", "Lifestyle", "Museum", "Souvenirs"];
+  // const { categories } = useSelector((state) => state.categories);
+  // console.log(categories);
+  // const categories = ["Brochure", "Lifestyle", "Museum", "Souvenirs"];
+
+  // const handleCheckboxChange = (category) => {
+  //   setSelectedCategories((prev) =>
+  //     prev.includes(category)
+  //       ? prev.filter((item) => item !== category)
+  //       : [...prev, category]
+  //   );
+  // };
 
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((item) => item !== category)
+      prev.some((item) => item.categoryName === category.categoryName)
+        ? prev.filter((item) => item.categoryName !== category.categoryName)
         : [...prev, category]
     );
   };
 
+  // useEffect(() => {
+  //   getCategories({ setCategories });
+  // }, []);
+  console.log(categories);
   return (
     <div className="flex flex-col space-y-4 mb-10">
       <label
@@ -28,15 +49,12 @@ export default function CategoriesCheckbox() {
         categories
       </label>
       {categories.map((category) => (
-        <label key={category} className="flex items-center space-x-2">
+        <label
+          key={category.categoryName}
+          className="flex items-center space-x-2"
+        >
           <Checkbox
-            // style={{
-            //   accentColor: "var(--main-color)",
-            //   //   backgroundColor: "var(--main-color)",
-            //   borderColor: "var(--main-color)",
-            // }}
             className="border-[var(--main-color)] checked:bg-[var(--main-color)] checked:border-[var(--main-color)]"
-            // color="gray"
             checked={selectedCategories.includes(category)}
             onChange={() => handleCheckboxChange(category)}
           />
@@ -46,7 +64,7 @@ export default function CategoriesCheckbox() {
               fontFamily: "var(--main-font)",
             }}
           >
-            {category}
+            {category.categoryName}
           </Typography>
         </label>
       ))}

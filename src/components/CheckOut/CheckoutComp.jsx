@@ -4,7 +4,7 @@ import { countries, cities } from "./countriesAndCitiesData";
 import DropDown from "./Icons/DropDown";
 import CheckOutCart from "./CheckOutCart";
 import ChekoutTitle from "../CheckOut/CheckoutTitle";
-import MainButton from '../Shared/MainButton'
+import MainButton from "../Shared/MainButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,22 +16,32 @@ export default function CheckoutComp() {
   const schema = yup.object().shape({
     firstName: yup.string().required("First Name is required"),
     lastName: yup.string().required("Last Name is required"),
-    phone: yup.string()
-    .required("Phone Number is required")
-    .min(10, "Phone Number must be at least 10 digits long")
-    .max(15, "Phone Number cannot exceed 15 digits"),
-    email: yup.string().email("Invalid email format").required("Email is required"),
+    phone: yup
+      .string()
+      .required("Phone Number is required")
+      .min(10, "Phone Number must be at least 10 digits long")
+      .max(15, "Phone Number cannot exceed 15 digits"),
+    email: yup
+      .string()
+      .email("Invalid email format")
+      .required("Email is required"),
     address: yup.string().required("Address is required"),
     country: yup.string().required("Country is required"),
     city: yup.string().required("City is required"),
     postcode: yup.string().required("Postcode is required"),
     paymentMethod: yup.string().required("Payment Method is required"),
-    notes: yup.string()
+    notes: yup.string(),
   });
 
   // React Hook Form setup
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
   const country = watch("country", "");
@@ -69,7 +79,9 @@ export default function CheckoutComp() {
     <div className="relative z-40 bg-white">
       <ChekoutTitle />
       <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700">
-        <h2 className="text-2xl font-semibold mb-10 uppercase">Billing Details</h2>
+        <h2 className="text-2xl font-semibold mb-10 uppercase">
+          Billing Details
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Form Fields Column */}
@@ -85,7 +97,9 @@ export default function CheckoutComp() {
                       {...register("firstName")}
                     />
                     {errors.firstName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.firstName.message}
+                      </p>
                     )}
                   </div>
                   <div className="relative">
@@ -97,7 +111,9 @@ export default function CheckoutComp() {
                       {...register("lastName")}
                     />
                     {errors.lastName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.lastName.message}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -110,7 +126,9 @@ export default function CheckoutComp() {
                     {...register("phone")}
                   />
                   {errors.phone && (
-                    <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.phone.message}
+                    </p>
                   )}
                 </div>
                 <div className="relative">
@@ -122,7 +140,9 @@ export default function CheckoutComp() {
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
                 <div className="relative">
@@ -134,7 +154,9 @@ export default function CheckoutComp() {
                     {...register("address")}
                   />
                   {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.address.message}
+                    </p>
                   )}
                 </div>
                 <div className="relative mb-8">
@@ -144,9 +166,13 @@ export default function CheckoutComp() {
                     className="w-full border-b border-gray-400 p-2 focus:outline-none pr-10 appearance-none bg-transparent placeholder-gray-500"
                     {...register("country")}
                   >
-                    <option value="" disabled>Select Country / Region</option>
+                    <option value="" disabled>
+                      Select Country / Region
+                    </option>
                     {countries.map((country) => (
-                      <option key={country} value={country}>{country}</option>
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
                     ))}
                   </select>
                   <div className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
@@ -161,9 +187,13 @@ export default function CheckoutComp() {
                     disabled={!country}
                     {...register("city")}
                   >
-                    <option value="" disabled>Select Town / City</option>
+                    <option value="" disabled>
+                      Select Town / City
+                    </option>
                     {cityOptions.map((city) => (
-                      <option key={city} value={city}>{city}</option>
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
                     ))}
                   </select>
                   {country && (
@@ -181,7 +211,9 @@ export default function CheckoutComp() {
                     {...register("postcode")}
                   />
                   {errors.postcode && (
-                    <p className="text-red-500 text-sm mt-1">{errors.postcode.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.postcode.message}
+                    </p>
                   )}
                 </div>
                 <div className="relative">
@@ -207,7 +239,9 @@ export default function CheckoutComp() {
                         Direct Bank Transfer
                       </label>
                       {errors.paymentMethod && (
-                        <p className="text-red-500 text-sm mt-1">{errors.paymentMethod.message}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.paymentMethod.message}
+                        </p>
                       )}
                       {paymentMethod === "direct-bank-transfer" && (
                         <p className="mt-4 text-gray-700">
@@ -245,9 +279,13 @@ export default function CheckoutComp() {
               <CheckOutCart />
             </div>
           </div>
-          <div className="flex justify-center mt-2 ">  
-          <MainButton title='Place Order' onClick={handleSubmit(onSubmit)} type="submit" />
-          </div> 
+          <div className="flex justify-center mt-2 ">
+            <MainButton
+              title="Place Order"
+              onClick={handleSubmit(onSubmit)}
+              type="submit"
+            />
+          </div>
         </form>
       </div>
     </div>

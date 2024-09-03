@@ -7,11 +7,12 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
 
 //components
 import Layout from "./components/Layout/Layout";
@@ -20,9 +21,11 @@ import Cart from "./pages/Cart/Cart";
 import "./App.css";
 import ShopList from "./pages/ShopList";
 import ShopSingle from "./pages/ShopSingle";
+import SignUp from "./pages/signup/SignUp";
 
 const router = createBrowserRouter([
-  { path: "register", element: <Register /> },
+  // { path: "register", element: <Register /> },
+  { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
   {
@@ -36,6 +39,7 @@ const router = createBrowserRouter([
       { path: "cart", element: <Cart /> },
       { path: "contact", element: <Contact /> },
       { path: "checkout", element: <Checkout /> },
+      { path: "about", element: <About /> },
     ],
   },
 ]);

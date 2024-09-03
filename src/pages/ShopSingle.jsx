@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PageTitle from "../components/Shared/PageTitle";
-import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Typography,
+} from "@material-tailwind/react";
 import MainButton from "../components/Shared/MainButton";
 import StaticStarRating from "../components/Shared/StaticStarRating";
 import ShopSingleTabs from "../components/ShopSingleTabs";
 import { addToCart } from "../Redux/actions/cartActions";
-import { fetchProductByIDAction } from '../Redux/actions/productActions';
+import { fetchProductByIDAction } from "../Redux/actions/productActions";
+import Quantity from "../components/Shared/Quantity";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 export default function ShopSingle() {
@@ -18,7 +24,11 @@ export default function ShopSingle() {
   // Access state from Redux store
   const currentProduct = useSelector((state) => state.products.currentProduct);
 
-
+  useEffect(() => {
+    const existingProduct = products.find(
+      (product) => product._id === productId
+    );
+  });
   useEffect(() => {
     dispatch(fetchProductByIDAction(productId));
   }, [productId, dispatch]);
@@ -31,13 +41,13 @@ export default function ShopSingle() {
 
   //should ensure they only affect the local quantity state variable and not the cart state because if I use dispatch it will update the quantity when I incease or decrease without addToCart Function
 
-  const handleIncreaseQuantity = () => {  
-    setQuantity(prevQuantity => prevQuantity + 1);  
-};  
+  const handleIncreaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
 
-const handleDecreaseQuantity = () => {  
-    setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1));  
-}; 
+  const handleDecreaseQuantity = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  };
 
   if (!currentProduct) return <p>Product Not Found</p>;
 
@@ -45,7 +55,11 @@ const handleDecreaseQuantity = () => {
     <div className="z-40 pb-[200px] relative bg-white items-center flex flex-col mb-10">
       <PageTitle title="Product" />
       <Card className="w-full max-w-[60rem] h-full flex-row m-40 rounded-none shadow-none">
-        <CardHeader shadow={false} floated={false} className="m-0 w-2/4 shrink-0 rounded-none">
+        <CardHeader
+          shadow={false}
+          floated={false}
+          className="m-0 w-2/4 shrink-0 rounded-none"
+        >
           <img
             src={currentProduct.image}
             alt="card-image"
@@ -59,9 +73,7 @@ const handleDecreaseQuantity = () => {
           <div className="mb-6">
             <StaticStarRating rating={currentProduct.rating || 4} />
           </div>
-          <Typography className="mb-2">
-            ${currentProduct.price}
-          </Typography>
+          <Typography className="mb-2">${currentProduct.price}</Typography>
           <Typography color="gray" className="mt-20 mb-8">
             {currentProduct.description}
           </Typography>
