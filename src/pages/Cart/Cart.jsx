@@ -8,13 +8,13 @@ import {
 } from "../../Redux/actions/cartActions";
 import cart from "../../assets/images/cart.jpg";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import ButtonCart from "../../components/ButtonCart";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import "../../index.css";
 import RollUp from "../../components/RollUpButton/RollUp";
 import CartTotals from "./CartTotals";
 import MainButton from "../../components/Shared/MainButton";
+import { toast, Bounce } from "react-toastify";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ export default function Cart() {
                 </h1>
               </div>
               <Link to="/products">
-                <ButtonCart title2={"Return To Product List"} />
+                <MainButton title2={"Return To Product List"} />
               </Link>
             </div>
           ) : (
@@ -123,7 +123,20 @@ export default function Cart() {
                   </div>
                   <div className="flex items-center justify-between">
                     <MdDeleteOutline
-                      onClick={() => dispatch(removeFromCart(item._id))}
+                      onClick={() => {
+                        dispatch(removeFromCart(item._id));
+                        toast.info("Product deleted from cart", {
+                          position: "top-center",
+                          autoClose: 2000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                          transition: Bounce,
+                        });
+                      }}
                       className="text-[#c9ab81] hover:text-[#816640] cursor-pointer text-[18px] md:text-[24px]"
                     />
                   </div>

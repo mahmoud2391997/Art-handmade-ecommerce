@@ -6,11 +6,11 @@
   --button-text-font: "Open Sans", sans-serif;
   --nav-links-font: "EB Garamond", serif;
   --page-title-font: "EB Garamond", serif;
+
   /* colors */
   --white: #ffff;
   --main-color: #c9ab81;
   --main-gray: #525252;
-
   --stroke: #c9ab81;
   --button-text-color: #525252;
   --button-text-font: "Open Sans", sans-serif;
@@ -23,7 +23,9 @@
   --main-text-color: #5f5f5f;
   --light-gray: #cfcfcf;
   --nav-links-color: #383838;
+  --placeholder-text-color: #7c8392;
   /* images */
+
   --button-text-font: "Open Sans", sans-serif;
   --nav-links-font: "EB Garamond", serif;
   --nav-links-color: #383838;
@@ -33,3 +35,35 @@
 .card {
   padding: 2em;
 }
+
+
+input::placeholder {
+  color: var(--placeholder-text-color) !important;
+  opacity: 1 !important;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.Toastify__toast {  
+  border-radius: 0 !important;
+}
+
+
+

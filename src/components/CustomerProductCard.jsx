@@ -9,6 +9,7 @@ import {
 import { addToCart } from "../Redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody } from "@material-tailwind/react";
+import { toast, Bounce } from "react-toastify";
 
 export default function ProductCard({ isRandom }) {
   const navigate = useNavigate();
@@ -25,7 +26,8 @@ export default function ProductCard({ isRandom }) {
 
   const handleAddToCart = (product) => {
     console.log("Adding to cart", product);
-    dispatch(addToCart(product)); // Ensure `addToCart` is configured to handle this
+    const defaultQuantity = 1;
+    dispatch(addToCart(product, defaultQuantity));
   };
 
   if (status === "loading") return <p>Loading...</p>;
@@ -48,9 +50,22 @@ export default function ProductCard({ isRandom }) {
             />
             <div className="absolute top-3 left-3 right-3 bottom-3 bg-white bg-opacity-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-full transition-transform duration-[2000ms] ease-in-out group-hover:translate-x-0">
               <MainButton
-                onClick={() => handleAddToCart(product)}
                 title="Add to Cart"
                 className="items-center justify-center flex"
+                onClick={() => {
+                  handleAddToCart(product);
+                  toast.success("Product added to the cart", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                  });
+                }}
               />
             </div>
           </div>

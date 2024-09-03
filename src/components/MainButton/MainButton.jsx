@@ -3,7 +3,7 @@ import React from "react";
 import "./MainButton.css";
 
 // eslint-disable-next-line react/prop-types
-export default function MainButton({ title }) {
+export default function MainButton({ title , onClick}) {
   return (
     <svg
       width="350"
@@ -11,6 +11,7 @@ export default function MainButton({ title }) {
       viewBox="0 0 150 50"
       xmlns="http://www.w3.org/2000/svg"
       className="stroke-button hover: cursor-pointer"
+      onClick={onClick}
     >
       <rect
         x="5"

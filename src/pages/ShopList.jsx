@@ -111,43 +111,60 @@ export default function ShopList() {
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start gap-10 mx-28 my-32">
-        <div className="w-full flex flex-col">
-          <div className="flex justify-between items-center flex-wrap mb-4">
-            <div
-              className="capitalize text-[17px] text-[var(--main-gray)]"
-              style={{ fontFamily: "var(--third-font)" }}
-            >
-              showing {indexOfFirstProduct + 1} -
-              {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
-              {filteredProducts.length} results
-            </div>
-            <div>
-              <Select
-                variant="standard"
-                label="Sort"
-                on
-                onChange={(e) => handleSortChange(e)}
+        {currentProducts.length == 0 ? (
+          <div className="w-full h-[19.8vh] flex flex-col items-center">
+            <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
+              <h1
+                className="md:text-xl lg:text-2xl font-medium text-lg text-center text-[var(--main-gray)]"
+                style={{
+                  fontFamily: "var(--main-font)",
+                  letterSpacing: ".16em",
+                  lineHeight: "1.31em",
+                }}
               >
-                <Option value="default">default</Option>
-                <Option value="priceLowToHigh">price: low to high</Option>
-                <Option value="priceHighToLow">price: high to low</Option>
-                <Option value="nameAZ">a-z</Option>
-                <Option value="nameZA">z-a</Option>
-              </Select>
+                No Products Found
+              </h1>
             </div>
           </div>
-          <div className="p-10 min-h-fit">
-            <ProductList isRandom={false} currentProducts={currentProducts} />
+        ) : (
+          <div className="w-full flex flex-col">
+            <div className="flex justify-between items-center flex-wrap mb-4">
+              <div
+                className="capitalize text-[17px] text-[var(--main-gray)]"
+                style={{ fontFamily: "var(--third-font)" }}
+              >
+                showing {indexOfFirstProduct + 1} -
+                {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
+                {filteredProducts.length} results
+              </div>
+              <div>
+                <Select
+                  variant="standard"
+                  label="Sort"
+                  on
+                  onChange={(e) => handleSortChange(e)}
+                >
+                  <Option value="default">default</Option>
+                  <Option value="priceLowToHigh">price: low to high</Option>
+                  <Option value="priceHighToLow">price: high to low</Option>
+                  <Option value="nameAZ">a-z</Option>
+                  <Option value="nameZA">z-a</Option>
+                </Select>
+              </div>
+            </div>
+            <div className="p-10 min-h-fit">
+              <ProductList isRandom={false} currentProducts={currentProducts} />
+            </div>
+            <div className="flex justify-center items-start mt-4">
+              {/* Pagination Controls */}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+              />
+            </div>
           </div>
-          <div className="flex justify-center items-start mt-4">
-            {/* Pagination Controls */}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-            />
-          </div>
-        </div>
+        )}
         <div className="w-1/3 flex flex-col gap-4">
           <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
           <Typography

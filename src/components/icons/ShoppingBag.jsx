@@ -31,7 +31,6 @@ export default function ShoppingBag() {
         />
       </svg>
       <span className="absolute -top-2 -right-2 text-sm ">{totalAmount}</span>
-      {/* // <FontAwesomeIcon icon={faBagShopping} className="text-xl" /> */}
     </div>
   );
 }
