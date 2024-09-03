@@ -1,4 +1,4 @@
-export default function InputCard({ type }) {
+export default function InputCard({ type, value, onChange }) {
   return (
     <div>
       <div className="w-72  space-y-3 mt-5">
@@ -11,10 +11,14 @@ export default function InputCard({ type }) {
           </label>
           <div className="relative mt-3">
             <input
+              onChange={(e) => {
+                onChange(e.target.value);
+              }}
+              value={value}
               type="text"
               id="hs-leading-icon"
               name="hs-leading-icon"
-              className="py-3 px-4 ps-11 block w-[90%] border-gray-500 shadow-sm border   text-sm focus:z-10 focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none "
+              className="py-3 px-4 ps-11 block w-[90%] border-0 border-b-gray-500 shadow-sm border-b   text-sm focus:z-10 focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none "
               placeholder={
                 type == "Phone Number"
                   ? "123-456-789"
