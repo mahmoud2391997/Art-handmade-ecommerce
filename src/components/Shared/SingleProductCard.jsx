@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MainButton from "./MainButton";
 import { Card, CardBody } from "@material-tailwind/react";
 import StaticStarRating from "./StaticStarRating";
-import { fetchProductsAction } from "../../Redux/actions/productActions";
 
 export default function SingleProductCard({ prod, handleAddToCart }) {
   const navigate = useNavigate();

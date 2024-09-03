@@ -59,7 +59,6 @@ export default function Login() {
             variant="standard"
             label="Email"
             type="text"
-            placeholder="Please Enter Your Email ..."
             {...register("email")}
           />
           {errors.email && (
@@ -71,9 +70,8 @@ export default function Login() {
         <div className="flex flex-col gap-2">
           <Input
             variant="standard"
-            label="Password"
             type="password"
-            placeholder="Please Enter Your Password ..."
+            label="Password"
             {...register("password")}
           />
           {errors.password && (
@@ -93,13 +91,14 @@ export default function Login() {
             Remember Me
           </label>
         </div>
-
-        <Button
-          type="submit"
-          className="self-center lg:self-end w-fit p-0 bg-transparent shadow-none hover:shadow-none"
-        >
-          <MainButton title={"log in"} />
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            type="submit"
+            className="self-center lg:self-end w-fit p-0 bg-transparent shadow-none hover:shadow-none"
+          >
+            <MainButton title={"log in"} />
+          </Button>
+        </div>
       </form>
     </div>
   );

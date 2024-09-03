@@ -3,9 +3,9 @@ import { useDebounce } from "use-debounce";
 
 import { Option, Select, Typography } from "@material-tailwind/react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getCategories } from "../api/categories";
+import getCategories from "../api/categories";
 
 import { debounce } from "../utils/debounce";
 
@@ -16,10 +16,20 @@ import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductList from "../components/ProductListFinal";
 import Pagination from "../components/Shared/Pagination";
+import { fetchProductsAction } from "../Redux/actions/productActions";
 
 export default function ShopList() {
-  const { products } = useSelector((state) => state.products);
-  console.log(products);
+  const dispatch = useDispatch();
+  const { products, status, error } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProductsAction());
+  }, []);
+
+  const handleAddToCart = (product) => {
+    console.log("Adding to cart", product);
+    dispatch(addToCart(product));
+  };
 
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -153,7 +163,7 @@ export default function ShopList() {
               </div>
             </div>
             <div className="p-10 min-h-fit">
-              <ProductList isRandom={false} currentProducts={currentProducts} />
+              <ProductList currentProducts={currentProducts} />
             </div>
             <div className="flex justify-center items-start mt-4">
               {/* Pagination Controls */}
