@@ -21,6 +21,7 @@ import { fetchProductsAction } from "../Redux/actions/productActions";
 export default function ShopList() {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector((state) => state.products);
+  console.log(status);
 
   useEffect(() => {
     dispatch(fetchProductsAction());
@@ -121,7 +122,22 @@ export default function ShopList() {
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start gap-10 mx-28 my-32">
-        {currentProducts.length == 0 ? (
+        {status == "idle" ? (
+          <div className="w-full h-[19.8vh] flex flex-col items-center">
+            <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
+              <h1
+                className="md:text-xl lg:text-2xl font-medium text-lg text-center text-[var(--main-gray)]"
+                style={{
+                  fontFamily: "var(--main-font)",
+                  letterSpacing: ".16em",
+                  lineHeight: "1.31em",
+                }}
+              >
+                Loading
+              </h1>
+            </div>
+          </div>
+        ) : currentProducts.length == 0 ? (
           <div className="w-full h-[19.8vh] flex flex-col items-center">
             <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
               <h1

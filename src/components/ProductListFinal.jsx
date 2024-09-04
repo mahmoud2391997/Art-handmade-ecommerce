@@ -10,7 +10,7 @@ import SingleProductCard from "./Shared/SingleProductCard";
 
 export default function ProductList({ currentProducts }) {
   // const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleAddToCart = (product) => {
     console.log("Adding to cart", product);
     const defaultQuantity = 1;

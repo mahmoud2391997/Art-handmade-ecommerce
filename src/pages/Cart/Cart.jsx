@@ -29,7 +29,7 @@ export default function Cart() {
 
   const handleCheckOut = () => {
     const isloggedIn =
-      localStorage.getItem("token") || sessionStorage.getItem("token");
+      sessionStorage.getItem("token") || sessionStorage.getItem("token");
 
     if (isloggedIn) {
       navigate("/checkout");
