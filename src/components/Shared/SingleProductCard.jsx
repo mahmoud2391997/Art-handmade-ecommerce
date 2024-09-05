@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MainButton from "./MainButton";
 import { Card, CardBody } from "@material-tailwind/react";
 import StaticStarRating from "./StaticStarRating";
-import { fetchProductsAction } from "../../Redux/actions/productActions";
 
 export default function SingleProductCard({ prod, handleAddToCart }) {
   const navigate = useNavigate();
@@ -22,7 +20,7 @@ export default function SingleProductCard({ prod, handleAddToCart }) {
         />
         <div className="absolute top-3 left-3 right-3 bottom-3 bg-white bg-opacity-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-full transition-transform duration-[2000ms] ease-in-out group-hover:translate-x-0">
           <MainButton
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(prod)}
             title="Add to Cart"
             className="items-center justify-center flex"
           />

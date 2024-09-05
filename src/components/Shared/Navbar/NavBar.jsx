@@ -10,6 +10,7 @@ import MainButton from "../MainButton";
 import ShoppingBag from "../../icons/ShoppingBag";
 import SearchIcon from "../../icons/SearchIcon";
 import { isAuth } from "../../../utils/isAuth";
+import ProfileIcon from "../../icons/ProfileIcon";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -75,7 +76,10 @@ export default function NavBar() {
                 <MainButton title={"log in"} onClick={goToLogIn} />
               </div>
             ) : (
-              <div className="hidden lg:flex ">
+              <div className="hidden lg:flex justify-between items-center">
+                <Link to={"/profile"}>
+                  <ProfileIcon />
+                </Link>
                 <MainButton title={"log out"} onClick={handleLogout} />
               </div>
             )}

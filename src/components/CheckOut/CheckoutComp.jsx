@@ -51,7 +51,13 @@ export default function CheckoutComp() {
   const onSubmit = (data) => {
     console.log(data);
   };
-
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (country && cities[country]) {
       setCityOptions(cities[country]);

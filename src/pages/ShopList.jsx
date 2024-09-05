@@ -3,9 +3,9 @@ import { useDebounce } from "use-debounce";
 
 import { Option, Select, Typography } from "@material-tailwind/react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getCategories } from "../api/categories";
+import getCategories from "../api/categories";
 
 import { debounce } from "../utils/debounce";
 
@@ -16,10 +16,24 @@ import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductList from "../components/ProductListFinal";
 import Pagination from "../components/Shared/Pagination";
+import { fetchProductsAction } from "../Redux/actions/productActions";
 
 export default function ShopList() {
-  const { products } = useSelector((state) => state.products);
-  console.log(products);
+  const dispatch = useDispatch();
+  const { products, status, error } = useSelector((state) => state.products);
+  console.log(status);
+
+  useEffect(() => {
+    dispatch(fetchProductsAction());
+  }, []);
+
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
 
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -111,7 +125,22 @@ export default function ShopList() {
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
       <div className="flex justify-center items-start gap-10 mx-28 my-32">
-        {currentProducts.length == 0 ? (
+        {status == "idle" ? (
+          <div className="w-full h-[19.8vh] flex flex-col items-center">
+            <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
+              <h1
+                className="md:text-xl lg:text-2xl font-medium text-lg text-center text-[var(--main-gray)]"
+                style={{
+                  fontFamily: "var(--main-font)",
+                  letterSpacing: ".16em",
+                  lineHeight: "1.31em",
+                }}
+              >
+                Loading
+              </h1>
+            </div>
+          </div>
+        ) : currentProducts.length == 0 ? (
           <div className="w-full h-[19.8vh] flex flex-col items-center">
             <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
               <h1
@@ -153,7 +182,7 @@ export default function ShopList() {
               </div>
             </div>
             <div className="p-10 min-h-fit">
-              <ProductList isRandom={false} currentProducts={currentProducts} />
+              <ProductList currentProducts={currentProducts} />
             </div>
             <div className="flex justify-center items-start mt-4">
               {/* Pagination Controls */}
