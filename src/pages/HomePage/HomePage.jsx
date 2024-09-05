@@ -24,6 +24,13 @@ export default function HomePage() {
   useEffect(() => {
     getCategories();
   }, []);
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   return (
     <div className="w-full z-40 pb-[200px] relative bg-white font-eb-garamond">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">

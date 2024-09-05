@@ -9,6 +9,7 @@ import axios from "axios";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import DatePickerComponent from "../../components/DatePicker/DatePicker";
 import { setDate } from "date-fns";
+import loadStorage from "../../helpers/Storage";
 
 export default function Profile() {
   const [profileId, setProfileId] = useState("");
@@ -19,13 +20,11 @@ export default function Profile() {
   const [phone, setPhone] = useState("");
   const [bdate, setBdate] = useState("");
   function getProfile() {
-    let token =
-      sessionStorage.getItem("token") || localStorage.getItem("token");
     axios
       .get(`https://art-ecommerce-server.glitch.me/api/profile`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${loadStorage()}`,
         },
       })
       .then((response) => {
@@ -43,8 +42,7 @@ export default function Profile() {
   }
   function editProfile(profileId, editedProfile) {
     console.log(editedProfile);
-    let token =
-      sessionStorage.getItem("token") || localStorage.getItem("token");
+
     axios
       .put(
         `https://art-ecommerce-server.glitch.me/api/profile/${profileId}`,
@@ -52,7 +50,7 @@ export default function Profile() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${loadStorage()}`,
           },
         }
       )
@@ -62,11 +60,15 @@ export default function Profile() {
       });
   }
   useEffect(() => {
-    getProfile(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWFobW91ZG1lbHNhaWQyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTcyNTA0NTk2NywiZXhwIjoxNzI1MzA1MTY3fQ.owSE9Tka5sLyJgtbGRb4BcXHiumqh6vasztvCXoHedM"
-    );
+    getProfile();
   }, []);
-
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   return (
     <div className="w-full pb-[300px] z-40 relative bg-white">
       <PageTitle title={"Profile"} />
@@ -141,18 +143,14 @@ export default function Profile() {
               onClick={() => {
                 console.log("asd");
 
-                editProfile(
-                  profileId,
-                  {
-                    email: email,
-                    first_name: firstName,
-                    last_name: lastName,
-                    birthday: bdate,
-                    phone_number: phone,
-                    gender: gender,
-                  },
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWFobW91ZG1lbHNhaWQyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTcyNTA0NTk2NywiZXhwIjoxNzI1MzA1MTY3fQ.owSE9Tka5sLyJgtbGRb4BcXHiumqh6vasztvCXoHedM"
-                );
+                editProfile(profileId, {
+                  email: email,
+                  first_name: firstName,
+                  last_name: lastName,
+                  birthday: bdate,
+                  phone_number: phone,
+                  gender: gender,
+                });
               }}
             />
             {/* <MainButton title={"Delete Account"} /> */}

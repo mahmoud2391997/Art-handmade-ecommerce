@@ -23,7 +23,13 @@ export default function ShopSingle() {
 
   // Access state from Redux store
   const currentProduct = useSelector((state) => state.products.currentProduct);
-
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   useEffect(() => {
     const existingProduct = products.find(
       (product) => product._id === productId

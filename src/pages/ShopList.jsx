@@ -27,10 +27,13 @@ export default function ShopList() {
     dispatch(fetchProductsAction());
   }, []);
 
-  const handleAddToCart = (product) => {
-    console.log("Adding to cart", product);
-    dispatch(addToCart(product));
-  };
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
 
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
