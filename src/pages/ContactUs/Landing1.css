@@ -1,0 +1,10 @@
+/* .landing1 {
+  animation: landing1 16s infinite;
+  background-image: url("/src/assets/images/contactus.jpg");
+}
+
+@keyframes landing1 {
+  0%, 100% {
+    background-image: url("/src/assets/images/contactus.jpg");
+  }
+} */

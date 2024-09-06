@@ -56,7 +56,7 @@ export default function CheckoutComp() {
     /******* */
     /******* */ window.scrollTo(0, 0); /******* */
     /******* */
-  }, []); /******* */
+  }, []); 
   ///////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (country && cities[country]) {
