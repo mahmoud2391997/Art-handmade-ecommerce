@@ -5,6 +5,7 @@ import { eventsData } from "./eventsData";
 import MainButton from "../Shared/MainButton";  
 import { Dialog } from '@material-tailwind/react';  
 import TicketForm from './TicketForm'; 
+import RollUp from '../RollUpButton/RollUp';
 
 export default function SingleEvent() {  
     const { eventId } = useParams();  
@@ -58,7 +59,8 @@ export default function SingleEvent() {
                             <MainButton title="Get Ticket" onClick={() => setOpen(true)} />  
                         </div>  
                     </div>  
-                </div>  
+                </div>
+                <RollUp />
             </div>  
 
             {/* Dialog for Ticket Form */}  

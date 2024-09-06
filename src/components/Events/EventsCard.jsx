@@ -3,6 +3,7 @@ import { eventsData } from './eventsData';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, Typography } from '@material-tailwind/react';  
 import HoverButton from '../Shared/HoverButton/HoverButton';
+import RollUp from '../RollUpButton/RollUp';
 
 export default function EventsCard() {  
     const [events] = useState(eventsData); 
@@ -40,7 +41,8 @@ export default function EventsCard() {
                         </Card>  
                     ))}  
                 </div>  
-            </div>  
+            </div>
+            <RollUp />
         </div>  
     );  
 }
