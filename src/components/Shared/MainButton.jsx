@@ -10,8 +10,8 @@ export default function MainButton({ title, onClick }) {
       viewBox="0 0 150 50"
       xmlns="http://www.w3.org/2000/svg"
       className="stroke-button hover: cursor-pointer"
-      onClick={onClick} // Attach the onClick handler here
-      style={{ cursor: "pointer" }} // Ensure the cursor style is applied
+      onClick={onClick} 
+      style={{ cursor: "pointer" }} 
     >
       <rect
         x="5"

@@ -1,0 +1,46 @@
+import { useState } from 'react';  
+import { eventsData } from './eventsData';  
+import { useNavigate } from 'react-router-dom';
+import { Card, CardBody, Typography } from '@material-tailwind/react';  
+import HoverButton from '../Shared/HoverButton/HoverButton';
+
+export default function EventsCard() {  
+    const [events] = useState(eventsData); 
+    const navigate = useNavigate();
+
+    const handleEventClick = (eventId) => {  
+        navigate(`/events/${eventId}`); 
+    }; 
+
+    return (  
+        <div className="relative pb-[500px] z-40 sm:w-full">  
+            <div className="bg-white pb-[50px] w-full">  
+                <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-10 gap-y-40 p-16">  
+                    {events.map((event) => (  
+                        <Card   
+                            key={event.id}   
+                            className="bg-white rounded-none relative flex flex-col"  
+                        >  
+                            <div className="overflow-hidden">  
+                                <img   
+                                    src={event.image}   
+                                    alt={event.title}   
+                                    className="relative w-full h-full object-cover transition-transform duration-300 transform hover:scale-105"  
+                                />  
+                            </div>  
+                            <CardBody className="bg-white bottom-0 w-[100%] md:bottom-[-50px] md:w-[85%] mx-auto my-auto absolute left-0 ">  
+                                <Typography variant="h5" color="blue-gray" className="mb-2 font-eb-garamond text-lg text-[#c9ab81] tracking-widest italic font-light">  
+                                    On-view collection  
+                                </Typography>  
+                                <Typography variant="h5" color="blue-gray" className="mb-2 font-eb-garamond text-gray-800 uppercase text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-widest font-light">  
+                                    {event.title}  
+                                </Typography> 
+                                <HoverButton title='view more' onClick={() => handleEventClick(event.id)} />
+                            </CardBody>  
+                        </Card>  
+                    ))}  
+                </div>  
+            </div>  
+        </div>  
+    );  
+}
