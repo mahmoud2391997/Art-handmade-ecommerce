@@ -6,7 +6,7 @@ function sendMessage(message) {
   // }
 
   axios
-    .post("https://art-ecommerce-server.glitch.me/api/products", message)
+    .post("https://art-ecommerce-server.glitch.me/api/messages", message)
     .then((response) => console.log(response.data))
     .catch((error) => {
       console.error(error);
