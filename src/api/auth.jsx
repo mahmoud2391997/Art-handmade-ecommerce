@@ -31,6 +31,7 @@ export function loginAuthentication(
         const redirectTo = location.state?.from?.pathname || "/";
         navigate(redirectTo, { replace: true });
       }
+      return true;
     })
     .catch((error) => {
       console.error(error);

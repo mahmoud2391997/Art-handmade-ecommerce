@@ -4,8 +4,8 @@ export default function OrderCard({ item }) {
       <div className="sm:min-w-[150px] sm:max-w-[150px] w-[200px] h-[200px]   sm:min-h-[150px]  sm:max-h-[150px]">
         <img
           src={
-            item.productImage
-              ? item.productImage
+            item.productImageUrl
+              ? item.productImageUrl
               : "https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-14.jpg"
           }
           alt=""
@@ -26,7 +26,7 @@ export default function OrderCard({ item }) {
             Quantity: x{item.productQuantity}
           </p>
           <p className="md:text-lg dark:text-white xl:text-lg font-semibold leading-6 text-gray-800 ">
-            Subtotal: {item.productSubtotal} $
+            Subtotal: {item.productPrice * item.productQuantity} $
           </p>
         </div>
       </div>

@@ -77,15 +77,30 @@ export default function SingleOrder({ order }) {
             <tbody className="h-full flex flex-col justify-between">
               <tr className="border-b w-full  h-1/4 flex justify-between border-[var(--main-color)]">
                 <td>price</td>
-                <td>{order.orderTotal}</td>
+                <td>
+                  {order.orderItems.reduce(
+                    (acc, item) =>
+                      acc + item.productPrice * item.productQuantity,
+                    0
+                  )}
+                  $
+                </td>
               </tr>
               <tr className="border-b h-1/4 border-[var(--main-color)] w-full flex justify-between">
                 <td>shipping</td>
-                <td>{"20$"}</td>
+                <td>{"50$"}</td>
               </tr>
               <tr className="border-b h-1/4 border-[var(--main-color)] w-full  flex justify-between">
                 <td>total</td>
-                <td>{order.orderTotal + 20 + "$"}</td>
+                <td>
+                  {order.orderItems.reduce(
+                    (acc, item) =>
+                      acc + item.productPrice * item.productQuantity,
+                    0
+                  ) +
+                    50 +
+                    "$"}
+                </td>
               </tr>
             </tbody>
           </table>

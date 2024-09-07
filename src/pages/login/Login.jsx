@@ -8,10 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import PageTitle from "../../components/Shared/PageTitle";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
+import { useDispatch } from "react-redux";
 
 import { loginAuthentication } from "../../api/auth";
+import { fetchCartItemsAction } from "../../Redux/actions/loggedInCartActions";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,7 +40,7 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     loginAuthentication(
       data.email,
       data.password,
@@ -45,6 +48,7 @@ export default function Login() {
       navigate,
       location
     );
+
     console.log(data);
   };
   return (

@@ -27,7 +27,7 @@ export function getOrders(token) {
 //},{},{}
 //   ]
 // }
-function makeOrder(orderDetails, token) {
+export function makeOrder(orderDetails, token) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/orders`, orderDetails, {
       headers: {

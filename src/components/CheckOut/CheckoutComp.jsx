@@ -8,9 +8,17 @@ import MainButton from "../Shared/MainButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { getProfile } from "../../api/profiles";
+import loadStorage from "../../helpers/Storage";
+import { makeOrder } from "../../api/orders";
+import { useSelector } from "react-redux";
 
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
+  const [profile, setProfile] = useState({});
+  console.log(profile);
+  const cartItems = useSelector((state) => state.loggedinCart.loggedinCart);
+  console.log(cartItems);
 
   // React Hook Form Schema
   const schema = yup.object().shape({
@@ -38,6 +46,7 @@ export default function CheckoutComp() {
     register,
     handleSubmit,
     setValue,
+    reset,
     watch,
     formState: { errors },
   } = useForm({
@@ -49,7 +58,33 @@ export default function CheckoutComp() {
   const paymentMethod = watch("paymentMethod", "");
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(cartItems);
+
+    const orderItems = cartItems.map((cartItem) => {
+      return {
+        productName: cartItem.item.name,
+        productPrice: cartItem.item.price,
+        productImageUrl: cartItem.item.image,
+        productQuantity: cartItem.quantity,
+      };
+    });
+    console.log(orderItems);
+    const orderDetails = {
+      customerName: data.firstName + " " + data.lastName,
+      customerEmail: data.email,
+      customerPhone: data.phone,
+      customerAddress:
+        data.address +
+        " " +
+        data.city +
+        " " +
+        data.postcode +
+        " " +
+        data.country,
+      paymentMethod: data.paymentMethod,
+      orderItems: orderItems,
+    };
+    makeOrder(orderDetails, loadStorage());
   };
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {
@@ -65,7 +100,9 @@ export default function CheckoutComp() {
       setCityOptions([]);
     }
   }, [country]);
-
+  useEffect(() => {
+    getProfile(loadStorage(), reset);
+  }, []);
   const handleCountryChange = (e) => {
     const selectedCountry = e.target.value;
     setValue("country", selectedCountry);
