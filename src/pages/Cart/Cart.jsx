@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 // eslint-disable-next-line no-unused-vars
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -32,11 +33,9 @@ export default function Cart() {
     return price * quantity;
   };
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   ///////////////////////////////////////////////////////////////////
   const handleCheckOut = () => {
     const isloggedIn =
@@ -80,7 +79,7 @@ export default function Cart() {
                   </h1>
                 </div>
                 <Link to="/products">
-                  <MainButton title2={"Return To Product List"} />
+                  <MainButton title={"Back To Product"} />
                 </Link>
               </div>
             ) : (
@@ -101,13 +100,13 @@ export default function Cart() {
                     key={item.item._id}
                     className="grid grid-cols-5 sm:grid-cols-5 border-b border-gray-200 md:mx-2 sm:mx-2 py-4 sm:py-1 md:py-2 lg:py-4 items-center gap-4 md:gap-2 sm:gap-1 lg:gap-4"
                   >
-                    <div className="flex items-center space-x-1 md:space-x-0.5 sm:space-x-0.5 ">
+                    <div className="flex flex-col items-center space-y-2 md:flex-row md:items-center md:space-x-1 md:space-y-0 sm:space-x-0.5 ">
                       <img
                         src={item.item.image}
                         alt={item.item.name}
-                        className="w-10 h-10 sm:w-16 sm:h-16 lg:w-24 lg:h-24  object-cover rounded "
+                        className="w-10 h-10 sm:w-16 sm:h-16 lg:w-24 lg:h-24 object-cover rounded "
                       />
-                      <p className="  ml-8 text-gray-600 text-[12px] md:text-base font-eb-garamond p-5 ">
+                      <p className="text-gray-600 text-[12px] md:text-base font-eb-garamond p-5 ">
                         {item.item.name}
                       </p>
                     </div>
