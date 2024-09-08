@@ -1,17 +1,31 @@
-import { useState } from 'react';  
-import { eventsData } from './eventsData';  
+import { useState, useEffect } from 'react';  
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEventsActions } from '../../Redux/actions/EventsActions';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, Typography } from '@material-tailwind/react';  
 import HoverButton from '../Shared/HoverButton/HoverButton';
 import RollUp from '../RollUpButton/RollUp';
 
-export default function EventsCard() {  
-    const [events] = useState(eventsData); 
+export default function EventsCard() { 
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
+
+    const {events, status, error} = useSelector((state) => state.events)
+
+    useEffect(() => {
+        dispatch(fetchEventsActions());
+    }, []);
 
     const handleEventClick = (eventId) => {  
         navigate(`/events/${eventId}`); 
     }; 
+
+    if (status === "loading") return <p>Loading...</p>;
+    if (status === "failed") return <p>{error}</p>;
+
+    useEffect(() => {
+        window.scrollTo(0, 0); 
+    }, []);
 
     return (  
         <div className="relative pb-[500px] z-40 sm:w-full">  
@@ -19,7 +33,7 @@ export default function EventsCard() {
                 <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-10 gap-y-40 p-16">  
                     {events.map((event) => (  
                         <Card   
-                            key={event.id}   
+                            key={event._id}   
                             className="bg-white rounded-none relative flex flex-col"  
                         >  
                             <div className="overflow-hidden">  

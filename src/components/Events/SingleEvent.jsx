@@ -1,4 +1,4 @@
-import React, { useState } from 'react';  
+import { useState, useEffect } from 'react';  
 import Title from "../Title";  
 import { useParams } from "react-router-dom";  
 import { eventsData } from "./eventsData";  
@@ -14,7 +14,11 @@ export default function SingleEvent() {
 
     if (!event) {  
         return <div>Event not found</div>;  
-    }  
+    }
+    
+    useEffect(() => {
+        window.scrollTo(0, 0); 
+    }, []);
 
     return (  
         <div className="relative z-40 sm:w-full">  
