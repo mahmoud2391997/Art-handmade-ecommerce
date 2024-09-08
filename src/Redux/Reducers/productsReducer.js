@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   products: [],
+  count: 0,
   status: "idle",
   error: null,
   currentProduct: null,
@@ -17,7 +18,8 @@ export const productReducer = (state = initialState, action) => {
     case FETCH_PRODUCTS: {
       return {
         ...state,
-        products: action.payload,
+        products: action.payload.products,
+        count: action.payload.count,
         status: "succeeded",
         loaded: true,
       };

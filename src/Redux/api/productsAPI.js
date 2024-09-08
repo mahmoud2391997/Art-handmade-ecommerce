@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (page) => {
   try {
     const response = await axios.get(
-      "https://art-ecommerce-server.glitch.me/api/products"
+      `https://art-ecommerce-server.glitch.me/api/products/pages/${page}`
     );
     console.log(response);
     return response.data;
@@ -12,7 +12,18 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
-
+export const fetchProductsCount = async () => {
+  try {
+    const response = await axios.get(
+      `https://art-ecommerce-server.glitch.me/api/products/count`
+    );
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching products:", error);
+    throw error;
+  }
+};
 export const fetchProductByID = async (productId) => {
   try {
     const response = await axios.get(
@@ -32,6 +43,7 @@ export const fetchBestSellers = async () => {
     );
     const products = response.data;
 
+    console.log(products);
     return products;
   } catch (error) {
     console.log("Error fetching random products:", error);

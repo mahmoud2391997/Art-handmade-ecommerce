@@ -30,11 +30,7 @@ export default function ShopSingle() {
     /******* */
   }, []); /******* */
   ///////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    const existingProduct = products.find(
-      (product) => product._id === productId
-    );
-  });
+
   useEffect(() => {
     dispatch(fetchProductByIDAction(productId));
   }, [productId, dispatch]);

@@ -19,13 +19,16 @@ import Pagination from "../components/Shared/Pagination";
 import { fetchProductsAction } from "../Redux/actions/productActions";
 
 export default function ShopList() {
+  const [page, setPages] = useState(1);
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.products);
+  const { products, count, status, error } = useSelector(
+    (state) => state.products
+  );
   console.log(status);
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
-  }, []);
+    dispatch(fetchProductsAction(page));
+  }, [page]);
 
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {
@@ -103,9 +106,10 @@ export default function ShopList() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setPages(pageNumber);
   };
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(count / productsPerPage);
 
   const handleSearchChange = debounce((term) => {
     setSearchTerm(term);
