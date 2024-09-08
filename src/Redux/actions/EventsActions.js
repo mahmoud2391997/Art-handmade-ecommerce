@@ -1,4 +1,4 @@
-import { FETCH_EVENTS } from "../actionTypes";
+import { FETCH_EVENTS, FETCH_EVENT_BY_ID } from "../actionTypes";
 import { fetchEvents, fetchEventById} from '../api/eventsApi'
 
 
@@ -21,9 +21,9 @@ export const fetchEventsActions = () => async (dispatchEvent, getState) => {
 
 export const fetchEventsByIdAction = (eventId) => async (dispatch) => {
     try {
-        const event = await fetchEvents(eventId)
+        const event = await fetchEventById(eventId)
         dispatch({
-            type: FETCH_EVENTS,
+            type: FETCH_EVENT_BY_ID,
             payload: event,
         });
     } catch (error) {

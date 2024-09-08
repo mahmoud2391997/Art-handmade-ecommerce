@@ -15,13 +15,11 @@ export const fetchEvents = async () => {
 
 export const fetchEventById = async (eventId) => {
     try {
-        const response = await axios.get(
-            `https://art-ecommerce-server.glitch.me/api/events/${eventId}`
-        );
-        console.log(response.data);
+        const response = await axios.get(`https://art-ecommerce-server.glitch.me/api/events/${eventId}`);
+        console.log(response.data); 
         return response.data;
     } catch (error) {
-        console.log("Error fetching event by ID:", error);
-        throw error;
+        console.error("Error fetching event by ID:", error);
+        throw error; 
     }
-}
+};

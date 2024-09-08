@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';  
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEventsActions } from '../../Redux/actions/EventsActions';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardBody, Typography } from '@material-tailwind/react';  
+import { Card, CardBody, Typography } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';  
 import HoverButton from '../Shared/HoverButton/HoverButton';
 import RollUp from '../RollUpButton/RollUp';
 
 export default function EventsCard() { 
-    const dispatch = useDispatch(); 
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); 
 
     const {events, status, error} = useSelector((state) => state.events)
 
@@ -50,7 +50,7 @@ export default function EventsCard() {
                                 <Typography variant="h5" color="blue-gray" className="mb-2 font-eb-garamond text-gray-800 uppercase text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-widest font-light">  
                                     {event.title}  
                                 </Typography> 
-                                <HoverButton title='view more' onClick={() => handleEventClick(event.id)} />
+                                <HoverButton title='view more' onClick={() => handleEventClick(event._id)} />
                             </CardBody>  
                         </Card>  
                     ))}  
