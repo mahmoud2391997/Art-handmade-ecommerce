@@ -6,7 +6,7 @@ function getEvents() {
       console.error(error);
     });
 }
-function getEvents(eventId) {
+function getEvent(eventId) {
   axios
     .get(`https://art-ecommerce-server.glitch.me/api/events/${eventId}`)
     .then((response) => console.log(response.data))

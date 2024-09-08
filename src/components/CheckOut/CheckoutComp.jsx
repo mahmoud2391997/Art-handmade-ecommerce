@@ -12,7 +12,7 @@ import { getProfile } from "../../api/profiles";
 import loadStorage from "../../helpers/Storage";
 import { makeOrder } from "../../api/orders";
 import { useSelector } from "react-redux";
-
+import stripePayment from "../../api/stripe";
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
   const [profile, setProfile] = useState({});
@@ -84,6 +84,9 @@ export default function CheckoutComp() {
       paymentMethod: data.paymentMethod,
       orderItems: orderItems,
     };
+    if (data.paymentMethod != "cash-on-delivery") {
+      stripePayment(orderItems, loadStorage());
+    }
     makeOrder(orderDetails, loadStorage());
   };
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
