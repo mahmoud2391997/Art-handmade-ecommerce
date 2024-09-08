@@ -1,6 +1,8 @@
 function getProducts(pageNumber) {
   axios
-    .get(`https://art-ecommerce-server.glitch.me/api/products/${pageNumber}`)
+    .get(
+      `https://art-ecommerce-server.glitch.me/api/products/page/${pageNumber}`
+    )
     .then((response) => console.log(response.data))
     .catch((error) => {
       console.error(error);
