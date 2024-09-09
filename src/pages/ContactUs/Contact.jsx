@@ -12,13 +12,12 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
-import contactUsImage from '../../assets/images/contactus.jpg'
-import axios from "axios";  
+import contactUsImage from "../../assets/images/contactus.jpg";
+import axios from "axios";
 import SocialLinks from "./SocialLinks";
+import { Bounce, toast } from "react-toastify";
 
 export default function Contact() {
-
-
   const values = [
     {
       value: "673 12 Constitution Lane Massillon, 10002 New York City",
@@ -61,18 +60,39 @@ export default function Contact() {
         data
       );
       console.log("Form submitted successfully:", response.data);
-      alert("Form submitted successfully!");
+      toast.info("Form Submitted Successfully", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error("Error submitting the form:", error);
-      alert("Failed to submit the form. Please try again.");
+      toast.info("Failed To Submit Form", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
   return (
     <div className="relative pb-[500px] z-40 sm:w-full">
       <div className="bg-white pb-[50px] md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">
-        <section className="land w-full max-w-screen h-[82vh] bg-cover bg-bottom bg-no-repeat flex items-center"
-        style={{ backgroundImage: `url(${contactUsImage})` }}
+        <section
+          className="land w-full max-w-screen h-[82vh] bg-cover bg-bottom bg-no-repeat flex items-center"
+          style={{ backgroundImage: `url(${contactUsImage})` }}
         >
           <div className="w-full moving-content">
             <Title title={"Contact us"} color={"white"} />

@@ -8,6 +8,8 @@ import MainButton from "../Shared/MainButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { loadStripe } from "@stripe/stripe-js";
+import { useSelector } from "react-redux";
 
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
@@ -48,16 +50,10 @@ export default function CheckoutComp() {
   const city = watch("city", "");
   const paymentMethod = watch("paymentMethod", "");
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); 
-  ///////////////////////////////////////////////////////////////////
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     if (country && cities[country]) {
       setCityOptions(cities[country]);
@@ -79,6 +75,50 @@ export default function CheckoutComp() {
 
   const handlePaymentChange = (e) => {
     setValue("paymentMethod", e.target.value);
+  };
+
+  const cartItems = useSelector((state) => state.cart.cartItems || []);
+  console.log(cartItems);
+
+  const handlePayment = async () => {
+    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
+    const body = {
+      cart: cartItems,
+    };
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loadStorage()}`,
+      },
+    };
+
+    const response = await fetch(`${apiURL}/create-checkout-session`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+
+    const session = await response.json();
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    if (data.paymentMethod === "direct-bank-transfer") {
+      console.log("Direct Bank Transfer selected");
+      await handlePayment();
+    } else if (data.paymentMethod === "cash-on-delivery") {
+      console.log("Cash on Delivery selected");
+    }
   };
 
   return (

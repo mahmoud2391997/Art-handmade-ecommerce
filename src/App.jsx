@@ -22,12 +22,17 @@ import ShopSingle from "./pages/ShopSingle";
 import Profile from "./pages/Profile/Profile";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
 import SignUp from "./pages/signup/SignUp";
+import PaymentSuccess from "./components/CheckOut/Payment/PaymentSuccess";
+import PaymentError from "./components/CheckOut/Payment/PaymentError";
+
 
 const router = createBrowserRouter([
   // { path: "register", element: <Register /> },
   { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
+  { path: "paymentSuccess", element: <PaymentSuccess /> },
+  { path: "paymentError", element: <PaymentError /> },
   {
     element: <Layout />,
     children: [
