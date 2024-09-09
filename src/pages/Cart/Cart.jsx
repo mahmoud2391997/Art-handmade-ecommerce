@@ -106,12 +106,12 @@ export default function Cart() {
                         alt={item.item.name}
                         className="w-10 h-10 sm:w-16 sm:h-16 lg:w-24 lg:h-24 object-cover rounded "
                       />
-                      <p className="text-gray-600 text-[12px] md:text-base font-eb-garamond p-5 ">
+                      <p className="text-gray-600 text-[12px] md:text-base font-eb-garamond p-2 ">
                         {item.item.name}
                       </p>
                     </div>
 
-                    <div className="  sm:ml-10 md:ml-12 text-gray-600 text-sm md:text-base font-eb-garamond  ">
+                    <div className="  sm:ml-10 md:ml-14 ml-5 text-gray-600 text-sm md:text-base font-eb-garamond  ">
                       ${item.item.price}
                     </div>
 
@@ -127,7 +127,7 @@ export default function Cart() {
                             }
                             className="text-gray-500  hover:text-[#c9ab81] cursor-pointer"
                           >
-                            <SlArrowUp className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
+                            <SlArrowUp className="w-2 h-2 sm:w-4 sm:h-4 md:w-2 md:h-2" />
                           </p>
                           <p
                             onClick={() =>
@@ -135,7 +135,7 @@ export default function Cart() {
                             }
                             className="text-gray-500 hover:text-[#c9ab81] cursor-pointer"
                           >
-                            <SlArrowDown className="w-3 h-3 sm:w-4 sm:h-4 md:w-2 md:h-2" />
+                            <SlArrowDown className="w-2 h-2 sm:w-4 sm:h-4 md:w-2 md:h-2" />
                           </p>
                         </div>
                       </div>
