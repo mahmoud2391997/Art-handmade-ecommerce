@@ -29,8 +29,7 @@ export default function OrderHistory() {
     getOrders();
   }, []);
   return (
-    <div className="w-full h-auto z-40 relative pb-[200px] bg-white">
-      <PageTitle title={"Orders History"} />
+    <div className="w-full h-auto bg-white">
       {orders.length ? (
         orders.map((order) => {
           return <SingleOrder order={order} />;

@@ -13,6 +13,7 @@ import loadStorage from "../../helpers/Storage";
 import { makeOrder } from "../../api/orders";
 import { useSelector } from "react-redux";
 import stripePayment from "../../api/stripe";
+import { Bounce, toast } from "react-toastify";
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
   const [profile, setProfile] = useState({});
@@ -86,8 +87,21 @@ export default function CheckoutComp() {
     };
     if (data.paymentMethod != "cash-on-delivery") {
       stripePayment(orderItems, loadStorage());
+      makeOrder(orderDetails, loadStorage());
+    } else {
+      makeOrder(orderDetails, loadStorage());
+      toast.info("Order Is Placed Successfully", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
-    makeOrder(orderDetails, loadStorage());
   };
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {

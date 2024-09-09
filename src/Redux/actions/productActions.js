@@ -11,20 +11,16 @@ import {
 } from "../api/productsAPI";
 
 export const fetchProductsAction = (page) => async (dispatch, getState) => {
-  const { loaded } = getState().products;
-
   // Only fetch products if they haven't been loaded yet
-  if (!loaded) {
-    try {
-      const products = await fetchProducts(page);
-      const count = await fetchProductsCount();
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: { products: products, count: count },
-      });
-    } catch (error) {
-      console.log("Error Fetching Products", error);
-    }
+  try {
+    const products = await fetchProducts(page);
+    const count = await fetchProductsCount();
+    dispatch({
+      type: FETCH_PRODUCTS,
+      payload: { products: products, count: count },
+    });
+  } catch (error) {
+    console.log("Error Fetching Products", error);
   }
 };
 

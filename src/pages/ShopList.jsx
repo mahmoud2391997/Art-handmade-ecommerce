@@ -24,12 +24,12 @@ export default function ShopList() {
   const { products, count, status, error } = useSelector(
     (state) => state.products
   );
-  console.log(status);
-
-  useEffect(() => {
+  function getProductsPage(page) {
     dispatch(fetchProductsAction(page));
-  }, [page]);
-
+  }
+  useEffect(() => {
+    getProductsPage(page);
+  }, []);
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {
     /******* */
@@ -51,6 +51,7 @@ export default function ShopList() {
   const [maxValue, setMaxValue] = useState(1500);
 
   const filteredProducts = useMemo(() => {
+    console.log(products);
     let sortedProducts = products.filter((product) => {
       const matchesCategory =
         selectedCategories.length > 0
@@ -107,6 +108,9 @@ export default function ShopList() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     setPages(pageNumber);
+    if (pageNumber > page) {
+      getProductsPage(pageNumber);
+    }
   };
 
   const totalPages = Math.ceil(count / productsPerPage);

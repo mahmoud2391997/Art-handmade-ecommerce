@@ -1,16 +1,36 @@
 import axios from "axios";
 import MainButton from "../MainButton";
 import OrderCard from "../OrderCard/OrderCard";
+import loadStorage from "../../helpers/Storage";
+import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 export default function SingleOrder({ order }) {
+  const [status, setStatus] = useState(order.orderStatus);
   function cancelOrder(orderId, token) {
+    setStatus("Canceled");
+    toast.info("Order Cancelled Successfully", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
     axios
-      .delete(`https://art-ecommerce-server.glitch.me/api/orders/${orderId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .put(
+        `https://art-ecommerce-server.glitch.me/api/orders/${orderId}`,
+        { status: "Canceled" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => console.log(response.data))
       .catch((error) => {
         console.error(error);
@@ -35,25 +55,23 @@ export default function SingleOrder({ order }) {
       <div className="grid md:grid-cols-4  sm:grid-cols-2 grid-cols-1 px-4 py-4 md:py-6 md:p-6 xl:p-8 space-y-2 sm:h-[8rem] h-auto w-full">
         <div className="w-full flex flex-col justify-between mt-2 text-center h-full">
           <span className="text-lg">Order Number</span>
-          <span className="text-3xl text-black font-bold">
+          <span className="text-xl text-black font-bold">
             #{order.orderNumber}
           </span>
         </div>
         <div className="w-full flex flex-col justify-between text-center h-full">
           <span className="text-lg">Order Date</span>
-          <span className="text-3xl text-black font-bold">
+          <span className="text-xl text-black font-bold">
             {formatDate(order.orderDate)}
           </span>
         </div>
         <div className="w-full flex flex-col justify-between text-center h-full">
           <span className="text-lg">Order Status</span>
-          <span className="text-3xl text-black font-bold">
-            {order.orderStatus}
-          </span>
+          <span className="text-xl text-black font-bold">{status}</span>
         </div>
         <div className="w-full flex flex-col justify-between text-center h-full">
           <span className="text-lg">Payment Method</span>
-          <span className="text-3xl text-black font-bold">
+          <span className="text-xl text-black font-bold">
             {order.paymentMethod}
           </span>
         </div>
@@ -106,7 +124,7 @@ export default function SingleOrder({ order }) {
           </table>
         </div>
       </div>
-      {order.orderStatus === "Pending" ? (
+      {status === "Pending" ? (
         <div
           className="xl:w-full lg:w-1/2 flex justify-center
         mt-16"
@@ -114,10 +132,7 @@ export default function SingleOrder({ order }) {
           <MainButton
             title={"Cancel Order"}
             onClick={() => {
-              cancelOrder(
-                order._id,
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3MjUwNDI5NDYsImV4cCI6MTcyNTMwMjE0Nn0.4mm9rc_vw8x-gOqyjvkSbjjpjzaF-53bO360ViBISMU"
-              );
+              cancelOrder(order._id, loadStorage());
             }}
           />
         </div>

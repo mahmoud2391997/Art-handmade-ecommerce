@@ -42,7 +42,7 @@ export function makeOrder(orderDetails, token) {
 }
 function cancelOrder(orderId, token) {
   axios
-    .put(`https://art-ecommerce-server.glitch.me/api/order/:id`, {
+    .put(`https://art-ecommerce-server.glitch.me/api/orders/:id`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

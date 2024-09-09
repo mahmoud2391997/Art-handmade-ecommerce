@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const fetchProducts = async (page) => {
+  console.log(page);
+
   try {
     const response = await axios.get(
       `https://art-ecommerce-server.glitch.me/api/products/pages/${page}`
