@@ -164,7 +164,7 @@ export default function Contact() {
               Contact
             </h1>
             <form
-              onClick={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(onSubmit)}
               className="w-full max-w-sm text-[#525252]"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -214,7 +214,11 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center justify-between">
-                <MainButton title={"Submit"} />
+                <MainButton
+                  title={"Submit"}
+                  onClick={handleSubmit(onSubmit)}
+                  type="submit"
+                />
               </div>
             </form>
           </div>
