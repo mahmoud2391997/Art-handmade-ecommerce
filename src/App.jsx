@@ -25,7 +25,6 @@ import SignUp from "./pages/signup/SignUp";
 import PaymentSuccess from "./components/CheckOut/Payment/PaymentSuccess";
 import PaymentError from "./components/CheckOut/Payment/PaymentError";
 
-
 const router = createBrowserRouter([
   // { path: "register", element: <Register /> },
   { path: "signup", element: <SignUp /> },
@@ -45,8 +44,9 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "checkout", element: <Checkout /> },
       { path: "profile", element: <Profile /> },
-      { path: "orderhistory", element: <OrderHistory /> },
       { path: "about", element: <About /> },
+      { path: "paymentsuccess", element: <PaymentSuccess /> },
+      { path: "paymenterror", element: <PaymentError /> },
     ],
   },
 ]);

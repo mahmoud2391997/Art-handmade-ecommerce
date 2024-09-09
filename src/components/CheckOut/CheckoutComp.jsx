@@ -8,11 +8,20 @@ import MainButton from "../Shared/MainButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loadStripe } from "@stripe/stripe-js";
+import { getProfile } from "../../api/profiles";
+import loadStorage from "../../helpers/Storage";
+import { makeOrder } from "../../api/orders";
 import { useSelector } from "react-redux";
+import stripePayment from "../../api/stripe";
+import { Bounce, toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
+  const [profile, setProfile] = useState({});
+  console.log(profile);
+  const cartItems = useSelector((state) => state.loggedinCart.loggedinCart);
+  console.log(cartItems);
 
   // React Hook Form Schema
   const schema = yup.object().shape({
@@ -40,6 +49,7 @@ export default function CheckoutComp() {
     register,
     handleSubmit,
     setValue,
+    reset,
     watch,
     formState: { errors },
   } = useForm({
@@ -50,10 +60,58 @@ export default function CheckoutComp() {
   const city = watch("city", "");
   const paymentMethod = watch("paymentMethod", "");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const onSubmit = (data) => {
+    console.log(cartItems);
 
+    const orderItems = cartItems.map((cartItem) => {
+      return {
+        productName: cartItem.item.name,
+        productPrice: cartItem.item.price,
+        productImageUrl: cartItem.item.image,
+        productQuantity: cartItem.quantity,
+      };
+    });
+    console.log(orderItems);
+    const orderDetails = {
+      customerName: data.firstName + " " + data.lastName,
+      customerEmail: data.email,
+      customerPhone: data.phone,
+      customerAddress:
+        data.address +
+        " " +
+        data.city +
+        " " +
+        data.postcode +
+        " " +
+        data.country,
+      paymentMethod: data.paymentMethod,
+      orderItems: orderItems,
+    };
+    if (data.paymentMethod != "cash-on-delivery") {
+      stripePayment(orderItems, loadStorage());
+      makeOrder(orderDetails, loadStorage());
+    } else {
+      makeOrder(orderDetails, loadStorage());
+      toast.info("Order Is Placed Successfully", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (country && cities[country]) {
       setCityOptions(cities[country]);
@@ -61,7 +119,9 @@ export default function CheckoutComp() {
       setCityOptions([]);
     }
   }, [country]);
-
+  useEffect(() => {
+    getProfile(loadStorage(), reset);
+  }, []);
   const handleCountryChange = (e) => {
     const selectedCountry = e.target.value;
     setValue("country", selectedCountry);
@@ -76,9 +136,6 @@ export default function CheckoutComp() {
   const handlePaymentChange = (e) => {
     setValue("paymentMethod", e.target.value);
   };
-
-  const cartItems = useSelector((state) => state.cart.cartItems || []);
-  console.log(cartItems);
 
   const handlePayment = async () => {
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -108,16 +165,6 @@ export default function CheckoutComp() {
 
     if (result.error) {
       console.error(result.error.message);
-    }
-  };
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    if (data.paymentMethod === "direct-bank-transfer") {
-      console.log("Direct Bank Transfer selected");
-      await handlePayment();
-    } else if (data.paymentMethod === "cash-on-delivery") {
-      console.log("Cash on Delivery selected");
     }
   };
 

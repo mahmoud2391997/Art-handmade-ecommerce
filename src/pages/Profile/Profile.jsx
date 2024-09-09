@@ -10,6 +10,7 @@ import DatePicker from "../../components/DatePicker/DatePicker";
 import DatePickerComponent from "../../components/DatePicker/DatePicker";
 import { setDate } from "date-fns";
 import loadStorage from "../../helpers/Storage";
+import OrderHistory from "../OrderHistory/OrderHistory";
 
 export default function Profile() {
   const [profileId, setProfileId] = useState("");
@@ -70,7 +71,7 @@ export default function Profile() {
   }, []); /******* */
   ///////////////////////////////////////////////////////////////////
   return (
-    <div className="w-full pb-[300px] z-40 relative bg-white">
+    <div className="w-full pb-[300px] h-auto z-40 relative bg-white">
       <PageTitle title={"Profile"} />
       <div className="w-full mt-10 m-auto">
         <div className="flex w-[70%] min-w-[288px] lg:min-w-[973px] md:min-w-[590px]  min-h-[90%] md:h-[400px] m-auto flex-col justify-between ">
@@ -157,6 +158,20 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <div className="flex mt-20 w-[70%] min-w-[288px] lg:min-w-[973px] md:min-w-[590px]  min-h-[90%]  m-auto flex-col justify-between ">
+        <h2
+          className="text-3xl"
+          style={{
+            fontSize: "32px",
+            fontFamily: "var(--page-title-font)",
+            letterSpacing: ".16em",
+            lineHeight: "2.33em",
+          }}
+        >
+          ORDER HISTORY
+        </h2>
+      </div>
+      <OrderHistory />
     </div>
   );
 }

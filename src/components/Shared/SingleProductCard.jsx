@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainButton from "./MainButton";
 import { Card, CardBody } from "@material-tailwind/react";
 import StaticStarRating from "./StaticStarRating";
+import { Bounce, toast } from "react-toastify";
 
 export default function SingleProductCard({ prod, handleAddToCart }) {
   const navigate = useNavigate();
@@ -20,7 +21,23 @@ export default function SingleProductCard({ prod, handleAddToCart }) {
         />
         <div className="absolute top-3 left-3 right-3 bottom-3 bg-white bg-opacity-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-full transition-transform duration-[2000ms] ease-in-out group-hover:translate-x-0">
           <MainButton
-            onClick={() => handleAddToCart(prod)}
+            onClick={() => {
+              if (prod.status == "out of stock" || prod.stock == 0) {
+                toast.info("Product is out of stock", {
+                  position: "top-center",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  transition: Bounce,
+                });
+              } else {
+                handleAddToCart(prod);
+              }
+            }}
             title="Add to Cart"
             className="items-center justify-center flex"
           />

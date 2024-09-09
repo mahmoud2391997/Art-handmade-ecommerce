@@ -11,6 +11,9 @@ import ShoppingBag from "../../icons/ShoppingBag";
 import SearchIcon from "../../icons/SearchIcon";
 import { isAuth } from "../../../utils/isAuth";
 import ProfileIcon from "../../icons/ProfileIcon";
+import LoggedinShoppingBag from "../../icons/LoggedinShoppingBag";
+import { useDispatch } from "react-redux";
+import { fetchCartItemsAction } from "../../../Redux/actions/loggedInCartActions";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -19,6 +22,7 @@ export default function NavBar() {
   );
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const handleOpen = () => setOpen((cur) => !cur);
 
   const goToSignUp = () => {
@@ -34,6 +38,7 @@ export default function NavBar() {
     sessionStorage.removeItem("token");
     console.log("logged out, token removed");
     setIsLogged(null);
+    navigate("/", { replace: true });
   };
 
   useEffect(() => {
@@ -42,13 +47,9 @@ export default function NavBar() {
       () => window.innerWidth >= 960 && setOpen(false)
     );
   }, []);
-
   useEffect(() => {
-    // const token =
-    //   localStorage.getItem("token") || sessionStorage.getItem("token");
-    // setIsLogged(token);
+    isLogged ? dispatch(fetchCartItemsAction()) : null;
   }, [isLogged]);
-
   return (
     <Navbar
       color="transparent"
@@ -67,7 +68,7 @@ export default function NavBar() {
           </div>
           <div className="flex justify-center items-center gap-4 ms-2  ">
             <Link to="/cart">
-              <ShoppingBag />
+              {!isAuth() ? <ShoppingBag /> : <LoggedinShoppingBag />}
             </Link>
             <SearchIcon />
             {!isAuth() ? (
