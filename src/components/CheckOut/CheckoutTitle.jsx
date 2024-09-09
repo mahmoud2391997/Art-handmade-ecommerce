@@ -12,7 +12,7 @@ export default function CheckoutTitle() {
         />
         <div className="absolute top-1/2 left-0 z-10 p-4 transform -translate-y-1/2">
             <h3 className="text-3xl p-20 font-eb-garamond text-white uppercase tracking-wider leading-[5.1em]">
-            Cart
+            Checkout
             </h3>
         </div>
         </div>

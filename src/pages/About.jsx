@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../components/Title";
 import {
   Accordion,
@@ -63,6 +63,8 @@ const faq = [
       "You can reach our customer support team through the contact form on our website. We are here to help with any questions or concerns.",
   },
 ];
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 
 export default function About() {
   const [open, setOpen] = useState(1);
@@ -72,7 +74,13 @@ export default function About() {
 
   return (
     <div className="relative flex-col items-center mb-8 bg-white z-40 pb-20">
-      <section className="w-full max-w-screen h-[82vh] bg-cover bg-bottom bg-no-repeat landing flex items-center">
+      <section
+        className="w-full max-w-screen h-[82vh] bg-cover bg-bottom bg-no-repeat flex items-center"
+        style={{
+          backgroundImage:
+            "url('https://musea.qodeinteractive.com/wp-content/uploads/2019/09/p1-title-img.jpg')",
+        }}
+      >
         <div className="w-full ">
           <Title title={"about us"} color={"white"} />
         </div>

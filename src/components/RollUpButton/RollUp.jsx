@@ -35,7 +35,7 @@ export default function RollUp() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="svg w-6 h-6 cursor-pointer"
+            className="w-6 h-6 cursor-pointer svg"
           >
             <path
               strokeLinecap="round"

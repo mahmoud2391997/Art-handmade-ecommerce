@@ -3,9 +3,9 @@ import { useDebounce } from "use-debounce";
 
 import { Option, Select, Typography } from "@material-tailwind/react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getCategories } from "../api/categories";
+import getCategories from "../api/categories";
 
 import { debounce } from "../utils/debounce";
 
@@ -16,10 +16,27 @@ import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductList from "../components/ProductListFinal";
 import Pagination from "../components/Shared/Pagination";
+import { fetchProductsAction } from "../Redux/actions/productActions";
 
 export default function ShopList() {
-  const { products } = useSelector((state) => state.products);
-  console.log(products);
+  const [page, setPages] = useState(1);
+  const dispatch = useDispatch();
+  const { products, count, status, error } = useSelector(
+    (state) => state.products
+  );
+  function getProductsPage(page) {
+    dispatch(fetchProductsAction(page));
+  }
+  useEffect(() => {
+    getProductsPage(page);
+  }, []);
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
 
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -34,6 +51,7 @@ export default function ShopList() {
   const [maxValue, setMaxValue] = useState(1500);
 
   const filteredProducts = useMemo(() => {
+    console.log(products);
     let sortedProducts = products.filter((product) => {
       const matchesCategory =
         selectedCategories.length > 0
@@ -89,9 +107,13 @@ export default function ShopList() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setPages(pageNumber);
+    if (pageNumber > page) {
+      getProductsPage(pageNumber);
+    }
   };
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(count / productsPerPage);
 
   const handleSearchChange = debounce((term) => {
     setSearchTerm(term);
@@ -110,44 +132,76 @@ export default function ShopList() {
   return (
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
-      <div className="flex justify-center items-start flex-col-reverse lg:flex-row gap-10 mx-28 py-32">
-        <div className="w-full flex flex-col">
-          <div className="flex justify-between items-center flex-wrap mb-4">
-            <div
-              className="capitalize text-[17px] text-[var(--main-gray)]"
-              style={{ fontFamily: "var(--third-font)" }}
-            >
-              showing {indexOfFirstProduct + 1} -
-              {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
-              {filteredProducts.length} results
-            </div>
-            <div>
-              <Select
-                variant="standard"
-                label="Sort"
-                on
-                onChange={(e) => handleSortChange(e)}
+      <div className="flex justify-center items-start gap-10 mx-28 py-32 flex-col-reverse lg:flex-row ">
+        {status == "idle" ? (
+          <div className="w-full h-[19.8vh] flex flex-col items-center">
+            <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
+              <h1
+                className="md:text-xl lg:text-2xl font-medium text-lg text-center text-[var(--main-gray)]"
+                style={{
+                  fontFamily: "var(--main-font)",
+                  letterSpacing: ".16em",
+                  lineHeight: "1.31em",
+                }}
               >
-                <Option value="default">default</Option>
-                <Option value="priceLowToHigh">price: low to high</Option>
-                <Option value="priceHighToLow">price: high to low</Option>
-                <Option value="nameAZ">a-z</Option>
-                <Option value="nameZA">z-a</Option>
-              </Select>
+                Loading
+              </h1>
             </div>
           </div>
-          <div className="p-10 min-h-fit">
-            <ProductList isRandom={false} currentProducts={currentProducts} />
+        ) : currentProducts.length == 0 ? (
+          <div className="w-full h-[19.8vh] flex flex-col items-center">
+            <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
+              <h1
+                className="md:text-xl lg:text-2xl font-medium text-lg text-center text-[var(--main-gray)]"
+                style={{
+                  fontFamily: "var(--main-font)",
+                  letterSpacing: ".16em",
+                  lineHeight: "1.31em",
+                }}
+              >
+                No Products Found
+              </h1>
+            </div>
           </div>
-          <div className="flex justify-center items-start mt-4">
-            {/* Pagination Controls */}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-            />
+        ) : (
+          <div className="w-full flex flex-col">
+            <div className="flex justify-between items-center flex-wrap mb-4">
+              <div
+                className="capitalize text-[17px] text-[var(--main-gray)]"
+                style={{ fontFamily: "var(--third-font)" }}
+              >
+                showing {indexOfFirstProduct + 1} -
+                {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
+                {filteredProducts.length} results
+              </div>
+              <div>
+                <Select
+                  variant="standard"
+                  label="Sort"
+                  on
+                  onChange={(e) => handleSortChange(e)}
+                >
+                  <Option value="default">default</Option>
+                  <Option value="priceLowToHigh">price: low to high</Option>
+                  <Option value="priceHighToLow">price: high to low</Option>
+                  <Option value="nameAZ">a-z</Option>
+                  <Option value="nameZA">z-a</Option>
+                </Select>
+              </div>
+            </div>
+            <div className="p-10 min-h-fit">
+              <ProductList isRandom={false} currentProducts={currentProducts} />
+            </div>
+            <div className="flex justify-center items-start mt-4">
+              {/* Pagination Controls */}
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className="lg:w-1/3 flex flex-row flex-wrap lg:flex-col gap-4">
           <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
           <Typography
@@ -181,48 +235,4 @@ export default function ShopList() {
       </div>
     </div>
   );
-}
-
-{
-  /* {currentProducts.map((product, index) => (
-              <div key={index}>
-                <SingleProductCard prod={product} isRandom={false} />
-              </div>
-            ))} */
-}
-{
-  /* Pass isRandom as needed */
-}
-{
-  /* <ProductCard isRandom={false} /> */
-}
-
-{
-  /* <Button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <LeftIcon />
-            </Button>
-            {[...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                className={
-                  currentPage === index + 1
-                    ? "underline text-sm px-3 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-color)]"
-                    : "text-xs px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-                }
-              >
-                {index + 1}
-              </Button>
-            ))}
-            <Button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <RightIcon />
-            </Button> */
 }

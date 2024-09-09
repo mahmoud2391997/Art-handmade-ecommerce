@@ -60,7 +60,6 @@ export default function SignUp() {
               variant="standard"
               label="First Name"
               type="text"
-              placeholder="Please Enter Your First Name ..."
               className="w-[50%]"
               {...register("first_name")}
             />
@@ -75,7 +74,6 @@ export default function SignUp() {
               variant="standard"
               label="Last Name"
               type="text"
-              placeholder="Please Enter Your Last Name ..."
               className="w-[50%]"
               {...register("last_name")}
             />
@@ -91,7 +89,6 @@ export default function SignUp() {
             variant="standard"
             label="Email"
             type="text"
-            placeholder="Please Enter Your Email ..."
             {...register("email")}
           />
           {errors.email && (
@@ -105,7 +102,6 @@ export default function SignUp() {
             variant="standard"
             label="Password"
             type="password"
-            placeholder="Please Enter Your Password ..."
             {...register("password")}
           />
           {errors.password && (
@@ -119,7 +115,6 @@ export default function SignUp() {
             variant="standard"
             label="Confirm Password"
             type="password"
-            placeholder="Please Confirm Your Password ..."
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (

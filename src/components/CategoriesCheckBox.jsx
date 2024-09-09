@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, Typography } from "@material-tailwind/react";
-import { getCategories } from "../api/categories";
+import getCategories from "../api/categories";
 import { useSelector } from "react-redux";
 
 export default function CategoriesCheckbox({

@@ -1,18 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./icons.css";
 import { useSelector } from "react-redux";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function ShoppingBag() {
+  // console.log(cartItems);
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   let totalAmount = 0;
   cartItems.map((item) => {
     totalAmount += item.quantity;
   });
-  // console.log(cartItems);
-  console.log(totalAmount);
 
   return (
     <div className="relative cursor-pointer transition-all duration-700 ease-in-out hover:text-[var(--main-color)]">
@@ -31,7 +31,6 @@ export default function ShoppingBag() {
         />
       </svg>
       <span className="absolute -top-2 -right-2 text-sm ">{totalAmount}</span>
-      {/* // <FontAwesomeIcon icon={faBagShopping} className="text-xl" /> */}
     </div>
   );
 }

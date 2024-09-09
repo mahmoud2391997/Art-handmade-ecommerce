@@ -92,7 +92,7 @@ export const updateTotal = (cartItems) => {
       type: UPDATE_AMOUNT,
       payload: amount,
     });
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-    localStorage.setItem("total", total.toString());
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+    sessionStorage.setItem("total", total.toString());
   };
 };

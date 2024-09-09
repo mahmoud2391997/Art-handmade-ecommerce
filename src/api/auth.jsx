@@ -26,11 +26,13 @@ export function loginAuthentication(
       }
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
+        console.log(response.data.token)
         // navigate("/", { replace: true });
         console.log(location.state);
         const redirectTo = location.state?.from?.pathname || "/";
         navigate(redirectTo, { replace: true });
       }
+      return true;
     })
     .catch((error) => {
       console.error(error);
