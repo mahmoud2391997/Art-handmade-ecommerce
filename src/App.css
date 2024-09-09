@@ -65,5 +65,10 @@ input::placeholder {
   border-radius: 0 !important;
 }
 
+.text-padding {
+  padding: 3rem; 
+}
+
+
 
 

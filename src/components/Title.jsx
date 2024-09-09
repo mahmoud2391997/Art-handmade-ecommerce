@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 
 export default function Title({ subTitle, title, color }) {
@@ -16,7 +18,7 @@ export default function Title({ subTitle, title, color }) {
         <h1
           className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl  ${
             color ? "text-" + color : "text-[#525252]"
-          } whitespace-nowrap font-eb-garamond text-center mx-4 tracking-[0.16em] leading-5`}
+          } whitespace-nowrap font-eb-garamond uppercase text-center mx-4 tracking-[0.16em] leading-5`}
         >
           {title}
         </h1>

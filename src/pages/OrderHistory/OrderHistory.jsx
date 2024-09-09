@@ -18,8 +18,11 @@ export default function OrderHistory() {
       })
       .then((response) => {
         console.log(response.data);
-
-        setOrders(response.data);
+        if (response.data.lenght != 0) {
+          setOrders(response.data);
+        } else {
+          setOrders(null);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -30,7 +33,7 @@ export default function OrderHistory() {
   }, []);
   return (
     <div className="w-full h-auto bg-white">
-      {orders.length ? (
+      {orders ? (
         orders.map((order) => {
           return <SingleOrder order={order} />;
         })

@@ -14,6 +14,8 @@ import { makeOrder } from "../../api/orders";
 import { useSelector } from "react-redux";
 import stripePayment from "../../api/stripe";
 import { Bounce, toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
   const [profile, setProfile] = useState({});
@@ -133,6 +135,37 @@ export default function CheckoutComp() {
 
   const handlePaymentChange = (e) => {
     setValue("paymentMethod", e.target.value);
+  };
+
+  const handlePayment = async () => {
+    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
+    const body = {
+      cart: cartItems,
+    };
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${loadStorage()}`,
+      },
+    };
+
+    const response = await fetch(`${apiURL}/create-checkout-session`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+
+    const session = await response.json();
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
   };
 
   return (
