@@ -110,7 +110,7 @@ export default function ShopList() {
   return (
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
-      <div className="flex justify-center items-start gap-10 mx-28 my-32">
+      <div className="flex justify-center items-start flex-col-reverse lg:flex-row gap-10 mx-28 py-32">
         <div className="w-full flex flex-col">
           <div className="flex justify-between items-center flex-wrap mb-4">
             <div
@@ -148,7 +148,7 @@ export default function ShopList() {
             />
           </div>
         </div>
-        <div className="w-1/3 flex flex-col gap-4">
+        <div className="lg:w-1/3 flex flex-row flex-wrap lg:flex-col gap-4">
           <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
           <Typography
             className="uppercase text-[22px] text-[var(--main-gray)] -mb-4"

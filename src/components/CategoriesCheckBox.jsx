@@ -36,7 +36,7 @@ export default function CategoriesCheckbox({
   // }, []);
   console.log(categories);
   return (
-    <div className="flex flex-col space-y-4 mb-10">
+    <div className="w-full flex flex-col space-y-4 mb-10">
       <label
         htmlFor="range"
         className="uppercase text-[22px] text-[var(--main-gray)]"
@@ -48,26 +48,28 @@ export default function CategoriesCheckbox({
       >
         categories
       </label>
-      {categories.map((category) => (
-        <label
-          key={category.categoryName}
-          className="flex items-center space-x-2"
-        >
-          <Checkbox
-            className="border-[var(--main-color)] checked:bg-[var(--main-color)] checked:border-[var(--main-color)]"
-            checked={selectedCategories.includes(category)}
-            onChange={() => handleCheckboxChange(category)}
-          />
-          <Typography
-            className="capitalize cursor-pointer font-[400] italic text-[17px] text-[var(--main-text-color)] hover:text-[var(--main-color)] transition-colors duration-500 ease-in-out"
-            style={{
-              fontFamily: "var(--main-font)",
-            }}
+      <div className="flex flex-wrap lg:flex-col">
+        {categories.map((category) => (
+          <label
+            key={category.categoryName}
+            className="flex items-center space-x-2"
           >
-            {category.categoryName}
-          </Typography>
-        </label>
-      ))}
+            <Checkbox
+              className="border-[var(--main-color)] checked:bg-[var(--main-color)] checked:border-[var(--main-color)]"
+              checked={selectedCategories.includes(category)}
+              onChange={() => handleCheckboxChange(category)}
+            />
+            <Typography
+              className="capitalize cursor-pointer font-[400] italic text-[17px] text-[var(--main-text-color)] hover:text-[var(--main-color)] transition-colors duration-500 ease-in-out"
+              style={{
+                fontFamily: "var(--main-font)",
+              }}
+            >
+              {category.categoryName}
+            </Typography>
+          </label>
+        ))}
+      </div>
     </div>
   );
 }

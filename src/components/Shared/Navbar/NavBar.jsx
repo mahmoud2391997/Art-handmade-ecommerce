@@ -52,7 +52,7 @@ export default function NavBar() {
     <Navbar
       color="transparent"
       fullWidth
-      className="sticky top-0 z-50 bg-white w-screen p-0 lg:p-4"
+      className="sticky top-0 z-50 bg-white w-screen p-2 lg:p-4"
     >
       <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900">
         <div className="flex justify-between w-full mr-4 lg:mr-0">
