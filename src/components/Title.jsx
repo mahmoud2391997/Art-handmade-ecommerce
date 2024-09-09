@@ -16,7 +16,7 @@ export default function Title({ subTitle, title, color }) {
           }   flex-grow mx-2 sm:mx-4 md:mx-10 lg:mx-10 xl:mx-40 `}
         ></div>
         <h1
-          className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl  ${
+          className={`uppercase text-xl sm:text-3xl md:text-4xl lg:text-5xl  ${
             color ? "text-" + color : "text-[#525252]"
           } whitespace-nowrap font-eb-garamond uppercase text-center mx-4 tracking-[0.16em] leading-5`}
         >

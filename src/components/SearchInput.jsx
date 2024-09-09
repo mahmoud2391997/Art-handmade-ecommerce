@@ -5,7 +5,7 @@ import { FiSearch as SearchIcon } from "react-icons/fi";
 
 export default function SearchInput({ onChange }) {
   return (
-    <div className="mb-8">
+    <div className="mb-8 w-[100%]">
       <Typography
         className="uppercase text-[22px] text-[var(--main-gray)]"
         style={{

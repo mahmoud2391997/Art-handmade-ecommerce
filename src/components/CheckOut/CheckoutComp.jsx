@@ -169,7 +169,7 @@ export default function CheckoutComp() {
   };
 
   return (
-    <div className="relative z-40 bg-white">
+    <div className="relative z-40 pb-32 bg-white">
       <ChekoutTitle />
       <div className="p-8 max-w-7xl mx-auto mt-10 font-eb-garamond text-gray-700">
         <h2 className="text-2xl font-semibold mb-10 uppercase">

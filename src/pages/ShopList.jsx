@@ -132,7 +132,7 @@ export default function ShopList() {
   return (
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
-      <div className="flex justify-center items-start gap-10 mx-28 my-32">
+      <div className="flex justify-center items-start gap-10 mx-28 py-32 flex-col-reverse lg:flex-row ">
         {status == "idle" ? (
           <div className="w-full h-[19.8vh] flex flex-col items-center">
             <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
@@ -190,7 +190,7 @@ export default function ShopList() {
               </div>
             </div>
             <div className="p-10 min-h-fit">
-              <ProductList currentProducts={currentProducts} />
+              <ProductList isRandom={false} currentProducts={currentProducts} />
             </div>
             <div className="flex justify-center items-start mt-4">
               {/* Pagination Controls */}
@@ -202,7 +202,7 @@ export default function ShopList() {
             </div>
           </div>
         )}
-        <div className="w-1/3 flex flex-col gap-4">
+        <div className="lg:w-1/3 flex flex-row flex-wrap lg:flex-col gap-4">
           <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
           <Typography
             className="uppercase text-[22px] text-[var(--main-gray)] -mb-4"
@@ -235,48 +235,4 @@ export default function ShopList() {
       </div>
     </div>
   );
-}
-
-{
-  /* {currentProducts.map((product, index) => (
-              <div key={index}>
-                <SingleProductCard prod={product} isRandom={false} />
-              </div>
-            ))} */
-}
-{
-  /* Pass isRandom as needed */
-}
-{
-  /* <ProductCard isRandom={false} /> */
-}
-
-{
-  /* <Button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <LeftIcon />
-            </Button>
-            {[...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                className={
-                  currentPage === index + 1
-                    ? "underline text-sm px-3 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-color)]"
-                    : "text-xs px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-                }
-              >
-                {index + 1}
-              </Button>
-            ))}
-            <Button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <RightIcon />
-            </Button> */
 }
