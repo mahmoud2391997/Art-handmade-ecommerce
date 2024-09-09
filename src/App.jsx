@@ -3,12 +3,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 //pages
-import Register from "./pages/Register";
+// import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Login from "./pages/login/Login";
 import Events from "./pages/Events";
-import Contact from "./pages/Contact";
+import Contact from "./pages/ContactUs/Contact";
 import Checkout from "./pages/Checkout";
 import About from "./pages/About";
 

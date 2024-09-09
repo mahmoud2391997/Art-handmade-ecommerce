@@ -1,14 +1,20 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { LOGO, ART, Icons, Events } from "./footerData";
 import logo from "../../../assets/images/logo.png";
 import SocialIcons from "../Footer/SocialIcons";
 import "../../../index.css";
 
+
+
+
+
 export default function Footer() {
   return (
     <>
-      <footer className="fixed bottom-0 w-full bg-[#272727] py-6 md:py-[116px] text-white z-10 ">
-        <div className="flex flex-row justify-around items-center px-4 sm:px-8 md:px-20 text-center md:text-left py-4 md:py-7 space-x-6">
+      <footer className="fixed bottom-0 w-full bg-[#272727] py-6 md:py-[116px] pb-[2px] md:pb-[10px] lg:pb-[116px] text-white z-10 ">
+        <div className="flex flex-col md:flex-row justify-center md:justify-around items-center px-4 sm:px-8 md:px-20 text-center md:text-left py-4 md:py-7 space-y-6 md:space-y-0 md:space-x-6">
           <Content Links={LOGO} img={logo} />
           <Content Links={Events} title="Events" />
           <Content Links={ART} title="Art info" />

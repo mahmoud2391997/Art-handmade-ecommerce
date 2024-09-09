@@ -10,5 +10,5 @@ export const rootReducer = combineReducers({
   cart: cartReducer,
   bestSellers: bestsellersReducer,
   loggedinCart: loggedinCartReducer,
-  events: eventsReducer
+  events: eventsReducer,
 });
