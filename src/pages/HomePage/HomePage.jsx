@@ -45,7 +45,7 @@ export default function HomePage() {
       <div className="my-20">
         <Title title={"MAIN CATEGORIES"} subTitle={"CHECK CATEGORIES"} />
         <section className="w-5/6 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid mt-20">
-          {categories.map((category) => {
+          {categories.slice(0, 4).map((category) => {
             return <CategoryItem category={category} />;
           })}
         </section>

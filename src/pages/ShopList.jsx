@@ -37,14 +37,16 @@ export default function ShopList() {
     /******* */
   }, []); /******* */
   ///////////////////////////////////////////////////////////////////
-
+  const [paginatioTotal, setPaginationTotal] = useState(null);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [searchedCategories, setSearchedCategories] = useState([]);
   const [value, setValue] = useState(1500);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
   const [debouncedValue] = useDebounce(value, 300);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const [currentPage, setCurrentPage] = useState(1);
 
   //no use now but will be needed
   const [minValue, setMinValue] = useState(50);
@@ -56,7 +58,8 @@ export default function ShopList() {
       const matchesCategory =
         selectedCategories.length > 0
           ? selectedCategories.some(
-              (selectedCategory) => selectedCategory._id === product.categoryId
+              (selectedCategory) =>
+                selectedCategory.categoryName === product.category
             )
           : true;
 
@@ -83,7 +86,6 @@ export default function ShopList() {
         b.name.localeCompare(a.name)
       );
     }
-
     return sortedProducts;
   }, [
     products,
@@ -96,7 +98,6 @@ export default function ShopList() {
   console.log(filteredProducts);
 
   const productsPerPage = 6; // Number of products per page
-  const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -126,9 +127,36 @@ export default function ShopList() {
   };
 
   useEffect(() => {
+    setPaginationTotal(totalPages);
     getCategories({ setCategories });
   }, []);
+  useEffect(() => {
+    setSearchedCategories(categories);
+  }, [categories]);
+  useEffect(() => {
+    if (searchTerm == "") {
+      setSearchedCategories(categories);
+      if (!selectedCategories.length) {
+        setPaginationTotal(totalPages);
+      } else {
+        setPaginationTotal(Math.ceil(filteredProducts.length / 6));
+      }
+    } else {
+      const searchCategories = Array.from(
+        new Set(
+          categories.filter((category) => {
+            return [...filteredProducts].filter(
+              (product) => product.categoryId == category._id
+            ).length;
+          })
+        )
+      );
+      console.log(searchCategories);
 
+      setSearchedCategories(searchCategories);
+      setPaginationTotal(Math.ceil(filteredProducts.length / 6));
+    }
+  }, [filteredProducts]);
   return (
     <div className="z-40  relative bg-white">
       <PageTitle title={"shop"} />
@@ -195,7 +223,7 @@ export default function ShopList() {
             <div className="flex justify-center items-start mt-4">
               {/* Pagination Controls */}
               <Pagination
-                totalPages={totalPages}
+                totalPages={paginatioTotal}
                 currentPage={currentPage}
                 handlePageChange={handlePageChange}
               />
@@ -228,7 +256,7 @@ export default function ShopList() {
           <CategoriesCheckbox
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
-            categories={categories}
+            categories={searchedCategories}
           />
           {/* <TagsFilter /> */}
         </div>

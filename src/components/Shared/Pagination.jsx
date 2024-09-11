@@ -9,6 +9,8 @@ export default function Pagination({
   currentPage,
   totalPages,
 }) {
+  console.log(totalPages);
+
   return (
     <>
       <Button
