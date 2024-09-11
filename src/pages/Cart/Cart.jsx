@@ -76,7 +76,7 @@ export default function Cart() {
               <div className="w-full h-[19.8vh] flex flex-col items-center">
                 <EmptyPage />
                 <Link to="/products">
-                  <MainButton title={"Back To Product"} />
+                  <MainButton title={"Back To Shop"} />
                 </Link>
               </div>
             ) : (
