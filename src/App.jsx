@@ -26,7 +26,6 @@ import PaymentSuccess from "./components/CheckOut/Payment/PaymentSuccess";
 import PaymentError from "./components/CheckOut/Payment/PaymentError";
 
 const router = createBrowserRouter([
-  // { path: "register", element: <Register /> },
   { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
