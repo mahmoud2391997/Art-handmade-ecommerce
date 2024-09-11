@@ -57,7 +57,9 @@ export default function CategoriesCheckbox({
             <Checkbox
               className="border-[var(--main-color)] checked:bg-[var(--main-color)] checked:border-[var(--main-color)]"
               checked={selectedCategories.includes(category)}
-              onChange={() => handleCheckboxChange(category)}
+              onChange={() => {
+                handleCheckboxChange(category);
+              }}
             />
             <Typography
               className="capitalize cursor-pointer font-[400] italic text-[17px] text-[var(--main-text-color)] hover:text-[var(--main-color)] transition-colors duration-500 ease-in-out"

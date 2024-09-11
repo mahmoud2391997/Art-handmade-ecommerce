@@ -329,7 +329,7 @@ export default function CheckoutComp() {
                           className="mr-2"
                           {...register("paymentMethod")}
                         />
-                        Direct Bank Transfer
+                        Credit Card Transaction
                       </label>
                       {errors.paymentMethod && (
                         <p className="text-red-500 text-sm mt-1">
@@ -338,10 +338,9 @@ export default function CheckoutComp() {
                       )}
                       {paymentMethod === "direct-bank-transfer" && (
                         <p className="mt-4 text-gray-700">
-                          Make your payment directly into our bank account.
-                          Please use your Order ID as the payment reference.
-                          Your order will not be shipped until the funds have
-                          cleared in our account.
+                          Our web app seamlessly integrates Stripe, a leading
+                          payment processing platform, to facilitate secure and
+                          efficient credit card transactions
                         </p>
                       )}
                     </li>
