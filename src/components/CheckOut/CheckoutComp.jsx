@@ -105,13 +105,11 @@ export default function CheckoutComp() {
       });
     }
   };
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
-  ///////////////////////////////////////////////////////////////////
+  
+  useEffect(() => {
+  window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     if (country && cities[country]) {
       setCityOptions(cities[country]);

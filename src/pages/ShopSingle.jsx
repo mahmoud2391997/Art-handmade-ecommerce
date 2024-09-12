@@ -20,19 +20,20 @@ export default function ShopSingle() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-
+  const [loading, setLoading] = useState(true);
   // Access state from Redux store
+  const products = useSelector((state) => state.products.products);
   const currentProduct = useSelector((state) => state.products.currentProduct);
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
-  ///////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    dispatch(fetchProductByIDAction(productId));
+    window.scrollTo(0, 0); 
+  }, []); 
+
+  useEffect(() => {
+    setLoading(true); 
+    dispatch(fetchProductByIDAction(productId))
+      .then(() => setLoading(false)) 
+      .catch(() => setLoading(false)); 
   }, [productId, dispatch]);
 
   const handleAddToCart = () => {
@@ -40,6 +41,8 @@ export default function ShopSingle() {
       dispatch(addToCart(currentProduct, quantity));
     }
   };
+  
+  console.log(currentProduct)
 
   //should ensure they only affect the local quantity state variable and not the cart state because if I use dispatch it will update the quantity when I incease or decrease without addToCart Function
 
@@ -50,6 +53,10 @@ export default function ShopSingle() {
   const handleDecreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
   };
+
+  if(loading){
+    return <h2>Loadingg...</h2>
+  }
 
   if (!currentProduct) return <p>Product Not Found</p>;
 
