@@ -33,11 +33,8 @@ export default function Cart() {
   const calculateItemSubtotal = (price, quantity) => {
     return price * quantity;
   };
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  ///////////////////////////////////////////////////////////////////
+
+  
   const handleCheckOut = () => {
     const isloggedIn =
       sessionStorage.getItem("token") || localStorage.getItem("token");

@@ -7,6 +7,7 @@ import {
   CardBody,
   CardHeader,
   Typography,
+  Spinner
 } from "@material-tailwind/react";
 import MainButton from "../components/Shared/MainButton";
 import StaticStarRating from "../components/Shared/StaticStarRating";
@@ -15,6 +16,7 @@ import { addToCart } from "../Redux/actions/cartActions";
 import { fetchProductByIDAction } from "../Redux/actions/productActions";
 import Quantity from "../components/Shared/Quantity";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+import { Bounce, toast } from "react-toastify";
 
 export default function ShopSingle() {
   const { productId } = useParams();
@@ -38,7 +40,32 @@ export default function ShopSingle() {
 
   const handleAddToCart = () => {
     if (currentProduct) {
-      dispatch(addToCart(currentProduct, quantity));
+      if (currentProduct.status === "out of stock" || currentProduct.stock === 0) {
+        toast.info("Product is out of stock", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        dispatch(addToCart(currentProduct, quantity));
+        toast.success("Product added to cart!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     }
   };
   
@@ -55,7 +82,11 @@ export default function ShopSingle() {
   };
 
   if(loading){
-    return <h2>Loadingg...</h2>
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">  
+        <Spinner className="h-20 w-20 spinner-animation text-[#c9ab81]" />  
+      </div>
+    )
   }
 
   if (!currentProduct) return <p>Product Not Found</p>;

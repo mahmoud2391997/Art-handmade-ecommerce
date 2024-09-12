@@ -11,8 +11,8 @@ import {
 
 // Load initial cart state from localStorage
 const initialState = {
-  cartItems: JSON.parse(sessionStorage.getItem("cart")) || [],
-  total: parseFloat(sessionStorage.getItem("total")) || 0,
+  cartItems: [],
+  total:  0,
   amount: 0,
 };
 
