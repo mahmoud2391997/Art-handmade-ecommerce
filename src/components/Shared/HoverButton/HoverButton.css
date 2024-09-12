@@ -1,0 +1,10 @@
+.hover-button-container {  
+    display: inline-flex;  
+    overflow: hidden;  
+    position: relative;  
+    width: 150px; /* Same width as MainButton */  
+  }  
+  
+  .hover-button-container:hover {  
+    transition: transform 0.3s ease; /* Smooth transition */  
+  }

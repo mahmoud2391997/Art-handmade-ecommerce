@@ -1,15 +1,38 @@
 import { useEffect, useState } from "react";
 import "../HomePage/Landing.css";
-import CategoryItem from "../../components/CategoryItem";
 import MainButton from "../../components/button/MainButton";
 import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
 import AdminProductCard from "../../components/AdminProductCard";
-import CustomerProductCard from "../../components/CustomerProductCard";
+import ProductCard from "../../components/CustomerProductCard";
+import axios from "axios";
+import CategoryItem from "../../components/CategoryItem";
 export default function HomePage() {
+  const [categories, setCategories] = useState([]);
+  function getCategories() {
+    axios
+      .get("https://art-ecommerce-server.glitch.me/api/categories")
+      .then((response) => {
+        console.log(response.data);
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  useEffect(() => {
+    getCategories();
+  }, []);
+  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
+  /******* */ useEffect(() => {
+    /******* */
+    /******* */ window.scrollTo(0, 0); /******* */
+    /******* */
+  }, []); /******* */
+  ///////////////////////////////////////////////////////////////////
   return (
-    <div className="w-full z-40 pb-[200px] relative bg-white">
+    <div className="w-full z-40 pb-[200px] relative bg-white font-eb-garamond">
       <section className="w-full max-w-screen h-screen bg-cover bg-no-repeat landing flex items-center">
         <div className=" w-full">
           <Title
@@ -22,10 +45,9 @@ export default function HomePage() {
       <div className="my-20">
         <Title title={"MAIN CATEGORIES"} subTitle={"CHECK CATEGORIES"} />
         <section className="w-5/6 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid mt-20">
-          <CategoryItem></CategoryItem>
-          <CategoryItem></CategoryItem>
-          <CategoryItem></CategoryItem>
-          <CategoryItem></CategoryItem>
+          {categories.slice(0, 4).map((category) => {
+            return <CategoryItem category={category} />;
+          })}
         </section>
       </div>
       <div className="my-20">
@@ -74,12 +96,8 @@ export default function HomePage() {
         <div className="w-full">
           <Title title={"BESTSELLERS"} subTitle={"PRODUCTS"} />
         </div>
-        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]  grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-20">
-          <CustomerProductCard />
-          <CustomerProductCard />
-          <CustomerProductCard />
-          <CustomerProductCard />
-          <CustomerProductCard />
+        <section className="w-5/6 lg:min-w-[940px] xl:min-w-[1012px]">
+          <ProductCard />
         </section>
       </div>
     </div>

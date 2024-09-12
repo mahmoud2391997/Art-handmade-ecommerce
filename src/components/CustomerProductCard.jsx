@@ -1,33 +1,97 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MainButton from "./button/MainButton";
-export default function CustomerProductCard() {
+import StaticStarRating from "../components/staticStarRating";
+import MainButton from "./MainButton";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addToCart } from "../Redux/actions/cartActions";
+import { useNavigate } from "react-router-dom";
+import { Card, CardBody } from "@material-tailwind/react";
+import { toast, Bounce } from "react-toastify";
+import SingleProductCard from "./Shared/SingleProductCard";
+import { fetchBestSellersAction } from "../Redux/actions/productActions";
+import {
+  fetchCartItemsAction,
+  updateCartItemsAction,
+} from "../Redux/actions/loggedInCartActions";
+
+export default function ProductCard() {
+  const dispatch = useDispatch();
+
+  const { bestSellers, status, error } = useSelector(
+    (state) => state.bestSellers
+  );
+  console.log(useSelector((state) => state.bestSellers));
+  console.log(useSelector((state) => state.loggedinCart));
+  const { loggedinCart } = useSelector((state) => state.loggedinCart);
+  console.log(loggedinCart);
+
+  useEffect(() => {
+    dispatch(fetchBestSellersAction());
+  }, [dispatch]);
+
+  const handleAddToCart = (product) => {
+    if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
+      console.log("Adding to cart", product);
+      const defaultQuantity = 1;
+      dispatch(addToCart(product, defaultQuantity));
+    } else {
+      console.log(loggedinCart);
+      console.log(
+        [...loggedinCart].filter((item) => item.item._id == product.product_Id)
+          .length
+      );
+
+      if (
+        [...loggedinCart].filter(
+          (item) => item.item._id == product.product_Id
+        ) != 0
+      ) {
+        const newCart = [...loggedinCart].map((item) => {
+          console.log(item);
+          console.log(product._id);
+
+          if (item.item._id == product.product_Id) {
+            return { productId: item.item._id, quantity: item.quantity + 1 };
+          } else {
+            return { productId: item.item._id, quantity: item.quantity };
+          }
+        });
+
+        dispatch(updateCartItemsAction(newCart));
+      } else {
+        if (loggedinCart.length != 0) {
+          const newCart = [...loggedinCart].map((item) => {
+            return { productId: item.item._id, quantity: item.quantity };
+          });
+          newCart.push({ productId: product.product_Id, quantity: 1 });
+
+          dispatch(updateCartItemsAction(newCart));
+        } else {
+          console.log("adsfads");
+
+          dispatch(
+            updateCartItemsAction({
+              productId: product.product_Id,
+              quantity: 1,
+            })
+          );
+        }
+      }
+    }
+  };
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>{error}</p>;
+
   return (
-    <div className="xl:w-[253px] w-full sm:w-56 h-[350px] xl:h-[400px] p-4 mb-7 flex flex-col items-center">
-      <div className="xl:w-[236px] w-[236px] h-[236px] sm:w-48 sm:h-48 xl:h-[236px]">
-        <img
-          src="https://musea.qodeinteractive.com/wp-content/uploads/2019/09/shop-img-5-600x600.jpg"
-          className=" h-full m-auto w-[236px]"
+    <div className="relative p-2 mb-7 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[7rem] ">
+      {bestSellers.map((product, index) => (
+        <SingleProductCard
+          key={index}
+          prod={product}
+          handleAddToCart={handleAddToCart}
         />
-      </div>
-      <div className="xl:w-[236px] w-full sm:w-56 h-24 xl:h-[124px] flex flex-col items-center justify-around">
-        <h5 className="sm:text-2xl text-base font-bold leading-5 tracking-[0.16em]">
-          Lorem, ipsum.
-        </h5>
-        <div className="w-2/3 flex justify-center">
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
-          <FontAwesomeIcon icon={faStar} className="text-[#c9ab81]" />
-        </div>
-        <div className="w-full tracking-[0.16em] leading-5 sm:text-2xl text-base text-center">
-          <span className="">57 $</span>
-        </div>
-      </div>
-      <div className="m-auto w-40 flex justify-center ">
-        <MainButton title={"Add To Cart"} />
-      </div>
+      ))}
     </div>
   );
 }

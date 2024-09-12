@@ -1,3 +1,12 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+
+::selection {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+
+
