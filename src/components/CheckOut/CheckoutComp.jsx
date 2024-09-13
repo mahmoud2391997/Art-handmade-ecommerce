@@ -11,10 +11,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { getProfile } from "../../api/profiles";
 import loadStorage from "../../helpers/Storage";
 import { makeOrder } from "../../api/orders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import stripePayment from "../../api/stripe";
 import { Bounce, toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
+import { updateCartItemsAction } from "../../Redux/actions/loggedInCartActions";
 
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
@@ -22,6 +24,8 @@ export default function CheckoutComp() {
   console.log(profile);
   const cartItems = useSelector((state) => state.loggedinCart.loggedinCart);
   console.log(cartItems);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // React Hook Form Schema
   const schema = yup.object().shape({
@@ -103,6 +107,8 @@ export default function CheckoutComp() {
         theme: "light",
         transition: Bounce,
       });
+      dispatch(updateCartItemsAction([]))
+            navigate("/products", { replace: true });
     }
   };
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////

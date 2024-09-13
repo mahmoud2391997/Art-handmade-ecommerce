@@ -11,7 +11,7 @@ import {
 const initialState = {
   loggedinCart: [],
   total: 0,
-  amount: null,
+  amount: 0,
 };
 
 export const loggedinCartReducer = (state = initialState, action) => {
