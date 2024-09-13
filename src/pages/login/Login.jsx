@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -8,13 +8,58 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import PageTitle from "../../components/Shared/PageTitle";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
+import { useDispatch, useSelector } from "react-redux";
 
-import { loginAuthentication } from "../../api/auth";
+import {
+  fetchCartItemsAction,
+  updateCartItemsAction,
+} from "../../Redux/actions/loggedInCartActions";
+import axios from "axios";
+import ImgTitle from "../../components/ImgTitle";
 
 export default function Login() {
+  const [response,setResponse] =useState(true)
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  async function loginAuthentication(
+    email,
+    password,
+    rememberMe,
+    navigate,
+    location
+  ) {
+    try {
+      const response = await axios.post(
+        `https://art-ecommerce-server.glitch.me/api/auth/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
+      console.log(response.data);
+      if (response.data.success) {
+        if (rememberMe) {
+          localStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("token", response.data.token);
+        } else {
+          sessionStorage.setItem("token", response.data.token);
+        }
+        // navigate("/", { replace: true });
+        console.log(location.state);
+        const redirectTo = location.state?.from?.pathname || "/";
+        navigate(redirectTo, { replace: true });
 
+        dispatch(fetchCartItemsAction())
+        setResponse(true);
+      } else {
+        setResponse(false);
+        
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -37,19 +82,26 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    loginAuthentication(
+  const onSubmit = async (data) => {
+    await loginAuthentication(
       data.email,
       data.password,
       data.rememberMe,
       navigate,
       location
-    );
-    console.log(data);
+    )
+    if (response) {
+      setError('authentication', {
+        type: 'manual',
+        message: 'Invalid email or password',
+      });
+    }
   };
+  console.log(response);
+  useEffect(()=>{},[response]);
   return (
     <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[5%]">
-      <PageTitle title={"log in"} />
+      <ImgTitle title={"log in"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[30%] lg:h-[100%]"
@@ -91,6 +143,11 @@ export default function Login() {
             Remember Me
           </label>
         </div>
+        {!response ? (
+            <Typography className="pl-2 text-red-500 text-sm">
+              invalid email or password
+            </Typography>
+          ):null}
         <div className="flex justify-center">
           <Button
             type="submit"
@@ -99,7 +156,19 @@ export default function Login() {
             <MainButton title={"log in"} />
           </Button>
         </div>
-      </form>
+        <div className="flex justify-center">
+            <Typography
+              className="text-[var(--main-gray)] font-normal font-eb-garamond "
+              >
+            Don't have an account ? please 
+          <Link to="/signup" 
+          className="text-[var(--main-gray)]  transition-all duration-500 ease-in-out font-normal underline font-eb-garamond hover:text-[var(--main-color)] ml-1 "
+          >
+              Sign up
+          </Link>
+            </Typography>
+        </div>      
+        </form>
     </div>
   );
 }

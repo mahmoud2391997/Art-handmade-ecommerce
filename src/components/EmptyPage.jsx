@@ -4,7 +4,7 @@ import emptyProduct from '../assets/images/emptyProduct.gif'
 
 export default function EmptyPage() {
   return (
-    <div className='justify-center flex '>
+    <div className='justify-center flex'>
         <img src={emptyProduct} className="justify-center flex "/>
     </div>
   )

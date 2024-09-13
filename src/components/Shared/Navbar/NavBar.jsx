@@ -11,6 +11,12 @@ import ShoppingBag from "../../icons/ShoppingBag";
 import SearchIcon from "../../icons/SearchIcon";
 import { isAuth } from "../../../utils/isAuth";
 import ProfileIcon from "../../icons/ProfileIcon";
+import LoggedinShoppingBag from "../../icons/LoggedinShoppingBag";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCartItemsAction,
+  updateCartItemsAction,
+} from "../../../Redux/actions/loggedInCartActions";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -19,6 +25,8 @@ export default function NavBar() {
   );
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+
   const handleOpen = () => setOpen((cur) => !cur);
 
   const goToSignUp = () => {
@@ -33,7 +41,8 @@ export default function NavBar() {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
     console.log("logged out, token removed");
-    setIsLogged(null);
+    // setIsLogged(null);
+    navigate("/", { replace: true });
   };
 
   useEffect(() => {
@@ -42,18 +51,12 @@ export default function NavBar() {
       () => window.innerWidth >= 960 && setOpen(false)
     );
   }, []);
-
-  useEffect(() => {
-    // const token =
-    //   localStorage.getItem("token") || sessionStorage.getItem("token");
-    // setIsLogged(token);
-  }, [isLogged]);
-
+ 
   return (
     <Navbar
       color="transparent"
       fullWidth
-      className="sticky top-0 z-50 bg-white w-screen p-0 lg:p-4"
+      className="sticky top-0 z-50 bg-white w-screen p-2 lg:p-4"
     >
       <div className="container mx-auto my-6 flex items-center justify-between text-blue-gray-900">
         <div className="flex justify-between w-full mr-4 lg:mr-0">
@@ -67,9 +70,13 @@ export default function NavBar() {
           </div>
           <div className="flex justify-center items-center gap-4 ms-2  ">
             <Link to="/cart">
-              <ShoppingBag />
+              {!isAuth() ? <ShoppingBag isLogged={isLogged}/> : <LoggedinShoppingBag />}
             </Link>
-            <SearchIcon />
+            {isAuth() ? (
+              <Link to={"/profile"}>
+                <ProfileIcon />
+              </Link>
+            ) : null}
             {!isAuth() ? (
               <div className="hidden lg:flex ">
                 <MainButton title={"sign up"} onClick={goToSignUp} />
@@ -77,9 +84,6 @@ export default function NavBar() {
               </div>
             ) : (
               <div className="hidden lg:flex justify-between items-center">
-                <Link to={"/profile"}>
-                  <ProfileIcon />
-                </Link>
                 <MainButton title={"log out"} onClick={handleLogout} />
               </div>
             )}

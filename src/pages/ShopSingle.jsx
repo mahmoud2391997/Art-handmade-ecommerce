@@ -15,33 +15,112 @@ import { addToCart } from "../Redux/actions/cartActions";
 import { fetchProductByIDAction } from "../Redux/actions/productActions";
 import Quantity from "../components/Shared/Quantity";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+import { updateCartItemsAction } from "../Redux/actions/loggedInCartActions";
+import ImgTitle from "../components/ImgTitle";
+import { Bounce, toast } from "react-toastify";
 
 export default function ShopSingle() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-
+  const { loggedinCart } = useSelector((state) => state.loggedinCart);
   // Access state from Redux store
   const currentProduct = useSelector((state) => state.products.currentProduct);
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
-  ///////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    const existingProduct = products.find(
-      (product) => product._id === productId
-    );
-  });
+  
   useEffect(() => {
     dispatch(fetchProductByIDAction(productId));
   }, [productId, dispatch]);
 
-  const handleAddToCart = () => {
-    if (currentProduct) {
-      dispatch(addToCart(currentProduct, quantity));
+  const handleAddToCart = (product) => {
+console.log(product);
+
+    if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
+      console.log("Adding to cart", product);
+      if (product) {
+        console.log(quantity);
+
+        dispatch(addToCart(product, quantity));
+      }
+      toast.success("Product added to cart!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      console.log(loggedinCart);
+      console.log(
+        [...loggedinCart].filter(
+          (item) => item.item._id == product._id
+        ).length
+      );
+      if (loggedinCart.length == 0) {
+        dispatch(
+          updateCartItemsAction({
+            productId: product._id,
+            quantity: quantity,
+          })
+        );
+        return null
+      }
+      if (
+        [...loggedinCart].filter(
+          (item) => item.item._id == product._id
+        ) != 0
+      ) {
+        const newCart = [...loggedinCart].map((item) => {
+          console.log(item);
+          console.log(product._id);
+
+          if (item.item._id == product._id) {
+            return {
+              productId: item.item._id,
+              quantity: item.quantity + quantity,
+            };
+          } else {
+            return { productId: item.item._id, quantity: item.quantity };
+          }
+        });
+
+        dispatch(updateCartItemsAction(newCart));
+      } else {
+        if (loggedinCart.length != 0) {
+          const newCart = [...loggedinCart].map((item) => {
+            return { productId: item.item._id, quantity: item.quantity };
+          });
+          newCart.push({
+            productId: product._id,
+            quantity: quantity,
+          });
+
+          dispatch(updateCartItemsAction(newCart));
+        } else {
+          console.log("adsfads");
+
+          dispatch(
+            updateCartItemsAction({
+              productId: product.product_Id,
+              quantity: quantity,
+            })
+          );
+        }
+      }
+      toast.success("Product added to cart!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -59,7 +138,7 @@ export default function ShopSingle() {
 
   return (
     <div className="z-40 pb-[200px] relative bg-white items-center flex flex-col mb-10">
-      <PageTitle title="Product" />
+      <ImgTitle title="Product" />
       <Card className="w-full max-w-[60rem] h-full flex-row m-40 rounded-none shadow-none">
         <CardHeader
           shadow={false}
@@ -104,7 +183,7 @@ export default function ShopSingle() {
                 </p>
               </div>
             </div>
-            <MainButton onClick={handleAddToCart} title="Add To Cart" />
+            <MainButton onClick={()=>{handleAddToCart(currentProduct)}} title="Add To Cart" />
           </div>
         </CardBody>
       </Card>

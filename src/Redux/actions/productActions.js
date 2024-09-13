@@ -1,28 +1,40 @@
+import searchProducts from "../../api/products";
 import {
   FETCH_BESTSELLERS_PRODUCTS,
   FETCH_PRODUCTS,
   FETCH_PRODUCT_BY_ID,
+  FETCH_SEARCHED_PRODUCTS,
 } from "../actionTypes";
 import {
   fetchProducts,
   fetchProductByID,
   fetchBestSellers,
+  fetchProductsCount,
 } from "../api/productsAPI";
 
-export const fetchProductsAction = () => async (dispatch, getState) => {
-  const { loaded } = getState().products;
-
+export const fetchProductsAction = (page) => async (dispatch, getState) => {
   // Only fetch products if they haven't been loaded yet
-  if (!loaded) {
-    try {
-      const products = await fetchProducts();
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: products,
-      });
-    } catch (error) {
-      console.log("Error Fetching Products", error);
-    }
+  try {
+    const products = await fetchProducts(page);
+    const count = await fetchProductsCount();
+    dispatch({
+      type: FETCH_PRODUCTS,
+      payload: { products: products, count: count },
+    });
+  } catch (error) {
+    console.log("Error Fetching Products", error);
+  }
+};
+export const fetchSearchedProductsAction = (searchTerm,page) => async (dispatch, getState) => {
+  // Only fetch products if they haven't been loaded yet
+  try {
+    const products = await searchProducts(searchTerm,page);
+    dispatch({
+      type: FETCH_SEARCHED_PRODUCTS,
+      payload: { products: products.searchedProducts, count: products.productsCount },
+    });
+  } catch (error) {
+    console.log("Error Fetching Products", error);
   }
 };
 

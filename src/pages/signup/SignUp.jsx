@@ -1,5 +1,5 @@
-import React from "react";
-import { replace, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, replace, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,10 +10,30 @@ import MainButton from "../../components/MainButton";
 import PageTitle from "../../components/Shared/PageTitle";
 
 import { registerAuthentication } from "../../api/auth";
+import ImgTitle from "../../components/ImgTitle";
+import axios from "axios";
 
 export default function SignUp() {
-  const navigate = useNavigate();
+  const [response,setResponse] =useState(true)
 
+  const navigate = useNavigate();
+  function registerAuthentication(profile, navigate) {
+    axios
+      .post(`https://art-ecommerce-server.glitch.me/api/auth/register`, profile)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.success) {
+          sessionStorage.setItem("token", response.data.token);
+          navigate("/", { replace: true });
+          setResponse(true)
+        } else{
+          setResponse(false)
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   const schema = yup.object().shape({
     first_name: yup.string().required("First name is required"),
     last_name: yup.string().required("Last name is required"),
@@ -35,6 +55,7 @@ export default function SignUp() {
       .required("Please confirm your password")
       .oneOf([yup.ref("password"), null], "Passwords must match"),
     gender: yup.string().required("Gender is required"),
+    
   });
 
   const {
@@ -48,8 +69,8 @@ export default function SignUp() {
     registerAuthentication(data, navigate);
   };
   return (
-    <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[5%]">
-      <PageTitle title={"sign up"} />
+    <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[1%]">
+      <ImgTitle title={"sign up"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[40%] lg:h-[100%]"
@@ -149,13 +170,31 @@ export default function SignUp() {
             </Typography>
           )}
         </div>
-
-        <Button
-          type="submit"
-          className="self-center lg:self-end w-fit p-0 bg-transparent shadow-none hover:shadow-none"
-        >
-          <MainButton title={"sign up"} />
-        </Button>
+        {!response ? (
+            <Typography className="pl-2 text-red-500 text-sm">
+              This account is already used
+            </Typography>
+          ):null}
+          <div className="flex justify-center w-full">
+            <Button
+              type="submit"
+              className="w-fit p-0 bg-transparent shadow-none hover:shadow-none"
+            >
+              <MainButton title={"sign up"} />
+            </Button>
+          </div>
+        <div className="flex justify-center">
+            <Typography
+              className="text-[var(--main-gray)] font-normal font-eb-garamond "
+              >
+            Already have an account ? please 
+          <Link to="/login" 
+          className="text-[var(--main-gray)]  transition-all duration-500 ease-in-out font-normal underline font-eb-garamond hover:text-[var(--main-color)] ml-1 "
+          >
+               Login
+          </Link>
+            </Typography>
+        </div>
       </form>
     </div>
   );

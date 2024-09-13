@@ -24,6 +24,7 @@ import {
 } from "../../Redux/actions/loggedInCartActions";
 import { useEffect } from "react";
 import EmptyPage from "../../components/EmptyPage";
+import ImgTitle from "../../components/ImgTitle";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -51,24 +52,13 @@ export default function Cart() {
   if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
     const { loggedinCart } = useSelector((state) => state.loggedinCart);
     console.log(loggedinCart);
-    useEffect(() => {
-      dispatch(fetchCartItemsAction());
-    }, []);
+  
 
     return (
-      <div className="relative pb-[500px] z-40 sm:w-full">
-        <div className="bg-white pb-[50px] md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">
+      <div className="relative pb-[0px] z-40 sm:w-full">
+        <div className="bg-white pb-44 md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">
           <div className="relative overflow-hidden w-full h-[150px] bg-white">
-            <img
-              className="absolute w-full h-full object-cover animate-moveVertical"
-              src={cart}
-              alt="Cart"
-            />
-            <div className="absolute top-1/2 left-0 z-10 p-4 transform -translate-y-1/2">
-              <h3 className="text-xl sm:text-2xl md:text-3xl p-20 font-eb-garamond text-white uppercase tracking-wider leading-[5.1em]">
-                Cart
-              </h3>
-            </div>
+          <ImgTitle title={"Cart"}/>
           </div>
 
           <div className="p-1 sm:p-6 md:p-10 max-w-4xl mx-auto bg-white rounded-lg">
@@ -76,7 +66,7 @@ export default function Cart() {
               <div className="w-full h-[19.8vh] flex flex-col items-center">
                 <EmptyPage />
                 <Link to="/products">
-                  <MainButton title={"Back To Product"} />
+                  <MainButton title={"Back To Shop"} />
                 </Link>
               </div>
             ) : (
@@ -183,8 +173,8 @@ export default function Cart() {
     const cartItems = useSelector((state) => state.cart.cartItems || []);
     console.log(cartItems);
     return (
-      <div className="relative pb-[500px] z-40 sm:w-full">
-        <div className="bg-white pb-[50px] md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">
+      <div className="relative pb-[0px] z-40 sm:w-full">
+        <div className="bg-white pb-44 md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">
           <div className="relative overflow-hidden w-full h-[150px] bg-white">
             <img
               className="absolute w-full h-full object-cover animate-moveVertical"

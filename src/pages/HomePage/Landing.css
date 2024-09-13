@@ -2,6 +2,10 @@
     animation: landing 16s;
     animation-iteration-count: infinite;
   }
+.event-Landing {
+    animation: events 38s;
+    animation-iteration-count: infinite;
+  }
   
   @keyframes landing {
     0% {
@@ -16,5 +20,32 @@
   
     100% {
       background-image: url("https://i1.adis.ws/i/canon/pro-printing-fine-art-paper-1_f67a0b6adcaf44a8b056dfae19b75dcf?$media-collection-full-dt$");
+    }
+  }
+  @keyframes events {
+    0% {
+      background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/09/show-img-11.jpg");
+    }
+    16% {
+      background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/09/show-img-10.jpg");
+    }
+    32% {
+      background-image: url("https://static01.nyt.com/images/2023/09/07/multimedia/07art-fair-sidebar-gzjw/07art-fair-sidebar-gzjw-superJumbo.jpg?quality=75&auto=webp");
+    }
+  
+    48% {
+      background-image: url("https://assets.vogue.com/photos/5b23fbb130f94b78490aecc0/master/w_1920,c_limit/00-story-image-francois-halard-exhibit.jpg");
+    }
+    54% {
+      background-image: url("https://lopificio.it/images/cms/skins/opificio/blog/torino-settimana-arte-contemporanea-eventi.webp");
+    }
+    70% {
+      background-image: url("https://lopificio.it/images/cms/skins/opificio/blog/luci-d-artista-TORINO.jpg");
+    }
+    86% {
+      background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/09/show-img-11.jpg");
+    }
+    100% {
+      background-image: url("https://musea.qodeinteractive.com/wp-content/uploads/2019/09/show-img-11.jpg");
     }
   }

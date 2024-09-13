@@ -5,6 +5,7 @@ import { Card, CardBody, Typography } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';  
 import HoverButton from '../Shared/HoverButton/HoverButton';
 import RollUp from '../RollUpButton/RollUp';
+import ImgTitle from '../ImgTitle';
 
 export default function EventsCard() { 
     const dispatch = useDispatch();
@@ -29,7 +30,9 @@ export default function EventsCard() {
 
     return (  
         <div className="relative pb-[500px] z-40 sm:w-full">  
-            <div className="bg-white pb-[50px] w-full">  
+            <div className="bg-white pb-[50px] w-full"> 
+
+            <ImgTitle title={"Events"}/>
                 <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-10 gap-y-40 p-16">  
                     {events.map((event) => (  
                         <Card   

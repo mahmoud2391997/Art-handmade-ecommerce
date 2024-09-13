@@ -7,7 +7,7 @@ import RollUp from '../components/RollUpButton/RollUp'
 export default function Events() {
   return (
     <div>
-      <PageTitle title="Events" />
+
       <EventsCard />
     </div>
   )

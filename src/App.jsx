@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -24,17 +24,29 @@ import OrderHistory from "./pages/OrderHistory/OrderHistory";
 import SignUp from "./pages/signup/SignUp";
 import PaymentSuccess from "./components/CheckOut/Payment/PaymentSuccess";
 import PaymentError from "./components/CheckOut/Payment/PaymentError";
+import { useEffect } from "react";
+function ScrollRestoration() {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
+  return null;
+}
 const router = createBrowserRouter([
-  // { path: "register", element: <Register /> },
   { path: "signup", element: <SignUp /> },
   { path: "login", element: <Login /> },
   { path: "notfound", element: <NotFound /> },
   { path: "paymentSuccess", element: <PaymentSuccess /> },
   { path: "paymentError", element: <PaymentError /> },
   {
-    element: <Layout />,
+    element:(
+      <>
+        <Layout />
+        <ScrollRestoration />
+      </>
+    ) ,
     children: [
       { path: "/", element: <Home /> },
       { path: "products", element: <ShopList /> },
@@ -45,8 +57,9 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "checkout", element: <Checkout /> },
       { path: "profile", element: <Profile /> },
-      { path: "orderhistory", element: <OrderHistory /> },
       { path: "about", element: <About /> },
+      { path: "paymentsuccess", element: <PaymentSuccess /> },
+      { path: "paymenterror", element: <PaymentError /> },
     ],
   },
 ]);

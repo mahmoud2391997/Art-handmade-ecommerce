@@ -16,17 +16,24 @@ import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductList from "../components/ProductListFinal";
 import Pagination from "../components/Shared/Pagination";
-import { fetchProductsAction } from "../Redux/actions/productActions";
+import { fetchProductsAction, fetchSearchedProductsAction } from "../Redux/actions/productActions";
+import searchProducts from "../api/products";
+import ImgTitle from "../components/ImgTitle";
 
 export default function ShopList() {
+  const [page, setPages] = useState(1);
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.products);
-  console.log(status);
-
+  
+  function getProductsPage(page) {
+    dispatch(fetchProductsAction(page));
+  }
   useEffect(() => {
-    dispatch(fetchProductsAction());
+    getProductsPage(page);
   }, []);
-
+  const { products, count, status, error } = useSelector(
+    (state) => state.products
+  );
+  console.log(products);
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {
     /******* */
@@ -34,25 +41,29 @@ export default function ShopList() {
     /******* */
   }, []); /******* */
   ///////////////////////////////////////////////////////////////////
-
+  const [paginatioTotal, setPaginationTotal] = useState(null);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [searchedCategories, setSearchedCategories] = useState([]);
   const [value, setValue] = useState(1500);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
   const [debouncedValue] = useDebounce(value, 300);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const [currentPage, setCurrentPage] = useState(1);
 
   //no use now but will be needed
   const [minValue, setMinValue] = useState(50);
   const [maxValue, setMaxValue] = useState(1500);
-
+ 
   const filteredProducts = useMemo(() => {
+    console.log(products);
     let sortedProducts = products.filter((product) => {
       const matchesCategory =
         selectedCategories.length > 0
           ? selectedCategories.some(
-              (selectedCategory) => selectedCategory._id === product.categoryId
+              (selectedCategory) =>
+                selectedCategory.categoryName === product.category
             )
           : true;
 
@@ -79,7 +90,6 @@ export default function ShopList() {
         b.name.localeCompare(a.name)
       );
     }
-
     return sortedProducts;
   }, [
     products,
@@ -92,7 +102,6 @@ export default function ShopList() {
   console.log(filteredProducts);
 
   const productsPerPage = 6; // Number of products per page
-  const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -103,12 +112,24 @@ export default function ShopList() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setPages(pageNumber);
+    if (pageNumber > page && searchTerm == "") {
+      getProductsPage(pageNumber);
+    } else {
+      dispatch(fetchSearchedProductsAction(term,pageNumber))
+    }
+   
   };
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(count / productsPerPage);
 
-  const handleSearchChange = debounce((term) => {
-    setSearchTerm(term);
+  const handleSearchChange = debounce( async (term) => {
+    if (term == "") {
+      getProductsPage(1);
+    } else {
+setSearchTerm(term)
+      dispatch(fetchSearchedProductsAction(term,page))
+    }
     setCurrentPage(1);
   }, 300);
 
@@ -118,13 +139,40 @@ export default function ShopList() {
   };
 
   useEffect(() => {
+    setPaginationTotal(totalPages);
     getCategories({ setCategories });
   }, []);
+  useEffect(() => {
+    setSearchedCategories(categories);
+  }, [categories]);
+  useEffect(() => {
+    if (searchTerm == "") {
+      setSearchedCategories(categories);
+      if (!selectedCategories.length) {
+        setPaginationTotal(totalPages);
+      } else {
+        setPaginationTotal(Math.ceil(filteredProducts.length / 6));
+      }
+    } else {
+      const searchCategories = Array.from(
+        new Set(
+          categories.filter((category) => {
+            return [...filteredProducts].filter(
+              (product) => product.categoryId == category._id
+            ).length;
+          })
+        )
+      );
+      console.log(searchCategories);
 
+      setSearchedCategories(searchCategories);
+      setPaginationTotal(Math.ceil(filteredProducts.length / 6));
+    }
+  }, [filteredProducts]);
   return (
     <div className="z-40  relative bg-white">
-      <PageTitle title={"shop"} />
-      <div className="flex justify-center items-start gap-10 mx-28 my-32">
+      <ImgTitle title={"shop"} />
+      <div className="flex justify-center items-start gap-10 mx-28 py-32 flex-col-reverse lg:flex-row ">
         {status == "idle" ? (
           <div className="w-full h-[19.8vh] flex flex-col items-center">
             <div className="w-[75%] h-[40%] flex items-center justify-center m-auto border-2 border-[var(--main-color)]">
@@ -182,20 +230,20 @@ export default function ShopList() {
               </div>
             </div>
             <div className="p-10 min-h-fit">
-              <ProductList currentProducts={currentProducts} />
+              <ProductList isRandom={false} currentProducts={currentProducts} />
             </div>
             <div className="flex justify-center items-start mt-4">
               {/* Pagination Controls */}
               <Pagination
-                totalPages={totalPages}
+                totalPages={paginatioTotal}
                 currentPage={currentPage}
                 handlePageChange={handlePageChange}
               />
             </div>
           </div>
         )}
-        <div className="w-1/3 flex flex-col gap-4">
-          <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
+        <div className="lg:w-1/3 flex flex-row flex-wrap lg:flex-col gap-4">
+          <SearchInput onChange={(e) =>{ handleSearchChange(e.target.value)}} />
           <Typography
             className="uppercase text-[22px] text-[var(--main-gray)] -mb-4"
             style={{
@@ -220,55 +268,11 @@ export default function ShopList() {
           <CategoriesCheckbox
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
-            categories={categories}
+            categories={searchedCategories}
           />
           {/* <TagsFilter /> */}
         </div>
       </div>
     </div>
   );
-}
-
-{
-  /* {currentProducts.map((product, index) => (
-              <div key={index}>
-                <SingleProductCard prod={product} isRandom={false} />
-              </div>
-            ))} */
-}
-{
-  /* Pass isRandom as needed */
-}
-{
-  /* <ProductCard isRandom={false} /> */
-}
-
-{
-  /* <Button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <LeftIcon />
-            </Button>
-            {[...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                className={
-                  currentPage === index + 1
-                    ? "underline text-sm px-3 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-color)]"
-                    : "text-xs px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-                }
-              >
-                {index + 1}
-              </Button>
-            ))}
-            <Button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-2 bg-transparent shadow-none hover:shadow-none transition-all duration-500 ease-in-out text-[var(--main-gray)] hover:text-[var(--main-color)]"
-            >
-              <RightIcon />
-            </Button> */
 }

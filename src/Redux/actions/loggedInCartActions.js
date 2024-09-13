@@ -12,26 +12,62 @@ export const fetchCartItemsAction = () => async (dispatch) => {
   try {
     const cartItems = await getCartItems();
     console.log(cartItems);
+    const storageCart = sessionStorage.getItem("cart")
+      ? JSON.parse(sessionStorage.getItem("cart")).map((item) => {
+          return { item: { ...item }, quantity: item.quantity };
+        })
+      : null;
+    if (storageCart) {
+      const mergedCarts = [...cartItems, ...storageCart];
 
-    if (cartItems) {
-      const total = cartItems.reduce(
+      const mergedCartWithTotalQuantity = mergedCarts.reduce((acc, curr) => {
+        const existingItem = acc.find(
+          (item) => item.item._id === curr.item._id
+        );
+
+        if (existingItem) {
+          existingItem.quantity += curr.quantity;
+        } else {
+          acc.push(curr);
+        }
+
+        return acc;
+      }, []);
+
+      console.log(mergedCartWithTotalQuantity);
+
+      const total = mergedCartWithTotalQuantity.reduce(
         (acc, item) => acc + item.item.price * item.quantity,
         0
       );
-      const amount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+      const amount = mergedCartWithTotalQuantity.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
       dispatch({
         type: FETCH_CARTITEMS,
-        payload: { cartItems: cartItems, total: total, amount: amount },
+        payload: {
+          cartItems: mergedCartWithTotalQuantity,
+          total: total,
+          amount: amount,
+        },
       });
-    } else {
-      return null;
-    }
+      updateCartItems(
+        mergedCartWithTotalQuantity.map((item) => {
+          return { productId: item.item._id, quantity: item.quantity };
+        })
+      );
+    } 
+    sessionStorage.removeItem("cart");
+
   } catch (error) {
     console.log("Error Fetching Cart Items", error);
   }
 };
 export const updateCartItemsAction = (updatedCart) => async (dispatch) => {
   try {
+    console.log(updatedCart);
+
     await updateCartItems(updatedCart);
     const cartItems = await getCartItems();
     console.log(cartItems);

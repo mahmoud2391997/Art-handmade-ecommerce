@@ -62,7 +62,7 @@ export default function ProductList({ currentProducts }) {
   };
 
   return (
-    <div className="relative p-4 mb-7 grid grid-cols-1 lg:grid-cols-3 gap-[10rem]">
+    <div className="relative p-2 mb-7 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[7rem]">
       {currentProducts.map((product, index) => (
         <SingleProductCard
           key={index}

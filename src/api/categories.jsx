@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default function getCategories({ setCategories }) {
-  axios
+ return axios
     .get("https://art-ecommerce-server.glitch.me/api/categories")
     .then((response) => {
       console.log(response.data);
