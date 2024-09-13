@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import PageTitle from "../../components/Shared/PageTitle";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
@@ -19,6 +19,7 @@ import ImgTitle from "../../components/ImgTitle";
 
 export default function Login() {
   const [response,setResponse] =useState(true)
+  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -104,7 +105,7 @@ export default function Login() {
       <ImgTitle title={"log in"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col lg:justify-center  gap-2 lg:gap-5 w-[30%] lg:h-[100%]"
+        className="flex flex-col lg:justify-center gap-2 lg:gap-5 w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] lg:h-[100%] mx-auto"
       >
         <div className="flex flex-col gap-2">
           <Input
@@ -119,13 +120,23 @@ export default function Login() {
             </Typography>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <Input
             variant="standard"
-            type="password"
+            type={showPassword ? "text" : "password"}
             label="Password"
             {...register("password")}
           />
+          <span
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+            <EyeIcon className="w-5 h-5 text-gray-500" />
+            ) : (
+              <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+            )}
+          </span>
           {errors.password && (
             <Typography className="pl-2 text-red-500 text-sm">
               {errors.password.message}
