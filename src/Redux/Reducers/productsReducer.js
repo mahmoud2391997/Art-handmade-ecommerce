@@ -2,6 +2,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_PRODUCT_BY_ID,
   FETCH_BESTSELLERS_PRODUCTS,
+  FETCH_SEARCHED_PRODUCTS,
 } from "../actionTypes";
 
 const initialState = {
@@ -24,7 +25,17 @@ export const productReducer = (state = initialState, action) => {
         status: "succeeded",
       };
     }
+    case  FETCH_SEARCHED_PRODUCTS :{
+      console.log(action.payload);
 
+      return {
+        ...state,
+        products: action.payload.products,
+        count: action.payload.count,
+        status: "succeeded",
+      };
+    }
+ 
     case FETCH_PRODUCT_BY_ID: {
       return {
         ...state,

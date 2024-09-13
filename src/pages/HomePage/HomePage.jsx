@@ -8,6 +8,7 @@ import AdminProductCard from "../../components/AdminProductCard";
 import ProductCard from "../../components/CustomerProductCard";
 import axios from "axios";
 import CategoryItem from "../../components/CategoryItem";
+import { Link } from "react-router-dom";
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
   function getCategories() {
@@ -49,6 +50,12 @@ export default function HomePage() {
             return <CategoryItem category={category} />;
           })}
         </section>
+     <div className="m-auto w-40 mt-5">
+      <Link to="/products">
+         <MainButton title={"Products List"}/>
+      </Link>
+      
+      </div>
       </div>
       <div className="my-20">
         <Title title={"UPCOMING EVENT"} subTitle={"CHECK TICKETS"} />

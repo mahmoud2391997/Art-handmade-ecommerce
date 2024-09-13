@@ -51,11 +51,11 @@ export default function Login() {
         const redirectTo = location.state?.from?.pathname || "/";
         navigate(redirectTo, { replace: true });
       }
-      dispatch(fetchCartItemsAction());
       return true;
     } catch (error) {
       console.error(error);
     }
+    dispatch(fetchCartItemsAction())
   }
   const schema = yup.object().shape({
     email: yup

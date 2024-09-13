@@ -51,9 +51,7 @@ export default function Cart() {
   if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
     const { loggedinCart } = useSelector((state) => state.loggedinCart);
     console.log(loggedinCart);
-    useEffect(() => {
-      dispatch(fetchCartItemsAction());
-    }, []);
+  
 
     return (
       <div className="relative pb-[500px] z-40 sm:w-full">

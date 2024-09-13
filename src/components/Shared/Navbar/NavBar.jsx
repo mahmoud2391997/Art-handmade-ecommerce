@@ -51,9 +51,7 @@ export default function NavBar() {
       () => window.innerWidth >= 960 && setOpen(false)
     );
   }, []);
-  useEffect(() => {
-    dispatch(fetchCartItemsAction());
-  }, []);
+ 
   return (
     <Navbar
       color="transparent"
@@ -72,7 +70,7 @@ export default function NavBar() {
           </div>
           <div className="flex justify-center items-center gap-4 ms-2  ">
             <Link to="/cart">
-              {!isAuth() ? <ShoppingBag /> : <LoggedinShoppingBag />}
+              {!isAuth() ? <ShoppingBag isLogged={isLogged}/> : <LoggedinShoppingBag />}
             </Link>
             {isAuth() ? (
               <Link to={"/profile"}>

@@ -1,15 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import "./icons.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItemsAction } from "../../Redux/actions/loggedInCartActions";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function LoggedinShoppingBag() {
   // console.log(cartItems);
+  const dispatch =useDispatch();
+  dispatch(fetchCartItemsAction())
   const cartItemsCount = useSelector((state) => state.loggedinCart.amount);
   console.log(cartItemsCount);
-
   return (
     <div className="relative cursor-pointer transition-all duration-700 ease-in-out hover:text-[var(--main-color)]">
       <svg

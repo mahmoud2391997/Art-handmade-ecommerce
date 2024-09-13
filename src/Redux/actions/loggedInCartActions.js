@@ -57,22 +57,9 @@ export const fetchCartItemsAction = () => async (dispatch) => {
           return { productId: item.item._id, quantity: item.quantity };
         })
       );
-      sessionStorage.removeItem("cart");
-    } else {
-      const total = cartItems.reduce(
-        (acc, item) => acc + item.item.price * item.quantity,
-        0
-      );
-      const amount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-      dispatch({
-        type: FETCH_CARTITEMS,
-        payload: {
-          cartItems: cartItems,
-          total: total,
-          amount: amount,
-        },
-      });
-    }
+    } 
+    sessionStorage.removeItem("cart");
+
   } catch (error) {
     console.log("Error Fetching Cart Items", error);
   }

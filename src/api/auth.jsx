@@ -3,7 +3,6 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { replace } from "react-router-dom";
-import { fetchCartItemsAction } from "../Redux/actions/loggedInCartActions";
 export async function loginAuthentication(
   email,
   password,
@@ -12,7 +11,6 @@ export async function loginAuthentication(
   location
 ) {
   try {
-    let dispatch = useDispatch();
     const response = await axios.post(
       `https://art-ecommerce-server.glitch.me/api/auth/login`,
       {
@@ -36,7 +34,6 @@ export async function loginAuthentication(
       const redirectTo = location.state?.from?.pathname || "/";
       navigate(redirectTo, { replace: true });
     }
-    dispatch(fetchCartItemsAction());
     return true;
   } catch (error) {
     console.error(error);

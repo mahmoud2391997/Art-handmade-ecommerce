@@ -1,3 +1,6 @@
+import axios from "axios";
+import { fetchProducts } from "../Redux/api/productsAPI";
+
 function getProducts(pageNumber) {
   axios
     .get(
@@ -16,4 +19,18 @@ function getProduct(productId) {
     .catch((error) => {
       console.error(error);
     });
+}
+export default async function searchProducts(product,page) {
+  if (product == "") {
+    getProducts(1)
+  } else {
+
+   const response = await axios
+    .get(`https://art-ecommerce-server.glitch.me/api/product/search?searchTerm=${product}&numOfPages=${page}`)
+   
+    .catch((error) => {
+      console.error(error);
+    });
+    return response.data
+  }
 }

@@ -16,20 +16,23 @@ import CategoriesCheckbox from "../components/CategoriesCheckBox";
 import TagsFilter from "../components/TagsFilter";
 import ProductList from "../components/ProductListFinal";
 import Pagination from "../components/Shared/Pagination";
-import { fetchProductsAction } from "../Redux/actions/productActions";
+import { fetchProductsAction, fetchSearchedProductsAction } from "../Redux/actions/productActions";
+import searchProducts from "../api/products";
 
 export default function ShopList() {
   const [page, setPages] = useState(1);
   const dispatch = useDispatch();
-  const { products, count, status, error } = useSelector(
-    (state) => state.products
-  );
+  
   function getProductsPage(page) {
     dispatch(fetchProductsAction(page));
   }
   useEffect(() => {
     getProductsPage(page);
   }, []);
+  const { products, count, status, error } = useSelector(
+    (state) => state.products
+  );
+  console.log(products);
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {
     /******* */
@@ -51,7 +54,7 @@ export default function ShopList() {
   //no use now but will be needed
   const [minValue, setMinValue] = useState(50);
   const [maxValue, setMaxValue] = useState(1500);
-
+ 
   const filteredProducts = useMemo(() => {
     console.log(products);
     let sortedProducts = products.filter((product) => {
@@ -109,15 +112,23 @@ export default function ShopList() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     setPages(pageNumber);
-    if (pageNumber > page) {
+    if (pageNumber > page && searchTerm == "") {
       getProductsPage(pageNumber);
+    } else {
+      dispatch(fetchSearchedProductsAction(term,pageNumber))
     }
+   
   };
 
   const totalPages = Math.ceil(count / productsPerPage);
 
-  const handleSearchChange = debounce((term) => {
-    setSearchTerm(term);
+  const handleSearchChange = debounce( async (term) => {
+    if (term == "") {
+      getProductsPage(1);
+    } else {
+
+      dispatch(fetchSearchedProductsAction(term,page))
+    }
     setCurrentPage(1);
   }, 300);
 
@@ -231,7 +242,7 @@ export default function ShopList() {
           </div>
         )}
         <div className="lg:w-1/3 flex flex-row flex-wrap lg:flex-col gap-4">
-          <SearchInput onChange={(e) => handleSearchChange(e.target.value)} />
+          <SearchInput onChange={(e) =>{ handleSearchChange(e.target.value)}} />
           <Typography
             className="uppercase text-[22px] text-[var(--main-gray)] -mb-4"
             style={{
