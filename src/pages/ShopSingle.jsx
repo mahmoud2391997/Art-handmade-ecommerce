@@ -32,12 +32,9 @@ export default function ShopSingle() {
   }, [productId, dispatch]);
 
   const handleAddToCart = (product) => {
-console.log(product);
 
     if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
-      console.log("Adding to cart", product);
       if (product) {
-        console.log(quantity);
 
         dispatch(addToCart(product, quantity));
       }
@@ -53,12 +50,6 @@ console.log(product);
         transition: Bounce,
       });
     } else {
-      console.log(loggedinCart);
-      console.log(
-        [...loggedinCart].filter(
-          (item) => item.item._id == product._id
-        ).length
-      );
       if (loggedinCart.length == 0) {
         dispatch(
           updateCartItemsAction({
@@ -74,8 +65,6 @@ console.log(product);
         ) != 0
       ) {
         const newCart = [...loggedinCart].map((item) => {
-          console.log(item);
-          console.log(product._id);
 
           if (item.item._id == product._id) {
             return {
@@ -100,8 +89,6 @@ console.log(product);
 
           dispatch(updateCartItemsAction(newCart));
         } else {
-          console.log("adsfads");
-
           dispatch(
             updateCartItemsAction({
               productId: product.product_Id,

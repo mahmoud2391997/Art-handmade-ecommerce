@@ -21,9 +21,7 @@ import { updateCartItemsAction } from "../../Redux/actions/loggedInCartActions";
 export default function CheckoutComp() {
   const [cityOptions, setCityOptions] = useState([]);
   const [profile, setProfile] = useState({});
-  console.log(profile);
   const cartItems = useSelector((state) => state.loggedinCart.loggedinCart);
-  console.log(cartItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -65,7 +63,6 @@ export default function CheckoutComp() {
   const paymentMethod = watch("paymentMethod", "");
 
   const onSubmit = (data) => {
-    console.log(cartItems);
 
     const orderItems = cartItems.map((cartItem) => {
       return {
@@ -75,7 +72,6 @@ export default function CheckoutComp() {
         productQuantity: cartItem.quantity,
       };
     });
-    console.log(orderItems);
     const orderDetails = {
       customerName: data.firstName + " " + data.lastName,
       customerEmail: data.email,
@@ -170,7 +166,7 @@ export default function CheckoutComp() {
     });
 
     if (result.error) {
-      console.error(result.error.message);
+      throw result.error;
     }
   };
 

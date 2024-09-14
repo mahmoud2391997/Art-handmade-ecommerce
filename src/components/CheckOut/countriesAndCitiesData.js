@@ -20,7 +20,7 @@ export const countries = [
 ];
 
 export const cities = {
-    Egypt: ["Cairo", "Alexandria", "Giza", "Sharm El Sheikh", "Luxor"],
+    Egypt: ["Cairo", "Alexandria", "Giza", "Ismailia", "Sharm El Sheikh", "Luxor"],
     SaudiArabia: ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
     UnitedArabEmirates: ["Dubai", "Abu Dhabi", "Sharjah", "Al Ain", "Ajman"],
     Morocco: ["Casablanca", "Rabat", "Marrakesh", "Tangier", "Fes"],

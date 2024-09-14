@@ -8,11 +8,8 @@ import { Bounce, toast } from "react-toastify";
 export default function SingleProductCard({ prod, handleAddToCart }) {
 
   const handleCartAction = () => {
-    console.log("Product status:", prod.status);
-    console.log("Product stock:", prod.stock);
   
     if (prod.status === "out of stock" || prod.stock === 0) {
-      console.log("Product is out of stock");
       toast.info("Product is out of stock", {
         position: "top-center",
         autoClose: 2000,
@@ -25,7 +22,6 @@ export default function SingleProductCard({ prod, handleAddToCart }) {
         transition: Bounce,
       });
     } else {
-      console.log("Product added to cart");
       toast.success("Product added to cart!", {
         position: "top-center",
         autoClose: 2000,
@@ -47,14 +43,13 @@ export default function SingleProductCard({ prod, handleAddToCart }) {
       key={prod._id}
       className="relative flex flex-col items-center group rounded-none p-3"
     >
-      {console.log(prod)}
       <div className="relative xl:w-60 w-60 h-60 sm:w-48 sm:h-48 xl:h-60 mb-4 overflow-hidden">
         <img
           src={prod.image}
           className="w-full h-full object-cover transition-transform duration-300 transform group-hover:scale-105"
           alt={prod.name}
         />
-       <div className="absolute top-3 left-3 right-3 bottom-3 bg-white bg-opacity-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transform translate-x-full transition-transform  duration-[2000ms] ease-in-out group-hover:translate-x-0 ">
+        <div className="absolute top-3 left-3 right-0 bottom-3 bg-white bg-opacity-100 flex items-center justify-center opacity-100 group-hover:opacity-100 transform translate-x-full transition-transform  duration-[2000ms] ease-in-out group-hover:translate-x-0">
           <MainButton
             onClick={handleCartAction}
             title="Add to Cart"

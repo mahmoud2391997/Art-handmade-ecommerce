@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 // import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function ShoppingBag() {
-  // console.log(cartItems);
+
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   let totalAmount = 0;

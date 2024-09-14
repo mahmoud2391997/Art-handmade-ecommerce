@@ -24,8 +24,6 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
     updatedCart = [...cartItems, { ...product, quantity }];
   }
 
-  console.log("Adding to cart: ", updatedCart); // Debugging line
-
   dispatch({
     type: ADD_TO_CART,
     payload: updatedCart,

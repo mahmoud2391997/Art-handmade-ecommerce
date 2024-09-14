@@ -59,7 +59,6 @@ export default function Contact() {
         "https://art-ecommerce-server.glitch.me/api/messages",
         data
       );
-      console.log("Form submitted successfully:", response.data);
       toast.info("Form Submitted Successfully", {
         position: "top-center",
         autoClose: 2000,
@@ -72,7 +71,6 @@ export default function Contact() {
         transition: Bounce,
       });
     } catch (error) {
-      console.error("Error submitting the form:", error);
       toast.info("Failed To Submit Form", {
         position: "top-center",
         autoClose: 2000,

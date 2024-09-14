@@ -40,7 +40,6 @@ export default function NavBar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
-    console.log("logged out, token removed");
     // setIsLogged(null);
     navigate("/", { replace: true });
   };

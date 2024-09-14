@@ -11,7 +11,6 @@ import {
 export const fetchCartItemsAction = () => async (dispatch) => {
   try {
     const cartItems = await getCartItems();
-    console.log(cartItems);
     const storageCart = sessionStorage.getItem("cart")
       ? JSON.parse(sessionStorage.getItem("cart")).map((item) => {
           return { item: { ...item }, quantity: item.quantity };
@@ -33,8 +32,6 @@ export const fetchCartItemsAction = () => async (dispatch) => {
 
         return acc;
       }, []);
-
-      console.log(mergedCartWithTotalQuantity);
 
       const total = mergedCartWithTotalQuantity.reduce(
         (acc, item) => acc + item.item.price * item.quantity,
@@ -61,16 +58,14 @@ export const fetchCartItemsAction = () => async (dispatch) => {
     sessionStorage.removeItem("cart");
 
   } catch (error) {
-    console.log("Error Fetching Cart Items", error);
+    throw error
   }
 };
 export const updateCartItemsAction = (updatedCart) => async (dispatch) => {
   try {
-    console.log(updatedCart);
 
     await updateCartItems(updatedCart);
     const cartItems = await getCartItems();
-    console.log(cartItems);
 
     const total = cartItems.reduce(
       (acc, item) => acc + item.item.price * item.quantity,
@@ -83,7 +78,7 @@ export const updateCartItemsAction = (updatedCart) => async (dispatch) => {
       payload: { cartItems: cartItems, total: total, amount: amount },
     });
   } catch (error) {
-    console.log("Error Fetching Cart Items", error);
+    throw error
   }
 };
 export const removeCartItem = (productId) => (dispatch, getState) => {
@@ -98,7 +93,6 @@ export const removeCartItem = (productId) => (dispatch, getState) => {
 
 export const increaseItemQuantity = (productId) => (dispatch, getState) => {
   const { loggedinCart } = getState().loggedinCart;
-  console.log(loggedinCart);
 
   const updatedCart = loggedinCart.map((item) =>
     item.item._id === productId

@@ -13,7 +13,7 @@ export const fetchEventsActions = () => async (dispatchEvent, getState) => {
                 payload: events,
             });
         } catch (error) {
-            console.log("Error Fetching Products", error);
+            throw error
         }
     }
 }
@@ -27,6 +27,6 @@ export const fetchEventsByIdAction = (eventId) => async (dispatch) => {
             payload: event,
         });
     } catch (error) {
-        console.log("Error Fetching Event", error);
+        throw error
     }
 }

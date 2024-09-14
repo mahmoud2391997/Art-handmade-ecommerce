@@ -8,7 +8,6 @@ import loadStorage from "../../helpers/Storage";
 //   },{},{}
 // ]
 export const updateCartItems = async (cartItemsArray) => {
-  console.log(cartItemsArray);
 
   try {
     await axios.post(
@@ -22,7 +21,7 @@ export const updateCartItems = async (cartItemsArray) => {
       }
     );
   } catch (error) {
-    console.error(error);
+    throw error
   }
 };
 export const getCartItems = async () => {
@@ -38,6 +37,6 @@ export const getCartItems = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw error
   }
 };

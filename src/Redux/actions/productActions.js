@@ -22,7 +22,7 @@ export const fetchProductsAction = (page) => async (dispatch, getState) => {
       payload: { products: products, count: count },
     });
   } catch (error) {
-    console.log("Error Fetching Products", error);
+    throw error
   }
 };
 export const fetchSearchedProductsAction = (searchTerm,page) => async (dispatch, getState) => {
@@ -34,7 +34,7 @@ export const fetchSearchedProductsAction = (searchTerm,page) => async (dispatch,
       payload: { products: products.searchedProducts, count: products.productsCount },
     });
   } catch (error) {
-    console.log("Error Fetching Products", error);
+    throw error
   }
 };
 
@@ -46,7 +46,7 @@ export const fetchProductByIDAction = (productId) => async (dispatch) => {
       payload: product,
     });
   } catch (error) {
-    console.log("Error Fetching Product", error);
+    throw error
   }
 };
 
@@ -58,6 +58,6 @@ export const fetchBestSellersAction = () => async (dispatch) => {
       payload: bestsellers,
     });
   } catch (error) {
-    console.log("Error Fetching BestSellers Products", error);
+    throw error
   }
 };

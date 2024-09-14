@@ -8,6 +8,6 @@ export const fetchBestSellersAction = () => async (dispatch) => {
       payload: bestsellers,
     });
   } catch (error) {
-    console.log("Error Fetching BestSellers Products", error);
+    throw error
   }
 };

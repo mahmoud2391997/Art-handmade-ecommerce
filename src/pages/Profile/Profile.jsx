@@ -39,11 +39,10 @@ export default function Profile() {
         setProfileId(response.data._id);
       })
       .catch((error) => {
-        console.error(error);
+        throw error
       });
   }
   function editProfile(profileId, editedProfile) {
-    console.log(editedProfile);
 
     axios
       .put(
@@ -56,21 +55,18 @@ export default function Profile() {
           },
         }
       )
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        return response.data
+      })
       .catch((error) => {
-        console.error(error);
+        throw error
       });
   }
   useEffect(() => {
     getProfile();
   }, []);
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
-  ///////////////////////////////////////////////////////////////////
+
+  
   return (
     <div className="w-full pb-[300px] h-auto z-40 relative bg-white">
       <ImgTitle title={"Profile"} />
@@ -143,7 +139,6 @@ export default function Profile() {
             <MainButton
               title={"Update Profile"}
               onClick={() => {
-                console.log("asd");
 
                 editProfile(profileId, {
                   email: email,

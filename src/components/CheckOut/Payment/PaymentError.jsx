@@ -12,10 +12,10 @@ export default function PaymentError() {
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
       <div className="bg-white border border-red-200 shadow-lg p-12 w-full max-w-lg h-auto">
-        <Typography variant="h1" color="red-600" className="mb-4 text-center text-4xl font-eb-garamond">
+        <Typography variant="h1" color="red" className="mb-4 text-center text-4xl font-eb-garamond">
           Payment Error!
         </Typography>
-        <Typography variant="paragraph" color="gray-700" className="mb-6 text-xl text-center font-eb-garamond">
+        <Typography variant="paragraph" color="gray" className="mb-6 text-xl text-center font-eb-garamond">
           Unfortunately, there was an issue with your payment. Please try again.
         </Typography>
         <Button

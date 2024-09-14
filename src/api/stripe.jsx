@@ -15,6 +15,6 @@ export default function stripePayment(orderItems, token) {
     .then((response) => (window.location.href = response.data))
 
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }

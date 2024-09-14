@@ -5,18 +5,22 @@ function getProducts(pageNumber) {
     .get(
       `https://art-ecommerce-server.glitch.me/api/products/pages/${pageNumber}`
     )
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
 
 function getProduct(productId) {
   axios
     .get(`https://art-ecommerce-server.glitch.me/api/products/${productId}`)
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
 export default async function searchProducts(product,page) {
@@ -28,7 +32,7 @@ export default async function searchProducts(product,page) {
     .get(`https://art-ecommerce-server.glitch.me/api/product/search?searchTerm=${product}&numOfPages=${page}`)
    
     .catch((error) => {
-      console.error(error);
+      throw error
     });
     return response.data
   }

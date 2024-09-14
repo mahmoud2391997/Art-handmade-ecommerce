@@ -1,6 +1,6 @@
 export default function CategoryItem({ category }) {
   return (
-    <div className="lg:h-[430px] m-auto w-[90%]   flex flex-col  items-center ">
+    <div  className="lg:h-[430px] m-auto w-[90%]   flex flex-col  items-center ">
       <img
         src={category.categoryImage}
         className="md:w-full w-full h-[350px]"

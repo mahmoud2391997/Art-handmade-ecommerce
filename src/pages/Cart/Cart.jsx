@@ -51,7 +51,6 @@ export default function Cart() {
   };
   if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
     const { loggedinCart } = useSelector((state) => state.loggedinCart);
-    console.log(loggedinCart);
   
 
     return (
@@ -171,7 +170,6 @@ export default function Cart() {
     );
   } else {
     const cartItems = useSelector((state) => state.cart.cartItems || []);
-    console.log(cartItems);
     return (
       <div className="relative pb-[0px] z-40 sm:w-full">
         <div className="bg-white pb-44 md:w-[100%] lg:w-[100%] sm:w-[100%] w-[100%]">

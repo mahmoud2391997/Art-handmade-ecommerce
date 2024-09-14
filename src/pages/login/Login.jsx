@@ -20,6 +20,7 @@ import ImgTitle from "../../components/ImgTitle";
 export default function Login() {
   const [response,setResponse] =useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,7 +39,6 @@ export default function Login() {
           password: password,
         }
       );
-      console.log(response.data);
       if (response.data.success) {
         if (rememberMe) {
           localStorage.setItem("token", response.data.token);
@@ -47,7 +47,6 @@ export default function Login() {
           sessionStorage.setItem("token", response.data.token);
         }
         // navigate("/", { replace: true });
-        console.log(location.state);
         const redirectTo = location.state?.from?.pathname || "/";
         navigate(redirectTo, { replace: true });
 
@@ -58,7 +57,7 @@ export default function Login() {
         
       }
     } catch (error) {
-      console.error(error);
+      throw error
     }
   }
   const schema = yup.object().shape({
@@ -98,7 +97,6 @@ export default function Login() {
       });
     }
   };
-  console.log(response);
   useEffect(()=>{},[response]);
   return (
     <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[5%]">

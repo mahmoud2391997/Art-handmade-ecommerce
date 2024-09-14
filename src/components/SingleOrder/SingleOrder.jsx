@@ -31,12 +31,14 @@ export default function SingleOrder({ order }) {
           },
         }
       )
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        return response.data
+      })
       .catch((error) => {
-        console.error(error);
+        throw error
       });
   }
-  console.log(order);
+
   function formatDate(dateString) {
     const date = new Date(dateString);
 

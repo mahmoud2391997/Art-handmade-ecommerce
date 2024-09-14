@@ -4,7 +4,7 @@ import { Link, replace, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
 import MainButton from "../../components/MainButton";
 import PageTitle from "../../components/Shared/PageTitle";
@@ -15,13 +15,14 @@ import axios from "axios";
 
 export default function SignUp() {
   const [response,setResponse] =useState(true)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const navigate = useNavigate();
   function registerAuthentication(profile, navigate) {
     axios
       .post(`https://art-ecommerce-server.glitch.me/api/auth/register`, profile)
       .then((response) => {
-        console.log(response.data);
         if (response.data.success) {
           sessionStorage.setItem("token", response.data.token);
           navigate("/", { replace: true });
@@ -31,7 +32,7 @@ export default function SignUp() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        throw error
       });
   }
   const schema = yup.object().shape({
@@ -65,7 +66,6 @@ export default function SignUp() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    console.log(data);
     registerAuthentication(data, navigate);
   };
   return (
@@ -118,26 +118,46 @@ export default function SignUp() {
             </Typography>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <Input
             variant="standard"
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password")}
           />
+          <span
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+            <EyeIcon className="w-5 h-5 text-gray-500" />
+            ) : (
+              <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+            )}
+          </span>
           {errors.password && (
             <Typography className="pl-2 text-red-500 text-sm">
               {errors.password.message}
             </Typography>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <Input
             variant="standard"
             label="Confirm Password"
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword")}
           />
+          <span
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? (
+            <EyeIcon className="w-5 h-5 text-gray-500" />
+            ) : (
+              <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+            )}
+          </span>
           {errors.confirmPassword && (
             <Typography className="pl-2 text-red-500 text-sm">
               {errors.confirmPassword.message}

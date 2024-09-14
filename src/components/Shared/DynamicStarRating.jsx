@@ -3,7 +3,6 @@ import StarIcon from "../icons/StarIcon";
 
 export default function DynamicStarRating({ totalStars }) {
   const [rating, setRating] = useState(0);
-  console.log(rating);
   return (
     <div className="flex">
       {[...Array(totalStars)].map((_, index) => (

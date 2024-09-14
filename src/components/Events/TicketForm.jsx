@@ -34,15 +34,12 @@ export default function TicketForm({ eventId, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
     if (isSubmitting) return;
     setIsSubmitting(true);
 
     const token = loadStorage();
-    console.log("Retrieved token:", token);
 
     if (!token) {
-      console.log("No token found, redirecting to login.");
       navigate("/login");
       setIsSubmitting(false);
       return;
@@ -66,7 +63,6 @@ export default function TicketForm({ eventId, onClose }) {
         }
       )
 if (response.data === "Your Email Already Received A Ticket") {
-        console.log(response.data);
         toast.info("You already bought the ticket", {
           position: "top-center",
           autoClose: 2000,
@@ -79,10 +75,9 @@ if (response.data === "Your Email Already Received A Ticket") {
           transition: Bounce,
         });
 }      
-      console.log("Form submitted successfully");
       reset();
     } catch (error) {
-      console.error("Error submitting form:", error);
+      throw error
     } finally {
       setIsSubmitting(false);
       onClose();

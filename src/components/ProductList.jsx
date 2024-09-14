@@ -23,7 +23,6 @@ const ProductList = () => {
   }, []);
 
   const handleAddToCart = (product) => {
-    console.log("Adding to cart", product);
     dispatch(addToCart(product));
   };
 
@@ -80,7 +79,7 @@ const ProductList = () => {
               </Button>
             </Tooltip>
             <Link to={`/products/${product._id}`}>
-              <Button variant="outlined" onClick={() => console.log(product)}>
+              <Button variant="outlined" >
                 More
               </Button>
             </Link>

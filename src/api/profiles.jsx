@@ -17,7 +17,7 @@ export async function getProfile(token, setProfile) {
       });
     })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
 function editProfile(profileId, editedProfile, token) {
@@ -32,9 +32,11 @@ function editProfile(profileId, editedProfile, token) {
         },
       }
     )
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
 function deleteProfile(profileId, token) {
@@ -45,8 +47,10 @@ function deleteProfile(profileId, token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }

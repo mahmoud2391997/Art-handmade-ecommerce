@@ -33,14 +33,7 @@ export default function ShopList() {
   const { products, count, status, error } = useSelector(
     (state) => state.products
   );
-  console.log(products);
-  /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
-  /******* */ useEffect(() => {
-    /******* */
-    /******* */ window.scrollTo(0, 0); /******* */
-    /******* */
-  }, []); /******* */
-  ///////////////////////////////////////////////////////////////////
+
   const [paginatioTotal, setPaginationTotal] = useState(null);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -57,7 +50,6 @@ export default function ShopList() {
   const [maxValue, setMaxValue] = useState(1500);
  
   const filteredProducts = useMemo(() => {
-    console.log(products);
     let sortedProducts = products.filter((product) => {
       const matchesCategory =
         selectedCategories.length > 0
@@ -99,7 +91,6 @@ export default function ShopList() {
     sortOption,
   ]);
 
-  console.log(filteredProducts);
 
   const productsPerPage = 6; // Number of products per page
 
@@ -163,7 +154,6 @@ setSearchTerm(term)
           })
         )
       );
-      console.log(searchCategories);
 
       setSearchedCategories(searchCategories);
       setPaginationTotal(Math.ceil(filteredProducts.length / 6));

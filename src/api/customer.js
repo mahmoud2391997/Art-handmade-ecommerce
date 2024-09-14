@@ -6,8 +6,10 @@ function getCustomerInfo(token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }

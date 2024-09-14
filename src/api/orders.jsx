@@ -7,26 +7,14 @@ export function getOrders(token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
-// {
-//   customerName:,
-//   customerEmail:,
-//   customerPhone:,
-//   customerAddress:,
-//   paymentMethod:,
-//   orderItems:[
-//     {
-// productName:,
-// productPrice: Number
-// productQuantity: Number
-// productImageUrl:
-//},{},{}
-//   ]
-// }
+
 export function makeOrder(orderDetails, token) {
   axios
     .post(`https://art-ecommerce-server.glitch.me/api/orders`, orderDetails, {
@@ -35,9 +23,11 @@ export function makeOrder(orderDetails, token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }
 function cancelOrder(orderId, token) {
@@ -48,8 +38,10 @@ function cancelOrder(orderId, token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => console.log(response.data))
+    .then((response) => {
+      return response.data
+    })
     .catch((error) => {
-      console.error(error);
+      throw error
     });
 }

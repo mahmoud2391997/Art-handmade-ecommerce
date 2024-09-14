@@ -17,7 +17,6 @@ export default function OrderHistory() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data.lenght != 0) {
           setOrders(response.data);
         } else {
@@ -25,7 +24,7 @@ export default function OrderHistory() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        throw error
       });
   }
   useEffect(() => {

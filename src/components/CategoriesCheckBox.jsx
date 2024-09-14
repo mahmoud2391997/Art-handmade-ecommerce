@@ -12,7 +12,6 @@ export default function CategoriesCheckbox({
   // const [selectedCategories, setSelectedCategories] = useState([]);
 
   // const { categories } = useSelector((state) => state.categories);
-  // console.log(categories);
   // const categories = ["Brochure", "Lifestyle", "Museum", "Souvenirs"];
 
   // const handleCheckboxChange = (category) => {
@@ -34,7 +33,6 @@ export default function CategoriesCheckbox({
   // useEffect(() => {
   //   getCategories({ setCategories });
   // }, []);
-  console.log(categories);
   return (
     <div className="w-full flex flex-col space-y-4 mb-10">
       <label

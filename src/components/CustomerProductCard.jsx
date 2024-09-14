@@ -20,10 +20,7 @@ export default function ProductCard() {
   const { bestSellers, status, error } = useSelector(
     (state) => state.bestSellers
   );
-  console.log(useSelector((state) => state.bestSellers));
-  console.log(useSelector((state) => state.loggedinCart));
   const { loggedinCart } = useSelector((state) => state.loggedinCart);
-  console.log(loggedinCart);
 
   useEffect(() => {
     dispatch(fetchBestSellersAction());
@@ -31,15 +28,9 @@ export default function ProductCard() {
 
   const handleAddToCart = (product) => {
     if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
-      console.log("Adding to cart", product);
       const defaultQuantity = 1;
       dispatch(addToCart(product, defaultQuantity));
     } else {
-      console.log(loggedinCart);
-      console.log(
-        [...loggedinCart].filter((item) => item.item._id == product.product_Id)
-          .length
-      );
 
       if (
         [...loggedinCart].filter(
@@ -47,8 +38,6 @@ export default function ProductCard() {
         ) != 0
       ) {
         const newCart = [...loggedinCart].map((item) => {
-          console.log(item);
-          console.log(product._id);
 
           if (item.item._id == product.product_Id) {
             return { productId: item.item._id, quantity: item.quantity + 1 };
@@ -67,7 +56,6 @@ export default function ProductCard() {
 
           dispatch(updateCartItemsAction(newCart));
         } else {
-          console.log("adsfads");
 
           dispatch(
             updateCartItemsAction({

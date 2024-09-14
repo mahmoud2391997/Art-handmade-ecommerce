@@ -3,10 +3,8 @@ export function isAuth() {
     sessionStorage.getItem("token") || localStorage.getItem("token");
 
   if (token) {
-    console.log("Token exists:", token);
     return true;
   } else {
-    console.log("no token found");
     return false;
   }
 }
