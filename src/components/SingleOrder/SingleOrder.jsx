@@ -64,7 +64,7 @@ export default function SingleOrder({ order }) {
         <div className="w-full flex flex-col justify-between text-center h-full">
           <span className="text-lg">Order Date</span>
           <span className="text-xl text-black font-bold">
-            {formatDate(order.orderDate)}
+            {order.orderDate}
           </span>
         </div>
         <div className="w-full flex flex-col justify-between text-center h-full">

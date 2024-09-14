@@ -50,6 +50,7 @@ export default function ShopList() {
   const [maxValue, setMaxValue] = useState(1500);
  
   const filteredProducts = useMemo(() => {
+    console.log(products);
     let sortedProducts = products.filter((product) => {
       const matchesCategory =
         selectedCategories.length > 0
@@ -91,6 +92,7 @@ export default function ShopList() {
     sortOption,
   ]);
 
+  console.log(filteredProducts);
 
   const productsPerPage = 6; // Number of products per page
 
@@ -104,23 +106,15 @@ export default function ShopList() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     setPages(pageNumber);
-    if (pageNumber > page && searchTerm == "") {
+    if (pageNumber > page) {
       getProductsPage(pageNumber);
-    } else {
-      dispatch(fetchSearchedProductsAction(term,pageNumber))
     }
-   
   };
 
   const totalPages = Math.ceil(count / productsPerPage);
 
-  const handleSearchChange = debounce( async (term) => {
-    if (term == "") {
-      getProductsPage(1);
-    } else {
-setSearchTerm(term)
-      dispatch(fetchSearchedProductsAction(term,page))
-    }
+  const handleSearchChange = debounce((term) => {
+    setSearchTerm(term);
     setCurrentPage(1);
   }, 300);
 
@@ -154,6 +148,7 @@ setSearchTerm(term)
           })
         )
       );
+      console.log(searchCategories);
 
       setSearchedCategories(searchCategories);
       setPaginationTotal(Math.ceil(filteredProducts.length / 6));
