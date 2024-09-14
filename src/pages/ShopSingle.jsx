@@ -7,6 +7,7 @@ import {
   CardBody,
   CardHeader,
   Typography,
+  Spinner
 } from "@material-tailwind/react";
 import MainButton from "../components/Shared/MainButton";
 import StaticStarRating from "../components/Shared/StaticStarRating";
@@ -23,12 +24,17 @@ export default function ShopSingle() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
   const { loggedinCart } = useSelector((state) => state.loggedinCart);
   // Access state from Redux store
   const currentProduct = useSelector((state) => state.products.currentProduct);
-  
+
+
   useEffect(() => {
-    dispatch(fetchProductByIDAction(productId));
+    setLoading(true); 
+    dispatch(fetchProductByIDAction(productId))
+      .then(() => setLoading(false)) 
+      .catch(() => setLoading(false)); 
   }, [productId, dispatch]);
 
   const handleAddToCart = (product) => {
@@ -120,6 +126,14 @@ export default function ShopSingle() {
   const handleDecreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
   };
+
+  if(loading){
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">  
+        <Spinner className="h-20 w-20 spinner-animation text-[#c9ab81]" />  
+      </div>
+    )
+  }
 
   if (!currentProduct) return <p>Product Not Found</p>;
 
