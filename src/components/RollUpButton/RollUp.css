@@ -1,0 +1,9 @@
+.svg path {
+  stroke-dasharray: 100% 90%;
+  stroke-dashoffset: 0%;
+  transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s;
+}
+
+.svg:hover path {
+  animation: snakeStroke 2s ease-in-out infinite;
+}

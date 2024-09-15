@@ -1,42 +1,73 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+:root {
+  /* fonts */
+  --main-font: "EB Garamond", serif;
+  --second-font: "Open Sans", sans-serif;
+  --third-font: "Alegreya Sans", sans-serif;
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
+  --page-title-font: "EB Garamond", serif;
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+  /* colors */
+  --white: #ffff;
+  --main-color: #c9ab81;
+  --main-gray: #525252;
+  --second-gray: #808080;
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  --stroke: #c9ab81;
+  --button-text-color: #525252;
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
+  --nav-links-color: #383838;
+  --logo: url("src/assets/images/logo-light.png");
+  --title-bg: url("src/assets/images/title-img-2.jpg");
+  --product-img: url("src/assets/images/test.jpg");
+  --heading-text-color: #525252;
+  --main-text-color: #5f5f5f;
+  --light-gray: #cfcfcf;
+  --nav-links-color: #383838;
+  --placeholder-text-color: #7c8392;
+  /* images */
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+  --button-text-font: "Open Sans", sans-serif;
+  --nav-links-font: "EB Garamond", serif;
+  --nav-links-color: #383838;
+  --logo: url("src/assets/images/logo.png");
+  --page-title-font: "EB Garamond", serif;
 }
-
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+input::placeholder {
+  color: var(--placeholder-text-color) !important;
+  opacity: 1 !important;
 }
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.Toastify__toast {
+  border-radius: 0 !important;
+}
+
+.text-padding {
+  padding: 3rem;
+}
+
+
