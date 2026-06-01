@@ -1,8 +1,5 @@
-// import { useNavigate } from "react-router-dom";
+import { dummyAuthResponse, simulateDelay } from "./dummyData";
 
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { replace } from "react-router-dom";
 export async function loginAuthentication(
   email,
   password,
@@ -10,48 +7,37 @@ export async function loginAuthentication(
   navigate,
   location
 ) {
-  try {
-    const response = await axios.post(
-      `https://art-server-puce.vercel.app/api/auth/login`,
-      {
-        email: email,
-        password: password,
-      }
-    );
-    console.log(response.data);
-   
-    if (response.data.success) {
+  await simulateDelay(500);
+  
+  if (email && password) {
+    const response = dummyAuthResponse;
+    
+    if (response.success) {
       if (rememberMe) {
-        localStorage.setItem("token", response.data.token);
-        sessionStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.token);
+        sessionStorage.setItem("token", response.token);
       } else {
-        sessionStorage.setItem("token", response.data.token);
-        console.log(location.state);
+        sessionStorage.setItem("token", response.token);
       }
-      console.log(response.data.token);
-      // navigate("/", { replace: true });
-      console.log(location.state);
+      
       const redirectTo = location.state?.from?.pathname || "/";
       navigate(redirectTo, { replace: true });
     }
     return true;
-  } catch (error) {
-    console.error(error);
   }
+  return false;
 }
-export function registerAuthentication(profile, navigate) {
-  axios
-    .post(`https://art-server-puce.vercel.app/api/auth/register`, profile)
-    .then((response) => {
-      console.log(response.data);
-      if (response.data.success) {
-        sessionStorage.setItem("token", response.data.token);
-        navigate("/", { replace: true });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+export async function registerAuthentication(profile, navigate) {
+  await simulateDelay(500);
+  
+  const response = dummyAuthResponse;
+  
+  if (response.success) {
+    sessionStorage.setItem("token", response.token);
+    navigate("/", { replace: true });
+  }
+  return response;
 }
 
 // function checkAuthroize() {

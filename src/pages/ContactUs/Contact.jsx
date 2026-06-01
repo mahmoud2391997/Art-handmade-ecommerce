@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import contactUsImage from "../../assets/images/contactus.jpg";
-import axios from "axios";
+import { sendMessage } from "../../api/contactMessages";
 import SocialLinks from "./SocialLinks";
 import { Bounce, toast } from "react-toastify";
 
@@ -55,10 +55,7 @@ export default function Contact() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "https://art-server-puce.vercel.app/api/messages",
-        data
-      );
+      await sendMessage(data);
       toast.info("Form Submitted Successfully", {
         position: "top-center",
         autoClose: 2000,

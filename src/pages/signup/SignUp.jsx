@@ -11,7 +11,6 @@ import PageTitle from "../../components/Shared/PageTitle";
 
 import { registerAuthentication } from "../../api/auth";
 import ImgTitle from "../../components/ImgTitle";
-import axios from "axios";
 
 export default function SignUp() {
   const [response,setResponse] =useState(true)
@@ -19,22 +18,6 @@ export default function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const navigate = useNavigate();
-  function registerAuthentication(profile, navigate) {
-    axios
-      .post(`https://art-server-puce.vercel.app/api/auth/register`, profile)
-      .then((response) => {
-        if (response.data.success) {
-          sessionStorage.setItem("token", response.data.token);
-          navigate("/", { replace: true });
-          setResponse(true)
-        } else{
-          setResponse(false)
-        }
-      })
-      .catch((error) => {
-        throw error
-      });
-  }
   const schema = yup.object().shape({
     first_name: yup.string().required("First name is required"),
     last_name: yup.string().required("Last name is required"),
@@ -65,8 +48,13 @@ export default function SignUp() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    registerAuthentication(data, navigate);
+  const onSubmit = async (data) => {
+    const result = await registerAuthentication(data, navigate);
+    if (result.success) {
+      setResponse(true);
+    } else {
+      setResponse(false);
+    }
   };
   return (
     <div className="flex flex-col gap-[10%] lg:gap-10 justify-center items-center h-[100vh] w-[100%] py-auto lg:py-[1%]">

@@ -1,11 +1,9 @@
-import axios from "axios";
+import { dummyEvents, getEventById, simulateDelay } from "../../api/dummyData";
 
 export const fetchEvents = async () => {
     try {
-        const response = await axios.get(
-            "https://art-server-puce.vercel.app/api/events"
-        );
-        return response.data;
+        await simulateDelay(300);
+        return dummyEvents;
     } catch (error) {
         throw error;
     }
@@ -13,8 +11,8 @@ export const fetchEvents = async () => {
 
 export const fetchEventById = async (eventId) => {
     try {
-        const response = await axios.get(`https://art-server-puce.vercel.app/api/events/${eventId}`);
-        return response.data;
+        await simulateDelay(300);
+        return getEventById(eventId);
     } catch (error) {
         throw error; 
     }

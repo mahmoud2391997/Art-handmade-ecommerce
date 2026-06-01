@@ -1,16 +1,6 @@
-function sendMessage(message) {
-  // message = {
-  //     name:"",
-  //     email:"",
-  //     message:""
-  // }
+import { simulateDelay } from "./dummyData";
 
-  axios
-    .post("https://art-server-puce.vercel.app/api/messages", message)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+export async function sendMessage(message) {
+  await simulateDelay(500);
+  return { success: true, message: "Message sent successfully" };
 }

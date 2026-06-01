@@ -1,12 +1,6 @@
-import axios from "axios";
+import { dummyCategories, simulateDelay } from "./dummyData";
 
-export default function getCategories({ setCategories }) {
- return axios
-    .get("https://art-server-puce.vercel.app/api/categories")
-    .then((response) => {
-      setCategories(response.data);
-    })
-    .catch((error) => {
-      throw error;
-    });
+export default async function getCategories({ setCategories }) {
+  await simulateDelay(300);
+  setCategories(dummyCategories);
 }

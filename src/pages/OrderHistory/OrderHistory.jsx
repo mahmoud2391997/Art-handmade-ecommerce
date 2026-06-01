@@ -3,32 +3,22 @@ import PageTitle from "../../components/Shared/PageTitle";
 import SingleOrder from "../../components/SingleOrder/SingleOrder";
 import { getOrders } from "../../api/orders.jsx";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
-  function getOrders() {
-    let token =
-      sessionStorage.getItem("token") || localStorage.getItem("token");
-    axios
-      .get("https://art-server-puce.vercel.app/api/orders", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.data.lenght != 0) {
-          setOrders(response.data);
-        } else {
-          setOrders(null);
-        }
-      })
-      .catch((error) => {
-        throw error
-      });
-  }
+  
   useEffect(() => {
-    getOrders();
+    async function fetchOrders() {
+      let token =
+        sessionStorage.getItem("token") || localStorage.getItem("token");
+      const ordersData = await getOrders(token);
+      if (ordersData && ordersData.length > 0) {
+        setOrders(ordersData);
+      } else {
+        setOrders(null);
+      }
+    }
+    fetchOrders();
   }, []);
   return (
     <div className="w-full h-auto bg-white">

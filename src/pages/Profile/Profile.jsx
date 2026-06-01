@@ -5,13 +5,14 @@ import InputCard from "../../components/InputCard/InputCard";
 import MainButton from "../../components/MainButton";
 import PageTitle from "../../components/Shared/PageTitle";
 import { Button, Input, Radio, Typography } from "@material-tailwind/react";
-import axios from "axios";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import DatePickerComponent from "../../components/DatePicker/DatePicker";
 import { setDate } from "date-fns";
 import loadStorage from "../../helpers/Storage";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import ImgTitle from "../../components/ImgTitle";
+import { getProfile, editProfile as editProfileAPI } from "../../api/profiles";
+import { dummyProfile } from "../../api/dummyData";
 
 export default function Profile() {
   const [profileId, setProfileId] = useState("");
@@ -21,49 +22,15 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bdate, setBdate] = useState("");
-  function getProfile() {
-    axios
-      .get(`https://art-server-puce.vercel.app/api/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${loadStorage()}`,
-        },
-      })
-      .then((response) => {
-        setFirstName(response.data.first_name);
-        setLastName(response.data.last_name);
-        setGender(response.data.gender);
-        setEmail(response.data.email);
-        setPhone(response.data.phone_number);
-        setBdate(response.data.birthday);
-        setProfileId(response.data._id);
-      })
-      .catch((error) => {
-        throw error
-      });
-  }
-  function editProfile(profileId, editedProfile) {
-
-    axios
-      .put(
-        `https://art-server-puce.vercel.app/api/profile/${profileId}`,
-        editedProfile,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${loadStorage()}`,
-          },
-        }
-      )
-      .then((response) => {
-        return response.data
-      })
-      .catch((error) => {
-        throw error
-      });
-  }
+  
   useEffect(() => {
-    getProfile();
+    getProfile(loadStorage(), (profile) => {
+      setFirstName(profile.firstName);
+      setLastName(profile.lastName);
+      setEmail(profile.email);
+      setPhone(profile.phone);
+      setProfileId(dummyProfile._id);
+    });
   }, []);
 
   
@@ -138,16 +105,15 @@ export default function Profile() {
           <div className="mt-10 w-[87%] flex justify-between">
             <MainButton
               title={"Update Profile"}
-              onClick={() => {
-
-                editProfile(profileId, {
+              onClick={async () => {
+                await editProfileAPI(profileId, {
                   email: email,
                   first_name: firstName,
                   last_name: lastName,
                   birthday: bdate,
                   phone_number: phone,
                   gender: gender,
-                });
+                }, loadStorage());
               }}
             />
             {/* <MainButton title={"Delete Account"} /> */}

@@ -1,32 +1,29 @@
-import axios from "axios";
+import { dummyProducts, getProductById, simulateDelay } from "../../api/dummyData";
 
 export const fetchProducts = async (page) => {
-
   try {
-    const response = await axios.get(
-      `https://art-server-puce.vercel.app/api/products/pages/${page}`
-    );
-    return response.data;
+    await simulateDelay(300);
+    const startIndex = (page - 1) * 5;
+    const endIndex = startIndex + 5;
+    return dummyProducts.slice(startIndex, endIndex);
   } catch (error) {
     throw error;
   }
 };
+
 export const fetchProductsCount = async () => {
   try {
-    const response = await axios.get(
-      `https://art-server-puce.vercel.app/api/products/count`
-    );
-    return response.data;
+    await simulateDelay(300);
+    return dummyProducts.length;
   } catch (error) {
     throw error;
   }
 };
+
 export const fetchProductByID = async (productId) => {
   try {
-    const response = await axios.get(
-      `https://art-server-puce.vercel.app/api/products/${productId}`
-    );
-    return response.data;
+    await simulateDelay(300);
+    return getProductById(productId);
   } catch (error) {
     throw error;
   }
@@ -34,12 +31,9 @@ export const fetchProductByID = async (productId) => {
 
 export const fetchBestSellers = async () => {
   try {
-    const response = await axios.get(
-      "https://art-server-puce.vercel.app/api/products/bestsellers"
-    );
-    const products = response.data;
-
-    return products;
+    await simulateDelay(300);
+    // Return top 3 products as best sellers
+    return dummyProducts.slice(0, 3);
   } catch (error) {
     throw error;
   }

@@ -1,39 +1,27 @@
-import axios from "axios";
+import { dummyProducts, getProductById, simulateDelay } from "./dummyData";
 
-function getProducts(pageNumber) {
-  axios
-    .get(
-      `https://art-server-puce.vercel.app/api/products/pages/${pageNumber}`
-    )
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+export async function getProducts(pageNumber) {
+  await simulateDelay(300);
+  // Return paginated results
+  const startIndex = (pageNumber - 1) * 5;
+  const endIndex = startIndex + 5;
+  return dummyProducts.slice(startIndex, endIndex);
 }
 
-function getProduct(productId) {
-  axios
-    .get(`https://art-server-puce.vercel.app/api/products/${productId}`)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+export async function getProduct(productId) {
+  await simulateDelay(300);
+  return getProductById(productId);
 }
-export default async function searchProducts(product,page) {
+
+export default async function searchProducts(product, page) {
+  await simulateDelay(300);
   if (product == "") {
-    getProducts(1)
+    return getProducts(1);
   } else {
-
-   const response = await axios
-    .get(`https://art-server-puce.vercel.app/api/product/search?searchTerm=${product}&numOfPages=${page}`)
-   
-    .catch((error) => {
-      throw error
-    });
-    return response.data
+    const filtered = dummyProducts.filter(p => 
+      p.name.toLowerCase().includes(product.toLowerCase()) ||
+      p.category.toLowerCase().includes(product.toLowerCase())
+    );
+    return filtered;
   }
 }

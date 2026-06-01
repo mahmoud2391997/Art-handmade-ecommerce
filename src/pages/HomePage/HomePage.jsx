@@ -6,23 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Title from "../../components/Title";
 import AdminProductCard from "../../components/AdminProductCard";
 import ProductCard from "../../components/CustomerProductCard";
-import axios from "axios";
 import CategoryItem from "../../components/CategoryItem";
 import { Link } from "react-router-dom";
+import getCategories from "../../api/categories";
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
-  function getCategories() {
-    axios
-      .get("https://art-server-puce.vercel.app/api/categories")
-      .then((response) => {
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        throw error
-      });
-  }
   useEffect(() => {
-    getCategories();
+    getCategories({ setCategories });
   }, []);
   /////////////الجزء دا عشان اول مافتح الصفحة يجبهالى من اول///////////////////
   /******* */ useEffect(() => {

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { DialogBody, DialogHeader } from "@material-tailwind/react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import loadStorage from "../../helpers/Storage";
 import { useForm } from "react-hook-form";
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Bounce, toast } from "react-toastify";
+import { buyTicket } from "../../api/ticket";
 
 
 
@@ -52,18 +52,9 @@ export default function TicketForm({ eventId, onClose }) {
     }; 
 
     try {
-   const response = await axios.post(
-        `https://art-server-puce.vercel.app/api/ticket/${eventId}`,
-        clientInfo,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-if (response.data === "Your Email Already Received A Ticket") {
-        toast.info("You already bought the ticket", {
+      const response = await buyTicket(eventId, clientInfo, token);
+      if (response.success) {
+        toast.info("Ticket purchased successfully!", {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -74,10 +65,20 @@ if (response.data === "Your Email Already Received A Ticket") {
           theme: "light",
           transition: Bounce,
         });
-}      
+      }
       reset();
     } catch (error) {
-      throw error
+      toast.info("Failed to purchase ticket", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } finally {
       setIsSubmitting(false);
       onClose();

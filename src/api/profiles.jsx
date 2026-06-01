@@ -1,56 +1,21 @@
-import axios from "axios";
+import { dummyProfile, simulateDelay } from "./dummyData";
 
 export async function getProfile(token, setProfile) {
-  await axios
-    .get(`https://art-server-puce.vercel.app/api/profile`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      setProfile({
-        firstName: response.data.first_name,
-        lastName: response.data.last_name,
-        email: response.data.email,
-        phone: response.data.phone_number,
-      });
-    })
-    .catch((error) => {
-      throw error
-    });
+  await simulateDelay(300);
+  setProfile({
+    firstName: dummyProfile.first_name,
+    lastName: dummyProfile.last_name,
+    email: dummyProfile.email,
+    phone: dummyProfile.phone_number,
+  });
 }
-function editProfile(profileId, editedProfile, token) {
-  axios
-    .put(
-      `https://art-server-puce.vercel.app/api/profile/${profileId}`,
-      editedProfile,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+
+export async function editProfile(profileId, editedProfile, token) {
+  await simulateDelay(300);
+  return { success: true };
 }
-function deleteProfile(profileId, token) {
-  axios
-    .delete(`https://art-server-puce.vercel.app/api/profile/${profileId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+
+export async function deleteProfile(profileId, token) {
+  await simulateDelay(300);
+  return { success: true };
 }

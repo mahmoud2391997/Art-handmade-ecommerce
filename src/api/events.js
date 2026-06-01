@@ -1,20 +1,11 @@
-function getEvents() {
-  axios
-    .get("https://art-server-puce.vercel.app/api/events")
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+import { dummyEvents, getEventById, simulateDelay } from "./dummyData";
+
+export async function getEvents() {
+  await simulateDelay(300);
+  return dummyEvents;
 }
-function getEvent(eventId) {
-  axios
-    .get(`https://art-server-puce.vercel.app/api/events/${eventId}`)
-    .then((response) => {
-      return response.data
-    })
-    .catch((error) => {
-      throw error
-    });
+
+export async function getEvent(eventId) {
+  await simulateDelay(300);
+  return getEventById(eventId);
 }

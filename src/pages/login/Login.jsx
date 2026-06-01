@@ -14,7 +14,7 @@ import {
   fetchCartItemsAction,
   updateCartItemsAction,
 } from "../../Redux/actions/loggedInCartActions";
-import axios from "axios";
+import { loginAuthentication } from "../../api/auth";
 import ImgTitle from "../../components/ImgTitle";
 
 export default function Login() {
@@ -24,42 +24,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  async function loginAuthentication(
-    email,
-    password,
-    rememberMe,
-    navigate,
-    location
-  ) {
-    try {
-      const response = await axios.post(
-        `https://art-server-puce.vercel.app/api/auth/login`,
-        {
-          email: email,
-          password: password,
-        }
-      );
-      if (response.data.success) {
-        if (rememberMe) {
-          localStorage.setItem("token", response.data.token);
-          sessionStorage.setItem("token", response.data.token);
-        } else {
-          sessionStorage.setItem("token", response.data.token);
-        }
-        // navigate("/", { replace: true });
-        const redirectTo = location.state?.from?.pathname || "/";
-        navigate(redirectTo, { replace: true });
-
-        dispatch(fetchCartItemsAction())
-        setResponse(true);
-      } else {
-        setResponse(false);
-        
-      }
-    } catch (error) {
-      throw error
-    }
-  }
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -83,14 +47,18 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    await loginAuthentication(
+    const success = await loginAuthentication(
       data.email,
       data.password,
       data.rememberMe,
       navigate,
       location
     )
-    if (response) {
+    if (success) {
+      dispatch(fetchCartItemsAction())
+      setResponse(true);
+    } else {
+      setResponse(false);
       setError('authentication', {
         type: 'manual',
         message: 'Invalid email or password',

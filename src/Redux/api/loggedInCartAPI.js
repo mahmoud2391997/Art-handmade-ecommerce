@@ -1,41 +1,18 @@
-import axios from "axios";
-import loadStorage from "../../helpers/Storage";
+import { dummyCartItems, simulateDelay } from "../../api/dummyData";
 
-// cartItemsArray=[
-//   {
-//     productId:,
-//     quantity: Number
-//   },{},{}
-// ]
 export const updateCartItems = async (cartItemsArray) => {
-
   try {
-    await axios.post(
-      `https://art-server-puce.vercel.app/api/cartItems`,
-      cartItemsArray,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${loadStorage()}`,
-        },
-      }
-    );
+    await simulateDelay(300);
+    return { success: true };
   } catch (error) {
     throw error
   }
 };
+
 export const getCartItems = async () => {
   try {
-    let response = await axios.get(
-      "https://art-server-puce.vercel.app/api/cartItems",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${loadStorage()}`,
-        },
-      }
-    );
-    return response.data;
+    await simulateDelay(300);
+    return dummyCartItems;
   } catch (error) {
     throw error
   }

@@ -1,13 +1,14 @@
-import axios from "axios";
 import MainButton from "../MainButton";
 import OrderCard from "../OrderCard/OrderCard";
 import loadStorage from "../../helpers/Storage";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
+import { cancelOrder } from "../../api/orders";
 
 export default function SingleOrder({ order }) {
   const [status, setStatus] = useState(order.orderStatus);
-  function cancelOrder(orderId, token) {
+  
+  async function handleCancelOrder(orderId, token) {
     setStatus("Canceled");
     toast.info("Order Cancelled Successfully", {
       position: "top-center",
@@ -20,23 +21,7 @@ export default function SingleOrder({ order }) {
       theme: "light",
       transition: Bounce,
     });
-    axios
-      .put(
-        `https://art-server-puce.vercel.app/api/orders/${orderId}`,
-        { status: "Canceled" },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        return response.data
-      })
-      .catch((error) => {
-        throw error
-      });
+    await cancelOrder(orderId, token);
   }
 
   function formatDate(dateString) {
@@ -134,7 +119,7 @@ export default function SingleOrder({ order }) {
           <MainButton
             title={"Cancel Order"}
             onClick={() => {
-              cancelOrder(order._id, loadStorage());
+              handleCancelOrder(order._id, loadStorage());
             }}
           />
         </div>

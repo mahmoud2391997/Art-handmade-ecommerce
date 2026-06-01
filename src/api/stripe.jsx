@@ -1,20 +1,8 @@
-import axios from "axios";
+import { simulateDelay } from "./dummyData";
 
-export default function stripePayment(orderItems, token) {
-  axios
-    .post(
-      `https://art-server-puce.vercel.app/api/create-checkout-session`,
-      orderItems,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => (window.location.href = response.data))
-
-    .catch((error) => {
-      throw error
-    });
+export default async function stripePayment(orderItems, token) {
+  await simulateDelay(1000);
+  // In a real app, this would redirect to Stripe checkout
+  console.log("Stripe payment initiated for:", orderItems);
+  return { success: true, checkoutUrl: "#" };
 }
