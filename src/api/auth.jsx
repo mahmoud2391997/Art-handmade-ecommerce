@@ -12,7 +12,7 @@ export async function loginAuthentication(
 ) {
   try {
     const response = await axios.post(
-      `https://art-ecommerce-server.glitch.me/api/auth/login`,
+      `https://art-server-puce.vercel.app/api/auth/login`,
       {
         email: email,
         password: password,
@@ -41,7 +41,7 @@ export async function loginAuthentication(
 }
 export function registerAuthentication(profile, navigate) {
   axios
-    .post(`https://art-ecommerce-server.glitch.me/api/auth/register`, profile)
+    .post(`https://art-server-puce.vercel.app/api/auth/register`, profile)
     .then((response) => {
       console.log(response.data);
       if (response.data.success) {
@@ -58,7 +58,7 @@ export function registerAuthentication(profile, navigate) {
 //   let token = sessionStorage.getItem("token");
 
 //   axios
-//     .get(`https://art-ecommerce-server.glitch.me/api/auth/authorize`, {
+//     .get(`https://art-server-puce.vercel.app/api/auth/authorize`, {
 //       headers: {
 //         Authorization: `Bearer ${token}`,
 //         "Content-Type": "application/json",

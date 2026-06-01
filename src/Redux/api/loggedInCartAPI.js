@@ -11,7 +11,7 @@ export const updateCartItems = async (cartItemsArray) => {
 
   try {
     await axios.post(
-      `https://art-ecommerce-server.glitch.me/api/cartItems`,
+      `https://art-server-puce.vercel.app/api/cartItems`,
       cartItemsArray,
       {
         headers: {
@@ -27,7 +27,7 @@ export const updateCartItems = async (cartItemsArray) => {
 export const getCartItems = async () => {
   try {
     let response = await axios.get(
-      "https://art-ecommerce-server.glitch.me/api/cartItems",
+      "https://art-server-puce.vercel.app/api/cartItems",
       {
         headers: {
           "Content-Type": "application/json",

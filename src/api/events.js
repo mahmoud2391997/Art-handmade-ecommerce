@@ -1,6 +1,6 @@
 function getEvents() {
   axios
-    .get("https://art-ecommerce-server.glitch.me/api/events")
+    .get("https://art-server-puce.vercel.app/api/events")
     .then((response) => {
       return response.data
     })
@@ -10,7 +10,7 @@ function getEvents() {
 }
 function getEvent(eventId) {
   axios
-    .get(`https://art-ecommerce-server.glitch.me/api/events/${eventId}`)
+    .get(`https://art-server-puce.vercel.app/api/events/${eventId}`)
     .then((response) => {
       return response.data
     })

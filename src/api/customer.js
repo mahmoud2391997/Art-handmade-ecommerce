@@ -1,6 +1,6 @@
 function getCustomerInfo(token) {
   axios
-    .get(`https://art-ecommerce-server.glitch.me/api/customer`, {
+    .get(`https://art-server-puce.vercel.app/api/customer`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

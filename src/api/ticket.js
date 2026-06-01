@@ -6,7 +6,7 @@ function buyTicket(eventId, clientInfo, token) {
   //     }
   axios
     .post(
-      `https://art-ecommerce-server.glitch.me/api/ticket/${eventId}`,
+      `https://art-server-puce.vercel.app/api/ticket/${eventId}`,
       clientInfo,
       {
         headers: {

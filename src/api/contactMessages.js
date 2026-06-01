@@ -6,7 +6,7 @@ function sendMessage(message) {
   // }
 
   axios
-    .post("https://art-ecommerce-server.glitch.me/api/messages", message)
+    .post("https://art-server-puce.vercel.app/api/messages", message)
     .then((response) => {
       return response.data
     })

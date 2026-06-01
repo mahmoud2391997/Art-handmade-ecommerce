@@ -3,7 +3,7 @@ import axios from "axios";
 export default function stripePayment(orderItems, token) {
   axios
     .post(
-      `https://art-ecommerce-server.glitch.me/api/create-checkout-session`,
+      `https://art-server-puce.vercel.app/api/create-checkout-session`,
       orderItems,
       {
         headers: {

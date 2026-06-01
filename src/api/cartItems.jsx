@@ -1,7 +1,7 @@
 import axios from "axios";
 export function getCartItems(token) {
   axios
-    .get("https://art-ecommerce-server.glitch.me/api/cartItems", {
+    .get("https://art-server-puce.vercel.app/api/cartItems", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export function getCartItems(token) {
 export function updateCartItems(cartItemsArray, token) {
   axios
     .post(
-      `https://art-ecommerce-server.glitch.me/api/cartItems`,
+      `https://art-server-puce.vercel.app/api/cartItems`,
       cartItemsArray,
       {
         headers: {

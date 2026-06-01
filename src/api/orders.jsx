@@ -1,7 +1,7 @@
 import axios from "axios";
 export function getOrders(token) {
   axios
-    .get("https://art-ecommerce-server.glitch.me/api/orders", {
+    .get("https://art-server-puce.vercel.app/api/orders", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -17,7 +17,7 @@ export function getOrders(token) {
 
 export function makeOrder(orderDetails, token) {
   axios
-    .post(`https://art-ecommerce-server.glitch.me/api/orders`, orderDetails, {
+    .post(`https://art-server-puce.vercel.app/api/orders`, orderDetails, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ export function makeOrder(orderDetails, token) {
 }
 function cancelOrder(orderId, token) {
   axios
-    .put(`https://art-ecommerce-server.glitch.me/api/orders/:id`, {
+    .put(`https://art-server-puce.vercel.app/api/orders/:id`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

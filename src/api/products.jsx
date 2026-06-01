@@ -3,7 +3,7 @@ import axios from "axios";
 function getProducts(pageNumber) {
   axios
     .get(
-      `https://art-ecommerce-server.glitch.me/api/products/pages/${pageNumber}`
+      `https://art-server-puce.vercel.app/api/products/pages/${pageNumber}`
     )
     .then((response) => {
       return response.data
@@ -15,7 +15,7 @@ function getProducts(pageNumber) {
 
 function getProduct(productId) {
   axios
-    .get(`https://art-ecommerce-server.glitch.me/api/products/${productId}`)
+    .get(`https://art-server-puce.vercel.app/api/products/${productId}`)
     .then((response) => {
       return response.data
     })
@@ -29,7 +29,7 @@ export default async function searchProducts(product,page) {
   } else {
 
    const response = await axios
-    .get(`https://art-ecommerce-server.glitch.me/api/product/search?searchTerm=${product}&numOfPages=${page}`)
+    .get(`https://art-server-puce.vercel.app/api/product/search?searchTerm=${product}&numOfPages=${page}`)
    
     .catch((error) => {
       throw error

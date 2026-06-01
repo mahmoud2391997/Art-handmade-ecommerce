@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getProfile(token, setProfile) {
   await axios
-    .get(`https://art-ecommerce-server.glitch.me/api/profile`, {
+    .get(`https://art-server-puce.vercel.app/api/profile`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export async function getProfile(token, setProfile) {
 function editProfile(profileId, editedProfile, token) {
   axios
     .put(
-      `https://art-ecommerce-server.glitch.me/api/profile/${profileId}`,
+      `https://art-server-puce.vercel.app/api/profile/${profileId}`,
       editedProfile,
       {
         headers: {
@@ -41,7 +41,7 @@ function editProfile(profileId, editedProfile, token) {
 }
 function deleteProfile(profileId, token) {
   axios
-    .delete(`https://art-ecommerce-server.glitch.me/api/profile/${profileId}`, {
+    .delete(`https://art-server-puce.vercel.app/api/profile/${profileId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

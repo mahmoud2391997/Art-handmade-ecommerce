@@ -4,7 +4,7 @@ export const fetchProducts = async (page) => {
 
   try {
     const response = await axios.get(
-      `https://art-ecommerce-server.glitch.me/api/products/pages/${page}`
+      `https://art-server-puce.vercel.app/api/products/pages/${page}`
     );
     return response.data;
   } catch (error) {
@@ -14,7 +14,7 @@ export const fetchProducts = async (page) => {
 export const fetchProductsCount = async () => {
   try {
     const response = await axios.get(
-      `https://art-ecommerce-server.glitch.me/api/products/count`
+      `https://art-server-puce.vercel.app/api/products/count`
     );
     return response.data;
   } catch (error) {
@@ -24,7 +24,7 @@ export const fetchProductsCount = async () => {
 export const fetchProductByID = async (productId) => {
   try {
     const response = await axios.get(
-      `https://art-ecommerce-server.glitch.me/api/products/${productId}`
+      `https://art-server-puce.vercel.app/api/products/${productId}`
     );
     return response.data;
   } catch (error) {
@@ -35,7 +35,7 @@ export const fetchProductByID = async (productId) => {
 export const fetchBestSellers = async () => {
   try {
     const response = await axios.get(
-      "https://art-ecommerce-server.glitch.me/api/products/bestsellers"
+      "https://art-server-puce.vercel.app/api/products/bestsellers"
     );
     const products = response.data;
 

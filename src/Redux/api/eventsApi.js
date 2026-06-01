@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchEvents = async () => {
     try {
         const response = await axios.get(
-            "https://art-ecommerce-server.glitch.me/api/events"
+            "https://art-server-puce.vercel.app/api/events"
         );
         return response.data;
     } catch (error) {
@@ -13,7 +13,7 @@ export const fetchEvents = async () => {
 
 export const fetchEventById = async (eventId) => {
     try {
-        const response = await axios.get(`https://art-ecommerce-server.glitch.me/api/events/${eventId}`);
+        const response = await axios.get(`https://art-server-puce.vercel.app/api/events/${eventId}`);
         return response.data;
     } catch (error) {
         throw error; 
