@@ -33,7 +33,7 @@ export default function Login() {
   ) {
     try {
       const response = await axios.post(
-        `https://art-ecommerce-server.glitch.me/api/auth/login`,
+        `https://art-server-puce.vercel.app/api/auth/login`,
         {
           email: email,
           password: password,

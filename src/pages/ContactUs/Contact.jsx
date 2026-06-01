@@ -56,7 +56,7 @@ export default function Contact() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "https://art-ecommerce-server.glitch.me/api/messages",
+        "https://art-server-puce.vercel.app/api/messages",
         data
       );
       toast.info("Form Submitted Successfully", {

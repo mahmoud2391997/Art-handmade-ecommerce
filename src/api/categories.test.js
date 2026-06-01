@@ -21,7 +21,7 @@ describe("getCategories", () => {
     const setCategories = jest.fn();
 
     mock
-      .onGet("https://art-ecommerce-server.glitch.me/api/categories")
+      .onGet("https://art-server-puce.vercel.app/api/categories")
       .reply(200, categoriesData);
 
     await getCategories({ setCategories });
@@ -33,7 +33,7 @@ describe("getCategories", () => {
     const setCategories = jest.fn();
 
     mock
-      .onGet("https://art-ecommerce-server.glitch.me/api/categories")
+      .onGet("https://art-server-puce.vercel.app/api/categories")
       .reply(500);
 
     const consoleSpy = jest

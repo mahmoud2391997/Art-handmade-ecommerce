@@ -21,7 +21,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   function registerAuthentication(profile, navigate) {
     axios
-      .post(`https://art-ecommerce-server.glitch.me/api/auth/register`, profile)
+      .post(`https://art-server-puce.vercel.app/api/auth/register`, profile)
       .then((response) => {
         if (response.data.success) {
           sessionStorage.setItem("token", response.data.token);

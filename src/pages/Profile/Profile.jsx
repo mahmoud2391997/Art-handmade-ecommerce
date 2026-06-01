@@ -23,7 +23,7 @@ export default function Profile() {
   const [bdate, setBdate] = useState("");
   function getProfile() {
     axios
-      .get(`https://art-ecommerce-server.glitch.me/api/profile`, {
+      .get(`https://art-server-puce.vercel.app/api/profile`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${loadStorage()}`,
@@ -46,7 +46,7 @@ export default function Profile() {
 
     axios
       .put(
-        `https://art-ecommerce-server.glitch.me/api/profile/${profileId}`,
+        `https://art-server-puce.vercel.app/api/profile/${profileId}`,
         editedProfile,
         {
           headers: {

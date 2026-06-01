@@ -53,7 +53,7 @@ export default function TicketForm({ eventId, onClose }) {
 
     try {
    const response = await axios.post(
-        `https://art-ecommerce-server.glitch.me/api/ticket/${eventId}`,
+        `https://art-server-puce.vercel.app/api/ticket/${eventId}`,
         clientInfo,
         {
           headers: {

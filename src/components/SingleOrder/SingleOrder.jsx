@@ -22,7 +22,7 @@ export default function SingleOrder({ order }) {
     });
     axios
       .put(
-        `https://art-ecommerce-server.glitch.me/api/orders/${orderId}`,
+        `https://art-server-puce.vercel.app/api/orders/${orderId}`,
         { status: "Canceled" },
         {
           headers: {

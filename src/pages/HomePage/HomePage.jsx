@@ -13,7 +13,7 @@ export default function HomePage() {
   const [categories, setCategories] = useState([]);
   function getCategories() {
     axios
-      .get("https://art-ecommerce-server.glitch.me/api/categories")
+      .get("https://art-server-puce.vercel.app/api/categories")
       .then((response) => {
         setCategories(response.data);
       })

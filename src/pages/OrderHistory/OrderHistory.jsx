@@ -10,7 +10,7 @@ export default function OrderHistory() {
     let token =
       sessionStorage.getItem("token") || localStorage.getItem("token");
     axios
-      .get("https://art-ecommerce-server.glitch.me/api/orders", {
+      .get("https://art-server-puce.vercel.app/api/orders", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
